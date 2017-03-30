@@ -1,6 +1,7 @@
 # ChineseMe server
 The application is built with express.  
 It is based on the [Express & ES6 REST API Boilerplate](https://github.com/developit/express-es6-rest-api).
+Git repository available on [Gitlab](https://gitlab.com/b00461197/chinese-me-server).
 
 ## Development
 ```
