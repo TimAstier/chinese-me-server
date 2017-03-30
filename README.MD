@@ -18,10 +18,10 @@ $ npm run lint
 ## Deployment
 The app is deployed to Heroku.
 ```
-heroku create chinese-me-server --remote production
+$ heroku create chinese-me-server --remote production
+$ heroku addons:create heroku-postgresql:hobby-dev --remote production
 // Set environment variables on Heroku (IMPORTANT: need to be done before building)
 $ git push production master
-$ heroku addons:create heroku-postgresql:hobby-dev --remote production
 $ heroku run bash --remote production
 $ sequelize db:migrate
 $ exit
@@ -39,7 +39,7 @@ $ heroku pg:psql --remote production // production
 The project is relying on Forest Admin.
 - development: http://app.forestadmin.com/9499
 - staging: https://app.forestadmin.com/9558
-- production:
+- production: https://app.forestadmin.com/9563
 
 ## Environment variables
 See .env.example file
@@ -55,7 +55,7 @@ $ git push heroku master
 ## Environments
 - development - http://localhost:8080
 - staging - https://frozen-temple-75832.herokuapp.com
-- production - https://
+- production - https://chinese-me-server.herokuapp.com
 
 ## Misc
 - Upgrading Heroku Postgres DB: https://devcenter.heroku.com/articles/upgrading-heroku-postgres-databases
