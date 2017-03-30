@@ -18,18 +18,28 @@ $ npm run lint
 ## Deployment
 The app is deployed to Heroku.
 ```
-heroku create chiese-me-server --remote production
-git push production master
-heroku addons:create heroku-postgresql:hobby-dev --remote production
+heroku create chinese-me-server --remote production
+// Set environment variables on Heroku (IMPORTANT: need to be done before building)
+$ git push production master
+$ heroku addons:create heroku-postgresql:hobby-dev --remote production
+$ heroku run bash --remote production
+$ sequelize db:migrate
+$ exit
 ```
 
 ## Database
 ```js
 /** connect to DB **/
-psql -p5432 -d 'chinese-me' // development
-heroku pg:psql --remote staging // staging
-heroku pg:psql --remote production // production
+$ psql -p5432 -d 'chinese-me' // development
+$ heroku pg:psql --remote staging // staging
+$ heroku pg:psql --remote production // production
 ```
+
+## Admin interface
+The project is relying on Forest Admin.
+- development: http://app.forestadmin.com/9499
+- staging: https://app.forestadmin.com/9558
+- production:
 
 ## Environment variables
 See .env.example file
@@ -38,13 +48,13 @@ Note: In order for Environment variables to be updated in the code after a chang
 the app needs to be rebuilt. This can be done by pushing an empty commit like so:
 
 ```
-git commit --allow-empty -m "empty commit"
-git push heroku master
+$ git commit --allow-empty -m "empty commit"
+$ git push heroku master
 ```
 
 ## Environments
 - development - http://localhost:8080
-- staging - https://
+- staging - https://frozen-temple-75832.herokuapp.com
 - production - https://
 
 ## Misc
