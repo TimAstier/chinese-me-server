@@ -53,12 +53,12 @@ router.get('/:identifier', (req, res) => {
 router.post('/', (req, res) => {
   validateInput(req.body, commonValidations).then(({ errors, isValid }) => {
     if (isValid) {
-      const { username, email, password } = req.body;
+      const { username, email, password, country } = req.body;
       const active = false;
       const password_digest = bcrypt.hashSync(password, 10); // eslint-disable-line camelcase
 
       User.create({
-        username, email, password_digest, active
+        username, email, password_digest, active, country
       })
       .then(() => res.json({ success: true }))
       .catch(err => res.status(500).json({ error: err }));
