@@ -28,12 +28,20 @@ $ exit
 ```
 
 ## Database
+
 ```js
 /** connect to DB **/
 $ psql -p5432 -d 'chinese-me' // development
 $ heroku pg:psql --remote staging // staging
 $ heroku pg:psql --remote production // production
+
+/** useful commands **/
+$ heroku pg:info
+$ watch heroku pg:info
 ```
+
+## Backups
+Automatic daily backups of postgresql-animate-96069 are scheduled at 02:00 America/Los_Angeles.
 
 ## Admin interface
 The project is relying on Forest Admin.
@@ -58,8 +66,12 @@ $ git push heroku master
 - production - https://chinese-me-server.herokuapp.com
 
 ## Misc
-- Upgrading Heroku Postgres DB: https://devcenter.heroku.com/articles/upgrading-heroku-postgres-databases
-- // TODO: Schedule backups
+- [Heroku: Upgrading Postgres DB](https://devcenter.heroku.com/articles/upgrading-heroku-postgres-databases)
+- [Heroku: Scheduling Backups](https://devcenter.heroku.com/articles/heroku-postgres-backups#scheduling-backups)
+- [Heroku: Renaming apps](https://devcenter.heroku.com/articles/renaming-apps)
+- [Heroku: Deploying nodeJS](https://devcenter.heroku.com/articles/deploying-nodejs)
+- [Heroku: Config vars](https://devcenter.heroku.com/articles/config-vars)
+- [Heroku: Multiple environments](https://devcenter.heroku.com/articles/multiple-environments)
 
 ## TODO
-- [ ]
+- [ ] Use Helmet
