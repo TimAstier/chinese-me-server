@@ -72,6 +72,4 @@ $ git push heroku master
 - [Heroku: Deploying nodeJS](https://devcenter.heroku.com/articles/deploying-nodejs)
 - [Heroku: Config vars](https://devcenter.heroku.com/articles/config-vars)
 - [Heroku: Multiple environments](https://devcenter.heroku.com/articles/multiple-environments)
-
-## TODO
-- [ ] Use Helmet
+- [Sequelize: order on easter loading](http://stackoverflow.com/questions/29995116/ordering-results-of-eager-loaded-models-in-node-sequelize)

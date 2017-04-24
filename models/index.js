@@ -19,14 +19,16 @@ fs
     return (file.indexOf('.') !== 0) && (file !== 'index.js');
   })
   .forEach(file => {
+    let model = null;
     try {
-      const model = sequelize.import(path.join(__dirname, file));
+      model = sequelize.import(path.join(__dirname, file));
       db[model.name] = model;
     } catch (error) {
       // This produces errors in build for unknown reason:
-      // console.error('Model creation error: ' + error);
+      console.error('Model creation error on file ' + file  + ' :' + error);
     }
   });
+  // BUG: grammar and grammarLesson not scanned
 Object.keys(db).forEach(modelName => {
   if ('associate' in db[modelName]) {
     db[modelName].associate(db);
@@ -34,4 +36,5 @@ Object.keys(db).forEach(modelName => {
 });
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+
 module.exports = db;
