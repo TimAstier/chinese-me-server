@@ -12,10 +12,10 @@ export default (sequelize, DataTypes) => {
     timestamps: true,
     classMethods: {
       associate: () => {
-        User.belongsToMany(models.grammar, { through: 'grammarUser' });
-        User.belongsToMany(models.char, { through: 'charUser' });
-        User.belongsToMany(models.lesson, { through: 'lessonUser' });
-        User.belongsToMany(models.dialog, { through: 'dialogUser' });
+        User.belongsToMany(models.grammar, { through: 'grammarUsers' });
+        User.belongsToMany(models.char, { through: 'charUsers' });
+        User.belongsToMany(models.lesson, { through: 'lessonUsers' });
+        User.belongsToMany(models.dialog, { through: 'dialogUsers' });
       }
     }
   });
