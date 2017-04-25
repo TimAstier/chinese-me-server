@@ -19,7 +19,11 @@ export default (sequelize, DataTypes) => {
     // BUG: Sequelize names the table 'grammar' by default
     // This is a bug from 'inflection'. Using this workaround:
     freezeTableName: true,
-    tableName: 'grammars'
+    tableName: 'grammars',
+    name: {
+      plural: 'grammars',
+      singular: 'grammar'
+    }
   });
   return Grammar;
 };
