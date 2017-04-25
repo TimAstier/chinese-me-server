@@ -15,7 +15,11 @@ export default (sequelize, DataTypes) => {
         Grammar.belongsToMany(models.sentence, { through: 'sentenceGrammar' });
         Grammar.belongsToMany(models.user, { through: 'grammarUser' });
       }
-    }
+    },
+    // BUG: Sequelize names the table 'grammar' by default
+    // This is a bug from 'inflection'. Using this workaround:
+    freezeTableName: true,
+    tableName: 'grammars'
   });
   return Grammar;
 };
