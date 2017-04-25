@@ -11,8 +11,8 @@ export default (sequelize, DataTypes) => {
     timestamps: true,
     classMethods: {
       associate: () => {
-        Sentence.hasMany(models.lineDialog, { onDelete: 'cascade', hooks: true });
-        Sentence.belongsToMany(models.dialog, { through: 'lineDialog' });
+        Sentence.hasMany(models.sentenceGrammar, { onDelete: 'cascade', hooks: true });
+        Sentence.belongsToMany(models.grammar, { through: 'sentenceGrammar' });
       }
     }
   });

@@ -25,10 +25,10 @@ fs
       db[model.name] = model;
     } catch (error) {
       // This produces errors in build for unknown reason:
-      console.error('Model creation error on file ' + file  + ' :' + error);
+      // console.error('Model creation error on file ' + file  + ' :' + error);
     }
   });
-  // BUG: grammar and grammarLesson not scanned
+
 Object.keys(db).forEach(modelName => {
   if ('associate' in db[modelName]) {
     db[modelName].associate(db);
