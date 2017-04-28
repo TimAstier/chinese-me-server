@@ -10,10 +10,9 @@ function get(request, response, next) {
     .catch(next);
 }
 
-// TODO: ensure authenticated
 function completeResource(request, response, next) {
   ResourceUserUpdater(request)
-    .then(resource => response.json(resource))
+    .then(result => response.send(result))
     .catch(next);
 }
 

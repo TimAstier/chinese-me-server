@@ -23,10 +23,15 @@ export default function ResourceUserUpdater(request) {
       return models.user
         .findOne({ where: { id: userId } })
         .then(user => {
-          user[`add${capitalizeFirstLetter(resourceType)}`](resource)
+          return user[`add${capitalizeFirstLetter(resourceType)}`](resource)
           .then(addedResource => {
-            // console.log(JSON.parse(JSON.stringify(addedResource)));
-            return addedResource;
+            if (addedResource.length === 0) {
+              return {};
+            }
+            // Add resourceType to the response to update store in the client
+            const result = addedResource[0][0].get({ plain: true });
+            result.resourceType = resourceType;
+            return result;
           });
         });
     })

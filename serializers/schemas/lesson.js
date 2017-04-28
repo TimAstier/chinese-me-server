@@ -4,17 +4,17 @@ module.exports = {
   keyForAttribute: 'camelCase',
   dialogs: {
     ref: 'id',
-    attributes: ['id', 'dialogLesson'],
+    attributes: ['id', 'dialogLesson', 'dialogUsers'],
     include: false
   },
   grammars: {
     ref: 'id',
-    attributes: ['id', 'grammarLesson'],
+    attributes: ['id', 'grammarLesson', 'grammarUsers'],
     include: false
   },
   chars: {
     ref: 'id',
-    attributes: ['id', 'charLesson'],
+    attributes: ['id', 'charLesson', 'charUsers'],
     include: false
   }
 };
