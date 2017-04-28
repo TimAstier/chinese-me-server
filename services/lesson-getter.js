@@ -1,15 +1,36 @@
 import models from '../models';
 
-export default function LessonGetter(id) {
+export default function LessonGetter(request) {
+  const lessonId = request.params.id;
+  const userId = request.currentUser.get({ plain: true }).id;
+  // console.log(userId)
   return models.lesson
     .findOne({
-      where: { id },
+      where: { id: lessonId },
       include: [{
-        model: models.grammar
+        model: models.grammar,
+        required: false,
+        include: [{
+          model: models.grammarUser,
+          where: { userId },
+          required: false
+        }]
       }, {
-        model: models.dialog
+        model: models.dialog,
+        required: false,
+        include: [{
+          model: models.dialogUser,
+          where: { userId },
+          required: false
+        }]
       }, {
-        model: models.char
+        model: models.char,
+        required: false,
+        include: [{
+          model: models.charUser,
+          where: { userId },
+          required: false
+        }]
       }]
     })
     .then(lesson => {

@@ -13,7 +13,8 @@ export default (sequelize, DataTypes) => {
       associate: () => {
         Char.hasMany(models.charLesson, { onDelete: 'cascade', hooks: true });
         Char.belongsToMany(models.lesson, { through: 'charLesson' });
-        Char.belongsToMany(models.user, { through: 'charUsers' });
+        Char.hasMany(models.charUser, { onDelete: 'cascade', hooks: true });
+        Char.belongsToMany(models.user, { through: 'charUser' });
       }
     }
   });

@@ -13,7 +13,8 @@ export default (sequelize, DataTypes) => {
         Grammar.belongsToMany(models.lesson, { through: 'grammarLesson' });
         Grammar.hasMany(models.sentenceGrammar, { onDelete: 'cascade', hooks: true });
         Grammar.belongsToMany(models.sentence, { through: 'sentenceGrammar' });
-        Grammar.belongsToMany(models.user, { through: 'grammarUsers' });
+        Grammar.hasMany(models.grammarUser, { onDelete: 'cascade', hooks: true });
+        Grammar.belongsToMany(models.user, { through: 'grammarUser' });
       }
     },
     // BUG: Sequelize names the table 'grammar' by default

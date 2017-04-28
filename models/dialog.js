@@ -12,7 +12,8 @@ export default (sequelize, DataTypes) => {
         Dialog.belongsToMany(models.lesson, { through: 'dialogLesson' });
         Dialog.hasMany(models.lineDialog, { onDelete: 'cascade', hooks: true });
         Dialog.belongsToMany(models.line, { through: 'lineDialog' });
-        Dialog.belongsToMany(models.user, { through: 'dialogUsers' });
+        Dialog.hasMany(models.dialogUser, { onDelete: 'cascade', hooks: true });
+        Dialog.belongsToMany(models.user, { through: 'dialogUser' });
       }
     }
   });

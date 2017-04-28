@@ -12,10 +12,13 @@ export default (sequelize, DataTypes) => {
     timestamps: true,
     classMethods: {
       associate: () => {
-        User.belongsToMany(models.grammar, { through: 'grammarUsers' });
+        User.hasMany(models.grammarUser, { onDelete: 'cascade', hooks: true });
+        User.belongsToMany(models.grammar, { through: 'grammarUser' });
+        User.hasMany(models.charUser, { onDelete: 'cascade', hooks: true });
         User.belongsToMany(models.char, { through: 'charUsers' });
         User.belongsToMany(models.lesson, { through: 'lessonUsers' });
-        User.belongsToMany(models.dialog, { through: 'dialogUsers' });
+        User.hasMany(models.dialogUser, { onDelete: 'cascade', hooks: true });
+        User.belongsToMany(models.dialog, { through: 'dialogUser' });
       }
     }
   });
