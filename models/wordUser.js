@@ -1,18 +1,18 @@
 export default (sequelize, DataTypes) => {
   const models = sequelize.models;
 
-  const CharUser = sequelize.define('charUser', {
+  const WordUser = sequelize.define('wordUser', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    charId: { type: DataTypes.INTEGER },
+    wordId: { type: DataTypes.INTEGER },
     userId: { type: DataTypes.INTEGER }
   }, {
     timestamps: true,
     classMethods: {
       associate: () => {
-        CharUser.belongsTo(models.char);
-        CharUser.belongsTo(models.user);
+        WordUser.belongsTo(models.word);
+        WordUser.belongsTo(models.user);
       }
     }
   });
-  return CharUser;
+  return WordUser;
 };

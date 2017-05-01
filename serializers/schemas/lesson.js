@@ -1,6 +1,6 @@
 module.exports = {
   ref: 'id',
-  attributes: ['id', 'title', 'dialogs', 'grammars', 'chars'],
+  attributes: ['id', 'title', 'dialogs', 'grammars', 'chars', 'words'],
   keyForAttribute: 'camelCase',
   dialogs: {
     ref: 'id',
@@ -15,6 +15,11 @@ module.exports = {
   chars: {
     ref: 'id',
     attributes: ['id', 'charLesson', 'charUsers'],
+    include: false
+  },
+  words: {
+    ref: 'id',
+    attributes: ['id', 'wordLesson', 'wordUsers'],
     include: false
   }
 };

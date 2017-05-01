@@ -16,6 +16,8 @@ export default (sequelize, DataTypes) => {
         Lesson.belongsToMany(models.char, { through: 'charLesson' });
         Lesson.hasMany(models.dialogLesson, { onDelete: 'cascade', hooks: true });
         Lesson.belongsToMany(models.dialog, { through: 'dialogLesson' });
+        Lesson.hasMany(models.wordLesson, { onDelete: 'cascade', hooks: true });
+        Lesson.belongsToMany(models.word, { through: 'wordLesson' });
         Lesson.belongsToMany(models.user, { through: 'lessonUsers' });
       }
     }

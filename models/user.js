@@ -7,7 +7,8 @@ export default (sequelize, DataTypes) => {
     email: { type: DataTypes.STRING },
     password_digest: { type: DataTypes.STRING },
     country: { type: DataTypes.STRING },
-    active: { type: DataTypes.BOOLEAN }
+    active: { type: DataTypes.BOOLEAN },
+    studyUrl: { type: DataTypes.STRING }
   }, {
     timestamps: true,
     classMethods: {
@@ -19,6 +20,8 @@ export default (sequelize, DataTypes) => {
         User.belongsToMany(models.lesson, { through: 'lessonUsers' });
         User.hasMany(models.dialogUser, { onDelete: 'cascade', hooks: true });
         User.belongsToMany(models.dialog, { through: 'dialogUser' });
+        User.hasMany(models.wordUser, { onDelete: 'cascade', hooks: true });
+        User.belongsToMany(models.word, { through: 'wordUser' });
       }
     }
   });

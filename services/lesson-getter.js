@@ -31,6 +31,14 @@ export default function LessonGetter(request) {
           where: { userId },
           required: false
         }]
+      }, {
+        model: models.word,
+        required: false,
+        include: [{
+          model: models.wordUser,
+          where: { userId },
+          required: false
+        }]
       }]
     })
     .then(lesson => {
