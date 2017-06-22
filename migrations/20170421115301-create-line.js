@@ -6,7 +6,7 @@ module.exports = {
       id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
       avatar: { type: Sequelize.STRING, allowNull: false },
       name: { type: Sequelize.STRING, allowNull: false },
-      meta: { type: Sequelize.STRING, allowNull: false },
+      meta: { type: Sequelize.STRING },
       text: { type: Sequelize.TEXT, allowNull: false },
       audioUrl: { type: Sequelize.STRING },
       pinyint: { type: Sequelize.TEXT },
