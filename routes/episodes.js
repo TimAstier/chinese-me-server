@@ -1,9 +1,9 @@
 import EpisodesGetter from '../services/episodes-getter';
-// const GrammarSerializer = require('../serializers/grammar');
+const EpisodeSerializer = require('../serializers/episode');
 
 function get(request, response, next) {
   EpisodesGetter()
-    // .then(grammar => GrammarSerializer.serialize(grammar))
+    .then(episodes => EpisodeSerializer.serialize(episodes))
     .then(episodes => response.send(episodes))
     .catch(next);
 }
