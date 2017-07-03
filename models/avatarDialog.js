@@ -1,18 +1,19 @@
 export default (sequelize, DataTypes) => {
   const models = sequelize.models;
 
-  const Episode = sequelize.define('episode', {
+  const AvatarDialog = sequelize.define('avatarDialog', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    title: { type: DataTypes.STRING },
-    number: { type: DataTypes.INTEGER }
+    avatarId: { type: DataTypes.INTEGER },
+    dialogId: { type: DataTypes.INTEGER }
   }, {
     timestamps: true,
     classMethods: {
       associate: () => {
-        Episode.hasMany(models.dialog);
+        AvatarDialog.belongsTo(models.avatar);
+        AvatarDialog.belongsTo(models.dialog);
       }
     },
     instanceMethods: {}
   });
-  return Episode;
+  return AvatarDialog;
 };

@@ -1,18 +1,18 @@
 export default (sequelize, DataTypes) => {
   const models = sequelize.models;
 
-  const Episode = sequelize.define('episode', {
+  const Statement = sequelize.define('statement', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    title: { type: DataTypes.STRING },
-    number: { type: DataTypes.INTEGER }
+    order: { type: DataTypes.INTEGER }
   }, {
     timestamps: true,
     classMethods: {
       associate: () => {
-        Episode.hasMany(models.dialog);
+        Statement.belongsTo(models.dialog);
+        Statement.hasMany(models.sentence);
       }
     },
     instanceMethods: {}
   });
-  return Episode;
+  return Statement;
 };
