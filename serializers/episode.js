@@ -1,5 +1,6 @@
-'use strict';
-const JSONAPISerializer = require('jsonapi-serializer').Serializer;
-const serializerOptions = require('./schemas/episode');
+import { Serializer as JSONAPISerializer } from 'jsonapi-serializer';
+import episodeSchema from './schemas/episode';
 
-module.exports = new JSONAPISerializer('episodes', serializerOptions);
+const EpisodeSerializer = new JSONAPISerializer('episodes', episodeSchema);
+
+export default EpisodeSerializer;

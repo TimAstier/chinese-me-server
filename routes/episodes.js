@@ -1,7 +1,7 @@
 import EpisodesGetter from '../services/episodes-getter';
-const EpisodeSerializer = require('../serializers/episode');
+import EpisodeSerializer from '../serializers/episode';
 
-function get(request, response, next) {
+function list(request, response, next) {
   EpisodesGetter()
     .then(episodes => EpisodeSerializer.serialize(episodes))
     .then(episodes => response.send(episodes))
@@ -9,5 +9,5 @@ function get(request, response, next) {
 }
 
 module.exports = app => {
-  app.get('/api/episodes', get);
+  app.get('/api/episodes', list);
 };
