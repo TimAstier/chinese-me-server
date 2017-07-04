@@ -31,6 +31,7 @@ const dialogSchema = {
       ref: 'id',
       attributes: [
         'id',
+        'order',
         'chinese',
         'mood',
         'audioUrl',

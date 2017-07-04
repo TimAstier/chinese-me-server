@@ -6,7 +6,11 @@ export default function DialogsGetter(episodeId) {
       where: { episodeId },
       include: [{
         model: models.avatar,
-        required: false
+        required: false,
+        include: [{
+          model: models.avatarDialog,
+          required: false
+        }]
       }, {
         model: models.statement,
         required: false,
@@ -14,7 +18,13 @@ export default function DialogsGetter(episodeId) {
           model: models.sentence,
           required: false
         }]
-      }]
+      }],
+      order: [
+        [ 'order', 'ASC' ],
+        [ models.statement, 'order', 'ASC' ],
+        [ models.statement, models.sentence, 'order', 'ASC' ],
+        [ models.avatar, models.avatarDialog, 'order', 'ASC']
+      ]
     })
     .then(dialogs => {
       if (!dialogs) {

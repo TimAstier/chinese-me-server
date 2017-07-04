@@ -4,11 +4,11 @@ module.exports = {
   up: function (queryInterface, Sequelize) {
     return queryInterface.createTable('sentences', {
       id: { type: Sequelize.INTEGER, primary: true, autoIncrement: true },
-      order: { type: Sequelize.INTEGER, allowNull: false },
-      audioUrl: { type: Sequelize.STRING, allowNull: false },
-      mood: { type: Sequelize.STRING, allowNull: false },
-      chinese: { type: Sequelize.STRING, allowNull: false },
-      english: { type: Sequelize.STRING, allowNull: false },
+      order: { type: Sequelize.INTEGER, allowNull: false, defaultValue: 0},
+      audioUrl: { type: Sequelize.STRING, allowNull: false, defaultValue: '' },
+      mood: { type: Sequelize.STRING, allowNull: false, defaultValue: '' },
+      chinese: { type: Sequelize.STRING, allowNull: false, defaultValue: '' },
+      english: { type: Sequelize.STRING, allowNull: false, defaultValue: '' },
       statementId: {
         type: Sequelize.INTEGER,
         reference: {

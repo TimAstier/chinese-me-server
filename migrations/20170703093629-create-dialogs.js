@@ -5,7 +5,7 @@ module.exports = {
     return queryInterface.createTable('dialogs', {
       id: { type: Sequelize.INTEGER, primary: true, autoIncrement: true },
       introAudioUrl: { type: Sequelize.STRING },
-      order: { type: Sequelize.INTEGER, allowNull: false },
+      order: { type: Sequelize.INTEGER, allowNull: false, defaultValue: 0 },
       episodeId: {
         type: Sequelize.INTEGER,
         reference: {

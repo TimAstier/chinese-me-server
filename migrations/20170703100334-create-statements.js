@@ -4,7 +4,7 @@ module.exports = {
   up: function (queryInterface, Sequelize) {
     return queryInterface.createTable('statements', {
       id: { type: Sequelize.INTEGER, primary: true, autoIncrement: true },
-      order: { type: Sequelize.INTEGER, allowNull: false },
+      order: { type: Sequelize.INTEGER, allowNull: false, defaultValue: 0 },
       dialogId: {
         type: Sequelize.INTEGER,
         reference: {

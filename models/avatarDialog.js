@@ -4,7 +4,8 @@ export default (sequelize, DataTypes) => {
   const AvatarDialog = sequelize.define('avatarDialog', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     avatarId: { type: DataTypes.INTEGER },
-    dialogId: { type: DataTypes.INTEGER }
+    dialogId: { type: DataTypes.INTEGER },
+    order: { type: DataTypes.INTEGER }
   }, {
     timestamps: true,
     classMethods: {
