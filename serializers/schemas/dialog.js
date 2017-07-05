@@ -35,8 +35,9 @@ const dialogSchema = {
         'chinese',
         'mood',
         'audioUrl',
-        'english'
-      ]
+        'english',
+        'avatarId'
+      ],
     },
     include: false
   }

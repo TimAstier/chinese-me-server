@@ -16,7 +16,7 @@ export default function DialogsGetter(episodeId) {
         required: false,
         include: [{
           model: models.sentence,
-          required: false
+          required: false,
         }]
       }],
       order: [
