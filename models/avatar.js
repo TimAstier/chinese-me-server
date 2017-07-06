@@ -12,7 +12,7 @@ export default (sequelize, DataTypes) => {
     timestamps: true,
     classMethods: {
       associate: () => {
-        Avatar.hasMany(models.sentence);
+        Avatar.hasMany(models.statement);
         Avatar.belongsToMany(models.dialog, { through: 'avatarDialog' });
         Avatar.hasMany(models.avatarDialog, { onDelete: 'cascade' });
       }

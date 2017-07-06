@@ -13,7 +13,6 @@ export default (sequelize, DataTypes) => {
     classMethods: {
       associate: () => {
         Sentence.belongsTo(models.statement);
-        Sentence.belongsTo(models.avatar);
       }
     },
     instanceMethods: {}

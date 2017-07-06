@@ -25,7 +25,8 @@ const dialogSchema = {
     attributes: [
       'id',
       'order',
-      'sentences'
+      'sentences',
+      'avatarId'
     ],
     sentences: {
       ref: 'id',
@@ -35,8 +36,7 @@ const dialogSchema = {
         'chinese',
         'mood',
         'audioUrl',
-        'english',
-        'avatarId'
+        'english'
       ],
     },
     include: false

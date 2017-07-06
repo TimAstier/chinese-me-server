@@ -10,6 +10,7 @@ export default (sequelize, DataTypes) => {
       associate: () => {
         Statement.belongsTo(models.dialog);
         Statement.hasMany(models.sentence);
+        Statement.belongsTo(models.avatar);
       }
     },
     instanceMethods: {}
