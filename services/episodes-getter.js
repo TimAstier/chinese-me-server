@@ -6,10 +6,14 @@ export default function EpisodesGetter() {
       include: [{
         model: models.dialog,
         attributes: ['id']
+      }, {
+        model: models.character,
+        attributes: ['id']
       }],
       order: [
         [ 'number', 'ASC' ],
-        [ models.dialog, 'order', 'ASC' ]
+        [ models.dialog, 'order', 'ASC' ],
+        [ models.character, models.characterEpisode, 'order', 'ASC']
       ]
     })
     .then(episodes => {
