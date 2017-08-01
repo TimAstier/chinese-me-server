@@ -10,6 +10,8 @@ export default (sequelize, DataTypes) => {
     classMethods: {
       associate: () => {
         Episode.hasMany(models.dialog);
+        Episode.belongsToMany(models.character, { through: 'characterEpisode' });
+        Episode.hasMany(models.characterEpisode, { onDelete: 'cascade' });
       }
     },
     instanceMethods: {}
