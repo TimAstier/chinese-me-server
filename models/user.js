@@ -1,5 +1,5 @@
 export default (sequelize, DataTypes) => {
-  // const models = sequelize.models;
+  const models = sequelize.models;
 
   const User = sequelize.define('user', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -7,7 +7,11 @@ export default (sequelize, DataTypes) => {
     password_digest: { type: DataTypes.STRING },
     active: { type: DataTypes.BOOLEAN, defaultValue: false },
   }, {
-    classMethods: {},
+    classMethods: {
+      associate: () => {
+        User.hasMany(models.feedback);
+      }
+    },
     instanceMethods: {}
   });
   return User;

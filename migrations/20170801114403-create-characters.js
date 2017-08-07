@@ -15,6 +15,6 @@ module.exports = {
   },
 
   down: function (queryInterface) {
-    return queryInterface.removeTable('characters');
+    return queryInterface.dropTable('characters');
   }
 };

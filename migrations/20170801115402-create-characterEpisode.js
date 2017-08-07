@@ -25,6 +25,6 @@ module.exports = {
   },
 
   down: function (queryInterface) {
-    return queryInterface.removeTable('characterEpisodes');
+    return queryInterface.dropTable('characterEpisodes');
   }
 };

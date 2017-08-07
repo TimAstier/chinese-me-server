@@ -13,6 +13,6 @@ module.exports = {
   },
 
   down: function (queryInterface) {
-    return queryInterface.removeColumn('users');
+    return queryInterface.dropColumn('users');
   }
 };
