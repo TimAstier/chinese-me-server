@@ -10,7 +10,7 @@ function getToken(request, response, next) {
     .then(foundUser => {
       if (!isEmpty(foundUser)) {
         const user = foundUser[0];
-        if (bcrypt.compareSync(password, user.get('password_digest'))) {
+        if (bcrypt.compareSync(password, user.get('passwordDigest'))) {
           if (user.active === false) {
             throw { status: 403, message: 'Account not activated.' };
           }
