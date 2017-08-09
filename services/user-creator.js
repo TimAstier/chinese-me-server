@@ -26,7 +26,7 @@ export default function UserCreator(data) {
               'Activate your ChineseMe account',
               templates.userActivation,
               [
-                [ '-url-', process.env.CLIENT_URL + '/' + user.activationToken ]
+                [ '-url-', process.env.CLIENT_URL + '/signup/activate/' + user.activationToken ]
               ]
             );
             mail.perform();
