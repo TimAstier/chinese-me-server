@@ -12,7 +12,7 @@ function getToken(request, response, next) {
         const user = foundUser[0];
         if (bcrypt.compareSync(password, user.get('passwordDigest'))) {
           if (user.active === false) {
-            throw { status: 403, message: 'Account not activated.' };
+            throw { status: 403, message: 'account_not_activated' };
           }
           const token = jwt.sign({
             id: user.get('id'),
@@ -20,10 +20,10 @@ function getToken(request, response, next) {
           }, process.env.JWT_SECRET);
           response.json({ token });
         } else {
-          throw { status: 401, message: 'Invalid Credentials' };
+          throw { status: 401, message: 'invalid_credentials' };
         }
       } else {
-        throw { status: 401, message: 'Invalid Credentials' };
+        throw { status: 401, message: 'invalid_credentials' };
       }
     })
     .catch(next);

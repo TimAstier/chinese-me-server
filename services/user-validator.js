@@ -4,13 +4,12 @@ import isEmpty from 'lodash/isEmpty';
 
 export default function UserValidator(data, otherValidations) {
   const { errors } = otherValidations(data);
-  console.log(errors);
   return Promise.all([
     models.user
     .findAll({ where: { email: data.email } })
     .then(user => {
       if (!isEmpty(user)) {
-        errors.email = 'There is user with such email';
+        errors.email = 'There is already an account linked to this email';
       }
     })
   ]).then(() => {

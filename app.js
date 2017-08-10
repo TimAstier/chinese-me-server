@@ -31,18 +31,21 @@ require('./routes')(app);
 
 // Errors handling
 app.use((err, req, res, next) => {
-  let { message } = err;
-  const { status } = err;
+  if (err.message) {
+    let { message } = err;
+    const { status } = err;
 
-  // NOTICE: Display the first error message if it is a Sequelize validation
-  //         error message.
-  if (err && err.errors && err.errors[0] && err.errors[0].message) {
-    message = err.errors[0].message;
-  }
+    // NOTICE: Display the first error message if it is a Sequelize validation
+    //         error message.
+    if (err && err.errors && err.errors[0] && err.errors[0].message) {
+      message = err.errors[0].message;
+    }
 
-  res
+    res
     .status(err.status || 400)
     .send({ errors: [{ status, message }] });
+  }
+  res.status(400).send(err);
   next(err);
 });
 
