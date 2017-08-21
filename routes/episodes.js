@@ -4,6 +4,7 @@ import DialogsGetter from '../services/dialogs-getter';
 import DialogSerializer from '../serializers/dialog';
 import CharactersGetter from '../services/characters-getter';
 import CharacterSerializer from '../serializers/character';
+import MapDataGetter from '../services/map-data-getter';
 
 function list(request, response, next) {
   EpisodesGetter()
@@ -26,8 +27,15 @@ function listCharacters(request, response, next) {
     .catch(next);
 }
 
+function map(request, response, next) {
+  MapDataGetter(request.params.id)
+    .then(data => response.send(data))
+    .catch(next);
+}
+
 module.exports = app => {
   app.get('/api/episodes', list);
   app.get('/api/episode/:id/dialogs', listDialogs);
   app.get('/api/episode/:id/characters', listCharacters);
+  app.get('/api/episodes/:id/map', map);
 };

@@ -3,6 +3,7 @@ const dialogSchema = {
   attributes: [
     'id',
     'introAudioUrl',
+    'title',
     'order',
     'avatars',
     'statements'

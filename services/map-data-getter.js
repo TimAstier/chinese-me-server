@@ -1,17 +1,19 @@
 import models from '../models';
 
-export default function EpisodesGetter() {
+export default function MapDataGetter(id) {
   return models.episode
-    .findAll({
+    .find({
+      where: { id },
+      attributes: ['id'],
       include: [{
         model: models.dialog,
-        attributes: ['id']
+        attributes: ['id', 'title']
       }, {
         model: models.character,
-        attributes: ['id']
+        attributes: ['id', 'simpChar']
       }, {
         model: models.grammar,
-        attributes: ['id']
+        attributes: ['id', 'title']
       }],
       order: [
         [ 'number', 'ASC' ],
@@ -20,10 +22,10 @@ export default function EpisodesGetter() {
         [ models.character, models.characterEpisode, 'order', 'ASC']
       ]
     })
-    .then(episodes => {
-      if (!episodes) {
-        throw { status: 404, message: 'episodes_not_found' };
+    .then(episode => {
+      if (!episode) {
+        throw { status: 404, message: 'map_data_not_found' };
       }
-      return episodes;
+      return episode;
     });
 }
