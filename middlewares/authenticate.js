@@ -16,7 +16,7 @@ export default (request, response, next) => {
       } else {
         User.findOne({
           where: { id: decoded.id },
-          attributes: ['email', 'username', 'id', 'active']
+          attributes: ['email', 'id', 'active']
         }).then(user => {
           if (!user) {
             response.status(404).json({ error: 'No such user' });

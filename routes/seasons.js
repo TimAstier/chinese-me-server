@@ -1,3 +1,4 @@
+import authenticate from '../middlewares/authenticate';
 import SeasonsGetter from '../services/seasons-getter';
 import SeasonSerializer from '../serializers/season';
 
@@ -9,5 +10,5 @@ function list(request, response, next) {
 }
 
 module.exports = app => {
-  app.get('/api/seasons', list);
+  app.get('/api/seasons', authenticate, list);
 };
