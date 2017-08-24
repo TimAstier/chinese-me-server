@@ -11,6 +11,8 @@ export default (sequelize, DataTypes) => {
     classMethods: {
       associate: () => {
         Grammar.belongsTo(models.episode);
+        Grammar.belongsToMany(models.user, { through: 'userGrammar' });
+        Grammar.hasMany(models.userGrammar, { onDelete: 'cascade' });
       }
     },
     instanceMethods: {},

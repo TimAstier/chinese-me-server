@@ -14,6 +14,8 @@ export default (sequelize, DataTypes) => {
       associate: () => {
         Character.belongsToMany(models.episode, { through: 'characterEpisode' });
         Character.hasMany(models.characterEpisode, { onDelete: 'cascade' });
+        Character.belongsToMany(models.user, { through: 'userCharacter' });
+        Character.hasMany(models.userCharacter, { onDelete: 'cascade' });
       }
     },
     instanceMethods: {}

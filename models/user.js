@@ -11,6 +11,12 @@ export default (sequelize, DataTypes) => {
     classMethods: {
       associate: () => {
         User.hasMany(models.feedback);
+        User.belongsToMany(models.character, { through: 'userCharacter' });
+        User.hasMany(models.userCharacter, { onDelete: 'cascade' });
+        User.belongsToMany(models.grammar, { through: 'userGrammar' });
+        User.hasMany(models.userGrammar, { onDelete: 'cascade' });
+        User.belongsToMany(models.dialog, { through: 'userDialog' });
+        User.hasMany(models.userDialog, { onDelete: 'cascade' });
       }
     },
     instanceMethods: {}
