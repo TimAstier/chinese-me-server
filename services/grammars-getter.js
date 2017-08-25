@@ -1,9 +1,15 @@
 import models from '../models';
 
-export default function GrammarsGetter(episodeId) {
+export default function GrammarsGetter(episodeId, userId) {
   return models.grammar
     .findAll({
       where: { episodeId },
+      include: [{
+        model: models.userGrammar,
+        where: { userId },
+        attributes: ['id'],
+        required: false
+      }],
       order: [
         [ 'order', 'ASC' ]
       ]

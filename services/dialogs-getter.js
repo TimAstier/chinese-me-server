@@ -1,6 +1,6 @@
 import models from '../models';
 
-export default function DialogsGetter(episodeId) {
+export default function DialogsGetter(episodeId, userId) {
   return models.dialog
     .findAll({
       where: { episodeId },
@@ -18,6 +18,11 @@ export default function DialogsGetter(episodeId) {
           model: models.sentence,
           required: false,
         }]
+      }, {
+        model: models.userDialog,
+        where: { userId },
+        attributes: ['id'],
+        required: false
       }],
       order: [
         [ 'order', 'ASC' ],

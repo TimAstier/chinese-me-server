@@ -6,9 +6,14 @@ const dialogSchema = {
     'title',
     'order',
     'avatars',
-    'statements'
+    'statements',
+    'completed'
   ],
   keyForAttribute: 'camelCase',
+  transform: record => {
+    record.completed = record.userDialogs.length !== 0;
+    return record;
+  },
   avatars: {
     ref: 'id',
     attributes: [

@@ -6,9 +6,14 @@ const characterSchema = {
     'pinyinNumber',
     'audioUrl',
     'etymologyUrl',
-    'writingUrl'
+    'writingUrl',
+    'completed'
   ],
-  keyForAttribute: 'camelCase'
+  keyForAttribute: 'camelCase',
+  transform: record => {
+    record.completed = record.userCharacters.length !== 0;
+    return record;
+  }
 };
 
 export default characterSchema;

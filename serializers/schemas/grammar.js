@@ -4,9 +4,14 @@ const grammarSchema = {
     'id',
     'title',
     'videoUrl',
-    'order'
+    'order',
+    'completed'
   ],
-  keyForAttribute: 'camelCase'
+  keyForAttribute: 'camelCase',
+  transform: record => {
+    record.completed = record.userGrammars.length !== 0;
+    return record;
+  }
 };
 
 export default grammarSchema;

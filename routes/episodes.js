@@ -18,21 +18,21 @@ function list(request, response, next) {
 }
 
 function listDialogs(request, response, next) {
-  DialogsGetter(request.params.id)
+  DialogsGetter(request.params.id, request.currentUser.id)
     .then(dialogs => DialogSerializer.serialize(dialogs))
     .then(dialogs => response.send(dialogs))
     .catch(next);
 }
 
 function listCharacters(request, response, next) {
-  CharactersGetter(request.params.id)
+  CharactersGetter(request.params.id, request.currentUser.id)
     .then(characters => CharacterSerializer.serialize(characters))
     .then(characters => response.send(characters))
     .catch(next);
 }
 
 function listGrammars(request, response, next) {
-  GrammarsGetter(request.params.id)
+  GrammarsGetter(request.params.id, request.currentUser.id)
     .then(grammars => GrammarSerializer.serialize(grammars))
     .then(grammars => response.send(grammars))
     .catch(next);
