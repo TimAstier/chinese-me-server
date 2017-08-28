@@ -18,6 +18,18 @@ module.exports = {
           key: 'id'
         }
       },
+      etymology: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+      },
+      pinyin: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+      },
+      writing: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+      },
       createdAt: { type: Sequelize.DATE, defaultValue: Sequelize.fn('NOW') },
       updatedAt: { type: Sequelize.DATE, defaultValue: Sequelize.fn('NOW') }
     });

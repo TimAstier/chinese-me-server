@@ -5,6 +5,9 @@ export default (sequelize, DataTypes) => {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     userId: { type: DataTypes.INTEGER },
     characterId: { type: DataTypes.INTEGER },
+    etymology: { type: DataTypes.INTEGER },
+    pinyin: { type: DataTypes.INTEGER },
+    writing: { type: DataTypes.INTEGER }
   }, {
     timestamps: true,
     classMethods: {

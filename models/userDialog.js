@@ -5,6 +5,9 @@ export default (sequelize, DataTypes) => {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     userId: { type: DataTypes.INTEGER },
     dialogId: { type: DataTypes.INTEGER },
+    listen: { type: DataTypes.INTEGER },
+    explore: { type: DataTypes.INTEGER },
+    roleplay: { type: DataTypes.INTEGER }
   }, {
     timestamps: true,
     classMethods: {

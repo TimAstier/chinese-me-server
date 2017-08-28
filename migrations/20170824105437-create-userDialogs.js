@@ -18,6 +18,18 @@ module.exports = {
           key: 'id'
         }
       },
+      listen: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+      },
+      explore: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+      },
+      roleplay: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+      },
       createdAt: { type: Sequelize.DATE, defaultValue: Sequelize.fn('NOW') },
       updatedAt: { type: Sequelize.DATE, defaultValue: Sequelize.fn('NOW') }
     });

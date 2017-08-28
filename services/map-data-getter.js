@@ -12,7 +12,7 @@ export default function MapDataGetter(episodeId, userId) {
         include: [{
           model: models.userDialog,
           where: { userId },
-          attributes: ['id'],
+          attributes: ['id', 'listen', 'explore', 'roleplay'],
           required: false
         }]
       }, {
@@ -22,7 +22,7 @@ export default function MapDataGetter(episodeId, userId) {
         include: [{
           model: models.userCharacter,
           where: { userId },
-          attributes: ['id'],
+          attributes: ['id', 'etymology', 'pinyin', 'writing'],
           required: false
         }]
       }, {

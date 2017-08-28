@@ -5,6 +5,7 @@ export default (sequelize, DataTypes) => {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     userId: { type: DataTypes.INTEGER },
     grammarId: { type: DataTypes.INTEGER },
+    explanation: { type: DataTypes.INTEGER }
   }, {
     timestamps: true,
     classMethods: {
