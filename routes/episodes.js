@@ -7,6 +7,8 @@ import CharactersGetter from '../services/characters-getter';
 import CharacterSerializer from '../serializers/character';
 import GrammarsGetter from '../services/grammars-getter';
 import GrammarSerializer from '../serializers/grammar';
+import MultipleChoicesGetter from '../services/multiple-choices-getter';
+import MultipleChoiceSerializer from '../serializers/multipleChoice';
 import MapDataGetter from '../services/map-data-getter';
 import MapDataSerializer from '../serializers/mapData';
 
@@ -38,6 +40,13 @@ function listGrammars(request, response, next) {
     .catch(next);
 }
 
+function listMultipleChoices(request, response, next) {
+  MultipleChoicesGetter(request.params.id)
+    .then(multipleChoices => MultipleChoiceSerializer.serialize(multipleChoices))
+    .then(multipleChoices => response.send(multipleChoices))
+    .catch(next);
+}
+
 function map(request, response, next) {
   MapDataGetter(request.params.id, request.currentUser.id)
     .then(mapData => MapDataSerializer.serialize(mapData))
@@ -50,5 +59,6 @@ module.exports = app => {
   app.get('/api/episode/:id/dialogs', authenticate, listDialogs);
   app.get('/api/episode/:id/characters', authenticate, listCharacters);
   app.get('/api/episode/:id/grammars', authenticate, listGrammars);
+  app.get('/api/episode/:id/multipleChoices', authenticate, listMultipleChoices);
   app.get('/api/episodes/:id/map', authenticate, map);
 };
