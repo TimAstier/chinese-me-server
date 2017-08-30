@@ -12,12 +12,20 @@ export default function EpisodesGetter() {
       }, {
         model: models.grammar,
         attributes: ['id']
+      }, {
+        model: models.multipleChoice,
+        attributes: ['id']
+      }, {
+        model: models.audioToText,
+        attributes: ['id']
       }],
       order: [
         [ 'number', 'ASC' ],
         [ models.dialog, 'order', 'ASC' ],
         [ models.grammar, 'order', 'ASC' ],
-        [ models.character, models.characterEpisode, 'order', 'ASC']
+        [ models.character, models.characterEpisode, 'order', 'ASC'],
+        [ models.multipleChoice, 'order', 'ASC' ],
+        [ models.audioToText, 'order', 'ASC' ]
       ]
     })
     .then(episodes => {

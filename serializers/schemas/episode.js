@@ -7,6 +7,8 @@ const episodeSchema = {
     'dialogs',
     'characters',
     'grammars',
+    'multipleChoices',
+    'audioToTexts',
     'seasonId'
   ],
   keyForAttribute: 'camelCase',
@@ -19,6 +21,14 @@ const episodeSchema = {
     include: false
   },
   grammars: {
+    ref: 'id',
+    include: false
+  },
+  multipleChoices: {
+    ref: 'id',
+    include: false
+  },
+  audioToTexts: {
     ref: 'id',
     include: false
   }
