@@ -9,6 +9,8 @@ import GrammarsGetter from '../services/grammars-getter';
 import GrammarSerializer from '../serializers/grammar';
 import MultipleChoicesGetter from '../services/multiple-choices-getter';
 import MultipleChoiceSerializer from '../serializers/multipleChoice';
+import AudioToTextsGetter from '../services/audio-to-texts-getter';
+import AudioToTextSerializer from '../serializers/audioToText';
 import MapDataGetter from '../services/map-data-getter';
 import MapDataSerializer from '../serializers/mapData';
 
@@ -47,6 +49,13 @@ function listMultipleChoices(request, response, next) {
     .catch(next);
 }
 
+function listAudioToTexts(request, response, next) {
+  AudioToTextsGetter(request.params.id)
+    .then(audioToTexts => AudioToTextSerializer.serialize(audioToTexts))
+    .then(audioToTexts => response.send(audioToTexts))
+    .catch(next);
+}
+
 function map(request, response, next) {
   MapDataGetter(request.params.id, request.currentUser.id)
     .then(mapData => MapDataSerializer.serialize(mapData))
@@ -60,5 +69,6 @@ module.exports = app => {
   app.get('/api/episode/:id/characters', authenticate, listCharacters);
   app.get('/api/episode/:id/grammars', authenticate, listGrammars);
   app.get('/api/episode/:id/multipleChoices', authenticate, listMultipleChoices);
+  app.get('/api/episode/:id/audioToTexts', authenticate, listAudioToTexts);
   app.get('/api/episodes/:id/map', authenticate, map);
 };

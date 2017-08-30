@@ -15,6 +15,7 @@ export default (sequelize, DataTypes) => {
         Episode.hasMany(models.characterEpisode, { onDelete: 'cascade' });
         Episode.belongsTo(models.season);
         Episode.hasMany(models.multipleChoice);
+        Episode.hasMany(models.audioToText);
       }
     },
     instanceMethods: {}
