@@ -13,18 +13,15 @@ export default function ReviewExercisesGetter(episodeId) {
             model: models.wordAudioToText,
             required: false
           }]
-        }],
-        order: [
-          [ 'order', 'ASC' ],
-          [ models.word, models.wordAudioToText, 'order', 'ASC']
-        ]
+        }]
       }, {
         model: models.multipleChoice
       }],
       order: [
         [ 'number', 'ASC' ],
         [ models.multipleChoice, 'order', 'ASC' ],
-        [ models.audioToText, 'order', 'ASC' ]
+        [ models.audioToText, 'order', 'ASC' ],
+        [ models.audioToText, models.word, models.wordAudioToText, 'order', 'ASC' ],
       ]
     })
     .then(episode => {
