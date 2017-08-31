@@ -1,6 +1,9 @@
 import { Serializer as JSONAPISerializer } from 'jsonapi-serializer';
-import userSchema from './schemas/user';
 
-const UserSerializer = new JSONAPISerializer('users', userSchema);
+const UserSerializer = new JSONAPISerializer('users', {
+  ref: 'id',
+  attributes: ['id', 'email'],
+  keyForAttribute: 'camelCase'
+});
 
 export default UserSerializer;

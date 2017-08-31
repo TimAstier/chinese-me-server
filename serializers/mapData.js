@@ -1,6 +1,14 @@
 import { Serializer as JSONAPISerializer } from 'jsonapi-serializer';
-import mapDataSchema from './schemas/mapData';
 
-const MapDataSerializer = new JSONAPISerializer('mapDatas', mapDataSchema);
+const MapDataSerializer = new JSONAPISerializer('mapDatas', {
+  ref: 'id',
+  attributes: [
+    'id',
+    'dialogs',
+    'characters',
+    'grammars'
+  ],
+  keyForAttribute: 'camelCase'
+});
 
 export default MapDataSerializer;

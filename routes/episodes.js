@@ -13,6 +13,8 @@ import AudioToTextsGetter from '../services/audio-to-texts-getter';
 import AudioToTextSerializer from '../serializers/audioToText';
 import MapDataGetter from '../services/map-data-getter';
 import MapDataSerializer from '../serializers/mapData';
+import ReviewExercisesGetter from '../services/review-exercises-getter.js';
+import ReviewSerializer from '../serializers/review';
 
 function list(request, response, next) {
   EpisodesGetter()
@@ -56,6 +58,13 @@ function listAudioToTexts(request, response, next) {
     .catch(next);
 }
 
+function review(request, response, next) {
+  ReviewExercisesGetter(request.params.id)
+    .then(episode => ReviewSerializer.serialize(episode))
+    .then(episode => response.send(episode))
+    .catch(next);
+}
+
 function map(request, response, next) {
   MapDataGetter(request.params.id, request.currentUser.id)
     .then(mapData => MapDataSerializer.serialize(mapData))
@@ -70,5 +79,6 @@ module.exports = app => {
   app.get('/api/episode/:id/grammars', authenticate, listGrammars);
   app.get('/api/episode/:id/multipleChoices', authenticate, listMultipleChoices);
   app.get('/api/episode/:id/audioToTexts', authenticate, listAudioToTexts);
+  app.get('/api/episode/:id/review', authenticate, review);
   app.get('/api/episodes/:id/map', authenticate, map);
 };

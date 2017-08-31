@@ -1,6 +1,17 @@
 import { Serializer as JSONAPISerializer } from 'jsonapi-serializer';
-import seasonSchema from './schemas/season';
 
-const SeasonSerializer = new JSONAPISerializer('seasons', seasonSchema);
+const SeasonSerializer = new JSONAPISerializer('seasons', {
+  ref: 'id',
+  attributes: [
+    'id',
+    'number',
+    'episodes'
+  ],
+  keyForAttribute: 'camelCase',
+  episodes: {
+    ref: 'id',
+    include: false
+  }
+});
 
 export default SeasonSerializer;
