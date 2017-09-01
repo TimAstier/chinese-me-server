@@ -17,7 +17,7 @@ import ReviewExercisesGetter from '../services/review-exercises-getter.js';
 import ReviewSerializer from '../serializers/review';
 
 function list(request, response, next) {
-  EpisodesGetter()
+  EpisodesGetter(request.currentUser.id)
     .then(episodes => EpisodeSerializer.serialize(episodes))
     .then(episodes => response.send(episodes))
     .catch(next);

@@ -1,6 +1,6 @@
 import models from '../models';
 
-export default function EpisodesGetter() {
+export default function EpisodesGetter(userId) {
   return models.episode
     .findAll({
       include: [{
@@ -18,6 +18,11 @@ export default function EpisodesGetter() {
       }, {
         model: models.audioToText,
         attributes: ['id']
+      }, {
+        model: models.userEpisode,
+        where: { userId },
+        attributes: ['id', 'review', 'score'],
+        required: false
       }],
       order: [
         [ 'number', 'ASC' ],

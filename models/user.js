@@ -17,6 +17,7 @@ export default (sequelize, DataTypes) => {
         User.hasMany(models.userGrammar, { onDelete: 'cascade' });
         User.belongsToMany(models.dialog, { through: 'userDialog' });
         User.hasMany(models.userDialog, { onDelete: 'cascade' });
+        User.hasMany(models.userEpisode, { onDelete: 'cascade' });
       }
     },
     instanceMethods: {}

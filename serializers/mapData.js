@@ -6,7 +6,8 @@ const MapDataSerializer = new JSONAPISerializer('mapDatas', {
     'id',
     'dialogs',
     'characters',
-    'grammars'
+    'grammars',
+    'userEpisodes'
   ],
   keyForAttribute: 'camelCase'
 });

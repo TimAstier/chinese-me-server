@@ -11,9 +11,23 @@ const EpisodeSerializer = new JSONAPISerializer('episodes', {
     'grammars',
     'multipleChoices',
     'audioToTexts',
-    'seasonId'
+    'seasonId',
+    'score',
+    'review',
+    'locked'
   ],
   keyForAttribute: 'camelCase',
+  transform: record => {
+    if (record.userEpisodes.length === 0) {
+      record.locked = true;
+      return record;
+    }
+    record.score = record.userEpisodes[0].score;
+    record.review = record.userEpisodes[0].review;
+    record.locked = false;
+    delete record.userEpisodes;
+    return record;
+  },
   dialogs: {
     ref: 'id',
     include: false
