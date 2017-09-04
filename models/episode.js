@@ -4,7 +4,8 @@ export default (sequelize, DataTypes) => {
   const Episode = sequelize.define('episode', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     title: { type: DataTypes.STRING },
-    number: { type: DataTypes.INTEGER }
+    number: { type: DataTypes.INTEGER },
+    imageUrl: { type: DataTypes.STRING }
   }, {
     timestamps: true,
     classMethods: {

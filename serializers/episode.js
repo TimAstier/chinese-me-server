@@ -6,6 +6,7 @@ const EpisodeSerializer = new JSONAPISerializer('episodes', {
     'id',
     'title',
     'number',
+    'imageUrl',
     'dialogs',
     'characters',
     'grammars',
