@@ -40,6 +40,21 @@ $ heroku pg:info
 $ watch heroku pg:info
 ```
 
+Restore dump in local DB:
+```
+// If starting from existing DB
+$ sequelize db:migrate:undo:all
+$ pg_restore --verbose --clean --no-acl --no-owner -h localhost -U timotheeastier -d chinese-me latest.dump
+```
+
+Restore dump in Heroku App:
+```
+// Create a dump and upload to s3
+// See: https://devcenter.heroku.com/articles/heroku-postgres-import-export
+// NOTE: pg-dump version is outated.
+$ heroku pg:backups:restore 'https://s3.amazonaws.com/me/items/3H0q/mydb.dump' DATABASE_URL --remote production
+```
+
 ## Backups
 Automatic daily backups of postgresql-animate-96069 are scheduled at 02:00 America/Los_Angeles.
 

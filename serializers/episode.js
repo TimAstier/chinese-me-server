@@ -20,7 +20,8 @@ const EpisodeSerializer = new JSONAPISerializer('episodes', {
   keyForAttribute: 'camelCase',
   transform: record => {
     if (record.userEpisodes.length === 0) {
-      record.locked = true;
+      // first episode is automatically unlocked
+      record.locked = record.number === 1 ? false : true;
       return record;
     }
     record.score = record.userEpisodes[0].score;
