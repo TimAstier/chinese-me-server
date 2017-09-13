@@ -1,4 +1,5 @@
 import authenticate from '../middlewares/authenticate';
+import EpisodeGetter from '../services/episode-getter';
 import EpisodesGetter from '../services/episodes-getter';
 import EpisodeSerializer from '../serializers/episode';
 import DialogsGetter from '../services/dialogs-getter';
@@ -20,6 +21,13 @@ function list(request, response, next) {
   EpisodesGetter(request.currentUser.id)
     .then(episodes => EpisodeSerializer.serialize(episodes))
     .then(episodes => response.send(episodes))
+    .catch(next);
+}
+
+function get(request, response, next) {
+  EpisodeGetter(request.params.id)
+    .then(episode => EpisodeSerializer.serialize(episode))
+    .then(episode => response.send(episode))
     .catch(next);
 }
 
@@ -74,6 +82,7 @@ function map(request, response, next) {
 
 module.exports = app => {
   app.get('/api/episodes', authenticate, list);
+  app.get('/api/episode/:id', get);
   app.get('/api/episode/:id/dialogs', authenticate, listDialogs);
   app.get('/api/episode/:id/characters', authenticate, listCharacters);
   app.get('/api/episode/:id/grammars', authenticate, listGrammars);
