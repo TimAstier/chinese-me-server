@@ -1,5 +1,4 @@
 import { Serializer as JSONAPISerializer } from 'jsonapi-serializer';
-import ExampleSchema from './schemas/example';
 
 const EpisodeSerializer = new JSONAPISerializer('episodes', {
   ref: 'id',
@@ -16,23 +15,19 @@ const EpisodeSerializer = new JSONAPISerializer('episodes', {
     'seasonId',
     'score',
     'review',
-    'locked',
-    'examples'
+    'locked'
   ],
   keyForAttribute: 'camelCase',
   transform: record => {
-    if (record.userEpisodes) {
-      if (record.userEpisodes.length === 0) {
-        // first episode is automatically unlocked
-        record.locked = record.number === 1 ? false : true;
-        return record;
-      }
-      record.score = record.userEpisodes[0].score;
-      record.review = record.userEpisodes[0].review;
-      record.locked = false;
-      delete record.userEpisodes;
+    if (record.userEpisodes.length === 0) {
+      // first episode is automatically unlocked
+      record.locked = record.number === 1 ? false : true;
       return record;
     }
+    record.score = record.userEpisodes[0].score;
+    record.review = record.userEpisodes[0].review;
+    record.locked = false;
+    delete record.userEpisodes;
     return record;
   },
   dialogs: {
@@ -54,8 +49,7 @@ const EpisodeSerializer = new JSONAPISerializer('episodes', {
   audioToTexts: {
     ref: 'id',
     include: false
-  },
-  examples: ExampleSchema
+  }
 });
 
 export default EpisodeSerializer;

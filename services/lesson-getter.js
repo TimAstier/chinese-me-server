@@ -1,6 +1,6 @@
 import models from '../models';
 
-export default function EpisodeGetter(episodeId) {
+export default function LessonGetter(episodeId) {
   return models.episode
     .findOne({
       where: { id: episodeId },
