@@ -22,9 +22,47 @@ export default function LessonGetter(params) {
             'english',
             'literalEnglish'
           ]
+        }, {
+          model: models.dialog,
+          required: false,
+          attributes: [
+            'id',
+            'order',
+            'englishTitle',
+            'chineseTitle',
+            'englishIntro'
+          ],
+          include: [{
+            model: models.statement,
+            required: false,
+            attributes: [
+              'id',
+              'order'
+            ],
+            include: [{
+              model: models.sentence,
+              required: false,
+              attributes: [
+                'id',
+                'order',
+                'chinese',
+                'english'
+              ]
+            }, {
+              model: models.avatar,
+              required: false,
+              attributes: [
+                'id',
+                'name',
+                'chineseName'
+              ]
+            }]
+          }],
         }],
         order: [
-          [ models.example, 'order', 'ASC' ]
+          [ models.example, 'order', 'ASC' ],
+          [ models.dialog, models.statement, 'order', 'ASC' ],
+          [ models.dialog, models.statement, models.sentence, 'order', 'ASC' ],
         ]
       })
       .then(episode => {

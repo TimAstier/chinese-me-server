@@ -1,16 +1,17 @@
 import { Serializer as JSONAPISerializer } from 'jsonapi-serializer';
-import ExampleSchema from './schemas/example';
+import exampleSchema from './schemas/example';
+import dialogSchema from './schemas/dialog';
 
-const EpisodeSerializer = new JSONAPISerializer('lessons', {
+const LessonSerializer = new JSONAPISerializer('lessons', {
   ref: 'id',
   attributes: [
     'id',
     'title',
     'number',
-    'examples'
+    'examples',
+    'dialogs'
   ],
-  keyForAttribute: 'camelCase',
-  examples: ExampleSchema
+  keyForAttribute: 'camelCase'
 });
 
-export default EpisodeSerializer;
+export default LessonSerializer;

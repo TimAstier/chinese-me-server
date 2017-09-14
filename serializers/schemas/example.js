@@ -1,4 +1,4 @@
-const ExampleSchema = {
+const exampleSchema = {
   ref: 'id',
   attributes: [
     'id',
@@ -11,4 +11,4 @@ const ExampleSchema = {
   keyForAttribute: 'camelCase'
 };
 
-export default ExampleSchema;
+export default exampleSchema;
