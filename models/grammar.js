@@ -3,8 +3,6 @@ export default (sequelize, DataTypes) => {
 
   const Grammar = sequelize.define('grammar', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    videoUrl: { type: DataTypes.STRING },
-    title: { type: DataTypes.STRING },
     order: { type: DataTypes.INTEGER }
   }, {
     timestamps: true,
@@ -13,6 +11,7 @@ export default (sequelize, DataTypes) => {
         Grammar.belongsTo(models.episode);
         Grammar.belongsToMany(models.user, { through: 'userGrammar' });
         Grammar.hasMany(models.userGrammar, { onDelete: 'cascade' });
+        Grammar.hasMany(models.grammarT, { onDelete: 'cascade', hooks: true });
       }
     },
     instanceMethods: {},

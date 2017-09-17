@@ -6,13 +6,13 @@ export default (sequelize, DataTypes) => {
     question: { type: DataTypes.STRING, allowNull: false },
     choices: { type: DataTypes.ARRAY(DataTypes.STRING), allowNull: false },
     correctAnswer: { type: DataTypes.INTEGER, allowNull: false },
-    explanation: { type: DataTypes.STRING, allowNull: false },
     order: { type: DataTypes.INTEGER }
   }, {
     timestamps: true,
     classMethods: {
       associate: () => {
         MultipleChoice.belongsTo(models.episode);
+        MultipleChoice.hasMany(models.multipleChoiceT, { onDelete: 'cascade', hooks: true });
       }
     },
     instanceMethods: {}

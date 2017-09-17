@@ -8,6 +8,7 @@ export default (sequelize, DataTypes) => {
     activationToken: { type: DataTypes.STRING },
     active: { type: DataTypes.BOOLEAN, defaultValue: false },
   }, {
+    timestamps: true,
     classMethods: {
       associate: () => {
         User.hasMany(models.feedback);

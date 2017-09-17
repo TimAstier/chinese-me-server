@@ -5,8 +5,6 @@ export default (sequelize, DataTypes) => {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     introAudioUrl: { type: DataTypes.STRING },
     chineseTitle: { type: DataTypes.STRING },
-    englishTitle: { type: DataTypes.STRING },
-    englishIntro: { type: DataTypes.TEXT },
     order: { type: DataTypes.INTEGER }
   }, {
     timestamps: true,
@@ -18,6 +16,7 @@ export default (sequelize, DataTypes) => {
         Dialog.hasMany(models.statement);
         Dialog.belongsToMany(models.user, { through: 'userDialog' });
         Dialog.hasMany(models.userDialog, { onDelete: 'cascade' });
+        Dialog.hasMany(models.dialogT, { onDelete: 'cascade', hooks: true });
       }
     },
     instanceMethods: {}

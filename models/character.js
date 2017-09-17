@@ -5,9 +5,7 @@ export default (sequelize, DataTypes) => {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     simpChar: { type: DataTypes.STRING(1), allowNull: false },
     pinyinNumber: { type: DataTypes.STRING },
-    audioUrl: { type: DataTypes.STRING },
-    etymologyUrl: { type: DataTypes.STRING },
-    writingUrl: { type: DataTypes.STRING }
+    audioUrl: { type: DataTypes.STRING }
   }, {
     timestamps: true,
     classMethods: {
@@ -16,6 +14,7 @@ export default (sequelize, DataTypes) => {
         Character.hasMany(models.characterEpisode, { onDelete: 'cascade' });
         Character.belongsToMany(models.user, { through: 'userCharacter' });
         Character.hasMany(models.userCharacter, { onDelete: 'cascade' });
+        Character.hasMany(models.characterT, { onDelete: 'cascade', hooks: true });
       }
     },
     instanceMethods: {}
