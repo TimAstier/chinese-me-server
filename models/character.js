@@ -1,3 +1,4 @@
+// NOTE: This table has an associated translation table
 export default (sequelize, DataTypes) => {
   const models = sequelize.models;
 
@@ -14,7 +15,9 @@ export default (sequelize, DataTypes) => {
         Character.hasMany(models.characterEpisode, { onDelete: 'cascade' });
         Character.belongsToMany(models.user, { through: 'userCharacter' });
         Character.hasMany(models.userCharacter, { onDelete: 'cascade' });
-        Character.hasMany(models.characterT, { onDelete: 'cascade', hooks: true });
+        Character.hasMany(models.characterT,
+          { as: 'translations', onDelete: 'cascade', hooks: true }
+        );
       }
     },
     instanceMethods: {}

@@ -1,3 +1,4 @@
+// TODO: translations
 import models from '../models';
 
 export default function CharactersGetter(episodeId, userId) {
@@ -6,6 +7,14 @@ export default function CharactersGetter(episodeId, userId) {
     .then(episode => {
       return episode.getCharacters({
         include: [{
+          model: models.characterT,
+          as: 'translations',
+          required: false,
+          attributes: [
+            'etymologyUrl',
+            'writingUrl'
+          ]
+        }, {
           model: models.characterEpisode,
           required: false
         }, {

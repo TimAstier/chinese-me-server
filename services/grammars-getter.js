@@ -1,3 +1,4 @@
+// TODO: translations
 import models from '../models';
 
 export default function GrammarsGetter(episodeId, userId) {
@@ -5,6 +6,14 @@ export default function GrammarsGetter(episodeId, userId) {
     .findAll({
       where: { episodeId },
       include: [{
+        model: models.grammarT,
+        as: 'translations',
+        required: true,
+        attributes: [
+          'title',
+          'videoUrl'
+        ]
+      }, {
         model: models.userGrammar,
         where: { userId },
         attributes: ['id'],

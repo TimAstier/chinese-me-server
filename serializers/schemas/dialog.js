@@ -6,13 +6,13 @@ const dialogSchema = {
   attributes: [
     'id',
     'introAudioUrl',
-    'englishTitle',
     'chineseTitle',
     'englishIntro',
     'order',
     'avatars',
     'statements',
-    'completed'
+    'completed',
+    'translations'
   ],
   keyForAttribute: 'camelCase',
   transform: record => {

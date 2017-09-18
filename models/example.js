@@ -1,3 +1,4 @@
+// NOTE: This table has an associated translation table
 export default (sequelize, DataTypes) => {
   const models = sequelize.models;
 
@@ -11,7 +12,9 @@ export default (sequelize, DataTypes) => {
     classMethods: {
       associate: () => {
         Example.belongsTo(models.episode);
-        Example.hasMany(models.exampleT, { onDelete: 'cascade', hooks: true });
+        Example.hasMany(models.exampleT,
+          { as: 'translations', onDelete: 'cascade', hooks: true }
+        );
       }
     },
     instanceMethods: {}

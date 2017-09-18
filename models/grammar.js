@@ -1,3 +1,4 @@
+// NOTE: This table has an associated translation table
 export default (sequelize, DataTypes) => {
   const models = sequelize.models;
 
@@ -11,7 +12,9 @@ export default (sequelize, DataTypes) => {
         Grammar.belongsTo(models.episode);
         Grammar.belongsToMany(models.user, { through: 'userGrammar' });
         Grammar.hasMany(models.userGrammar, { onDelete: 'cascade' });
-        Grammar.hasMany(models.grammarT, { onDelete: 'cascade', hooks: true });
+        Grammar.hasMany(models.grammarT,
+          { as: 'translations', onDelete: 'cascade', hooks: true }
+        );
       }
     },
     instanceMethods: {},

@@ -7,7 +7,7 @@ export default function MapDataGetter(episodeId, userId) {
       attributes: ['id'],
       include: [{
         model: models.dialog,
-        attributes: ['id', 'title'],
+        attributes: ['id', 'chineseTitle'],
         required: false,
         include: [{
           model: models.userDialog,
@@ -27,13 +27,20 @@ export default function MapDataGetter(episodeId, userId) {
         }]
       }, {
         model: models.grammar,
-        attributes: ['id', 'title'],
+        attributes: ['id'],
         required: false,
         include: [{
           model: models.userGrammar,
           where: { userId },
           attributes: ['id'],
           required: false
+        }, {
+          model: models.grammarT,
+          as: 'translations',
+          required: false,
+          attributes: [
+            'title'
+          ]
         }]
       }, {
         model: models.userEpisode,

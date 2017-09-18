@@ -5,9 +5,9 @@ const multipleChoiceSchema = {
     'question',
     'choices',
     'correctAnswer',
-    'explanation',
     'episodeId',
-    'order'
+    'order',
+    'translations'
   ],
   keyForAttribute: 'camelCase'
 };

@@ -1,21 +1,9 @@
 import { Serializer as JSONAPISerializer } from 'jsonapi-serializer';
+import characterSchema from './schemas/character';
 
-const CharacterSerializer = new JSONAPISerializer('characters', {
-  ref: 'id',
-  attributes: [
-    'id',
-    'simpChar',
-    'pinyinNumber',
-    'audioUrl',
-    'etymologyUrl',
-    'writingUrl',
-    'completed'
-  ],
-  keyForAttribute: 'camelCase',
-  transform: record => {
-    record.completed = record.userCharacters.length !== 0;
-    return record;
-  }
-});
+const CharacterSerializer = new JSONAPISerializer(
+  'characters',
+  characterSchema
+);
 
 export default CharacterSerializer;

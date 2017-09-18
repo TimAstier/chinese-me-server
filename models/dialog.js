@@ -1,3 +1,4 @@
+// NOTE: This table has an associated translation table
 export default (sequelize, DataTypes) => {
   const models = sequelize.models;
 
@@ -16,7 +17,9 @@ export default (sequelize, DataTypes) => {
         Dialog.hasMany(models.statement);
         Dialog.belongsToMany(models.user, { through: 'userDialog' });
         Dialog.hasMany(models.userDialog, { onDelete: 'cascade' });
-        Dialog.hasMany(models.dialogT, { onDelete: 'cascade', hooks: true });
+        Dialog.hasMany(models.dialogT,
+          { as: 'translations', onDelete: 'cascade', hooks: true }
+        );
       }
     },
     instanceMethods: {}

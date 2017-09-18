@@ -1,3 +1,4 @@
+// TODO: limit scope of translations
 import models from '../models';
 
 export default function LessonGetter(params) {
@@ -18,21 +19,34 @@ export default function LessonGetter(params) {
             'id',
             'order',
             'chinese',
-            'pinyin',
-            'english',
-            'literalEnglish'
-          ]
+            'pinyin'
+          ],
+          include: [{
+            model: models.exampleT,
+            as: 'translations',
+            required: false,
+            attributes: [
+              'translation',
+              'literalTranslation'
+            ]
+          }]
         }, {
           model: models.dialog,
           required: false,
           attributes: [
             'id',
             'order',
-            'englishTitle',
             'chineseTitle',
-            'englishIntro'
           ],
           include: [{
+            model: models.dialogT,
+            as: 'translations',
+            required: true,
+            attributes: [
+              'titleTranslation',
+              'intro'
+            ]
+          }, {
             model: models.statement,
             required: false,
             attributes: [
@@ -45,9 +59,16 @@ export default function LessonGetter(params) {
               attributes: [
                 'id',
                 'order',
-                'chinese',
-                'english'
-              ]
+                'chinese'
+              ],
+              include: [{
+                model: models.sentenceT,
+                as: 'translations',
+                required: true,
+                attributes: [
+                  'translation'
+                ]
+              }]
             }, {
               model: models.avatar,
               required: false,

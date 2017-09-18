@@ -1,3 +1,4 @@
+// TODO: translations
 import models from '../models';
 
 export default function ReviewExercisesGetter(episodeId) {
@@ -15,7 +16,15 @@ export default function ReviewExercisesGetter(episodeId) {
           }]
         }]
       }, {
-        model: models.multipleChoice
+        model: models.multipleChoice,
+        include: [{
+          model: models.multipleChoiceT,
+          as: 'translations',
+          required: true,
+          attributes: [
+            'explanation'
+          ]
+        }]
       }],
       order: [
         [ 'number', 'ASC' ],

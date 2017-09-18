@@ -1,3 +1,4 @@
+// TODO: translations
 import models from '../models';
 
 export default function DialogsGetter(episodeId, userId) {
@@ -17,6 +18,15 @@ export default function DialogsGetter(episodeId, userId) {
         include: [{
           model: models.sentence,
           required: false,
+          include: [{
+            model: models.sentenceT,
+            as: 'translations',
+            required: true,
+            attributes: [
+              'translation',
+              'audioUrl'
+            ]
+          }]
         }]
       }, {
         model: models.userDialog,
