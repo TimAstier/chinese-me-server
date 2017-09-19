@@ -20,7 +20,7 @@ export default function EpisodesGetter(userId) {
         attributes: ['id']
       }, {
         model: models.userEpisode,
-        where: { userId },
+        where: { userId: userId },
         attributes: ['id', 'review', 'score'],
         required: false
       }],

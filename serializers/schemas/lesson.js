@@ -4,6 +4,8 @@ const lessonSchema = {
     'id',
     'title',
     'number',
+    'characters',
+    'grammars',
     'examples',
     'dialogs'
   ],

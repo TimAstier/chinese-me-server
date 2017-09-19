@@ -1,4 +1,4 @@
-import authenticate from '../middlewares/authenticate';
+import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 import UserCharactersUpdater from '../services/user-characters-updater';
 
 function complete(request, response, next) {
@@ -8,5 +8,5 @@ function complete(request, response, next) {
 }
 
 module.exports = app => {
-  app.post('/api/character/:id/completed', authenticate, complete);
+  app.post('/api/character/:id/completed', ensureAuthenticated, complete);
 };

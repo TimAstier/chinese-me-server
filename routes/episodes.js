@@ -1,4 +1,5 @@
-import authenticate from '../middlewares/authenticate';
+import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+import optionalAuthenticate from '../middlewares/optionalAuthenticate';
 import EpisodesGetter from '../services/episodes-getter';
 import EpisodeSerializer from '../serializers/episode';
 import DialogsGetter from '../services/dialogs-getter';
@@ -20,6 +21,13 @@ function list(request, response, next) {
   EpisodesGetter(request.currentUser.id)
     .then(episodes => EpisodeSerializer.serialize(episodes))
     .then(episodes => response.send(episodes))
+    .catch(next);
+}
+
+function map(request, response, next) {
+  MapDataGetter(request.params.id, request.currentUser.id)
+    .then(mapData => MapDataSerializer.serialize(mapData))
+    .then(mapData => response.send(mapData))
     .catch(next);
 }
 
@@ -65,20 +73,13 @@ function review(request, response, next) {
     .catch(next);
 }
 
-function map(request, response, next) {
-  MapDataGetter(request.params.id, request.currentUser.id)
-    .then(mapData => MapDataSerializer.serialize(mapData))
-    .then(mapData => response.send(mapData))
-    .catch(next);
-}
-
 module.exports = app => {
-  app.get('/api/episodes', authenticate, list);
-  app.get('/api/episode/:id/dialogs', authenticate, listDialogs);
-  app.get('/api/episode/:id/characters', authenticate, listCharacters);
-  app.get('/api/episode/:id/grammars', authenticate, listGrammars);
-  app.get('/api/episode/:id/multipleChoices', authenticate, listMultipleChoices);
-  app.get('/api/episode/:id/audioToTexts', authenticate, listAudioToTexts);
-  app.get('/api/episode/:id/review', authenticate, review);
-  app.get('/api/episodes/:id/map', authenticate, map);
+  app.get('/api/episodes', optionalAuthenticate, list);
+  app.get('/api/episodes/:id/map', optionalAuthenticate, map);
+  app.get('/api/episode/:id/dialogs', ensureAuthenticated, listDialogs);
+  app.get('/api/episode/:id/characters', ensureAuthenticated, listCharacters);
+  app.get('/api/episode/:id/grammars', ensureAuthenticated, listGrammars);
+  app.get('/api/episode/:id/multipleChoices', ensureAuthenticated, listMultipleChoices);
+  app.get('/api/episode/:id/audioToTexts', ensureAuthenticated, listAudioToTexts);
+  app.get('/api/episode/:id/review', ensureAuthenticated, review);
 };

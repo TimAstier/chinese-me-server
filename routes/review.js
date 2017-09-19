@@ -1,5 +1,5 @@
 import UserEpisodeUpdater from '../services/user-episode-updater';
-import authenticate from '../middlewares/authenticate';
+import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
 function post(request, response, next) {
   UserEpisodeUpdater(request.params.episodeId, request.currentUser.id)
@@ -8,5 +8,5 @@ function post(request, response, next) {
 }
 
 module.exports = app => {
-  app.post('/api/review/:episodeId', authenticate, post);
+  app.post('/api/review/:episodeId', ensureAuthenticated, post);
 };

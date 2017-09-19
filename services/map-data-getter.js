@@ -11,7 +11,7 @@ export default function MapDataGetter(episodeId, userId) {
         required: false,
         include: [{
           model: models.userDialog,
-          where: { userId },
+          where: { userId: userId },
           attributes: ['id', 'listen', 'explore', 'roleplay'],
           required: false
         }]
@@ -21,7 +21,7 @@ export default function MapDataGetter(episodeId, userId) {
         required: false,
         include: [{
           model: models.userCharacter,
-          where: { userId },
+          where: { userId: userId },
           attributes: ['id', 'etymology', 'pinyin', 'writing'],
           required: false
         }]
@@ -31,7 +31,7 @@ export default function MapDataGetter(episodeId, userId) {
         required: false,
         include: [{
           model: models.userGrammar,
-          where: { userId },
+          where: { userId: userId },
           attributes: ['id'],
           required: false
         }, {
@@ -44,7 +44,7 @@ export default function MapDataGetter(episodeId, userId) {
         }]
       }, {
         model: models.userEpisode,
-        where: { userId },
+        where: { userId: userId },
         attributes: ['id', 'review', 'score'],
         required: false,
       }],

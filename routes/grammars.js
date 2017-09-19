@@ -1,4 +1,4 @@
-import authenticate from '../middlewares/authenticate';
+import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 import UserGrammarsUpdater from '../services/user-grammars-updater';
 
 function complete(request, response, next) {
@@ -8,5 +8,5 @@ function complete(request, response, next) {
 }
 
 module.exports = app => {
-  app.post('/api/grammar/:id/completed', authenticate, complete);
+  app.post('/api/grammar/:id/completed', ensureAuthenticated, complete);
 };

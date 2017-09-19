@@ -1,4 +1,4 @@
-import authenticate from '../middlewares/authenticate';
+import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 import FeedbackCreator from '../services/feedback-creator';
 
 function post(request, response, next) {
@@ -8,5 +8,5 @@ function post(request, response, next) {
 }
 
 module.exports = app => {
-  app.post('/api/feedbacks', authenticate, post);
+  app.post('/api/feedbacks', ensureAuthenticated, post);
 };
