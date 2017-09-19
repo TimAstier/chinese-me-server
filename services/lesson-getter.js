@@ -49,7 +49,7 @@ export default function LessonGetter(params) {
           include: [{
             model: models.dialogT,
             as: 'translations',
-            required: true,
+            required: false,
             attributes: [
               'titleTranslation',
               'intro'
@@ -72,7 +72,7 @@ export default function LessonGetter(params) {
               include: [{
                 model: models.sentenceT,
                 as: 'translations',
-                required: true,
+                required: false,
                 attributes: [
                   'translation'
                 ]
