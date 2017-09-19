@@ -18,23 +18,8 @@ export default function LessonGetter(params) {
           attributes: [
             'id',
             'simpChar',
-            'pinyinNumber'
+            'pinyin'
           ]
-        }, {
-          model: models.grammar,
-          required: false,
-          attributes: [
-            'id',
-            'order'
-          ],
-          include: [{
-            model: models.grammarT,
-            as: 'translations',
-            required: false,
-            attributes: [
-              'title'
-            ]
-          }]
         }, {
           model: models.example,
           required: false,
@@ -106,7 +91,6 @@ export default function LessonGetter(params) {
         order: [
           [ models.character, models.characterEpisode, 'order', 'ASC' ],
           [ models.example, 'order', 'ASC' ],
-          [ models.grammar, 'order', 'ASC' ],
           [ models.dialog, 'order', 'ASC' ],
           [ models.dialog, models.statement, 'order', 'ASC' ],
           [ models.dialog, models.statement, models.sentence, 'order', 'ASC' ],

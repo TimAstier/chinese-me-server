@@ -4,6 +4,7 @@ const characterSchema = {
     'id',
     'simpChar',
     'pinyinNumber',
+    'pinyin',
     'audioUrl',
     'completed',
     'translations'

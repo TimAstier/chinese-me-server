@@ -5,7 +5,6 @@ const lessonSchema = {
     'title',
     'number',
     'characters',
-    'grammars',
     'examples',
     'dialogs'
   ],
