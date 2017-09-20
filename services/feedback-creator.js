@@ -1,7 +1,7 @@
 import models from '../models';
 
-export default function FeedbackCreator(data) {
-  const { subject, message, userId } = data;
+export default function FeedbackCreator(data, userId) {
+  const { subject, message } = data;
   if (!message) {
     throw { status: 400, message: 'feedback_message_required' };
   }

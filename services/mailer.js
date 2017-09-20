@@ -18,7 +18,7 @@ function Mailer(recipient, subject, template, params) {
         const toEmail = new helper.Email(recipient);
         const content = new helper.Content(
           'text/html',
-          'This email was sent automatically.' // Replaces the body that that is required
+          'This email was sent automatically.' // Replaces the body that is required by Sendgrid
         );
         const mail = new helper.Mail(fromEmail, subject, toEmail, content);
         params.forEach(param => {
