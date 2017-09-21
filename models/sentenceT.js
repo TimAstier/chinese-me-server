@@ -3,7 +3,6 @@ export default (sequelize, DataTypes) => {
 
   const SentenceT = sequelize.define('sentenceT', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    audioUrl: { type: DataTypes.STRING },
     translation: { type: DataTypes.STRING }
   }, {
     timestamps: true,
