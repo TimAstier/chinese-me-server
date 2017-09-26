@@ -6,7 +6,8 @@ export default (sequelize, DataTypes) => {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     chinese: { type: DataTypes.STRING },
     pinyin: { type: DataTypes.STRING },
-    order: { type: DataTypes.INTEGER }
+    order: { type: DataTypes.INTEGER },
+    audioUrl: { type: DataTypes.STRING }
   }, {
     timestamps: true,
     classMethods: {

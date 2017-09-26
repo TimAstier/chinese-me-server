@@ -5,7 +5,8 @@ const exampleSchema = {
     'order',
     'chinese',
     'pinyin',
-    'translations'
+    'translations',
+    'audioUrl'
   ],
   keyForAttribute: 'camelCase'
 };
