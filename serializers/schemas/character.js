@@ -5,7 +5,6 @@ const characterSchema = {
     'simpChar',
     'pinyinNumber',
     'pinyin',
-    'audioUrl',
     'completed',
     'translations'
   ],

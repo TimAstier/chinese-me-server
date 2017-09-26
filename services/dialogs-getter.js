@@ -23,8 +23,7 @@ export default function DialogsGetter(episodeId, userId) {
             as: 'translations',
             required: true,
             attributes: [
-              'translation',
-              'audioUrl'
+              'translation'
             ]
           }]
         }]
