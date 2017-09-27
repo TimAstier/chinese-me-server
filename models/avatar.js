@@ -6,8 +6,11 @@ export default (sequelize, DataTypes) => {
     name: { type: DataTypes.STRING },
     chineseName: { type: DataTypes.STRING },
     happyImage: { type: DataTypes.STRING },
-    blinkImage: { type: DataTypes.STRING },
-    surprisedImage: { type: DataTypes.STRING }
+    normalImage: { type: DataTypes.STRING },
+    surprisedImage: { type: DataTypes.STRING },
+    questionImage: { type: DataTypes.STRING },
+    embarrassedImage: { type: DataTypes.STRING },
+    sadImage: { type: DataTypes.STRING }
   }, {
     timestamps: true,
     classMethods: {

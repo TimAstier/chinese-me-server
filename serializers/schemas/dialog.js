@@ -5,7 +5,6 @@ const dialogSchema = {
   ref: 'id',
   attributes: [
     'id',
-    'introAudioUrl',
     'chineseTitle',
     'englishIntro',
     'order',

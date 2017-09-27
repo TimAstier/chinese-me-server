@@ -5,8 +5,11 @@ const avatarSchema = {
     'name',
     'chineseName',
     'happyImage',
-    'blinkImage',
-    'surprisedImage'
+    'normalImage',
+    'surprisedImage',
+    'questionImage',
+    'embarrassedImage',
+    'sadImage'
   ],
   include: false
 };

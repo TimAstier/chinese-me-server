@@ -4,7 +4,6 @@ export default (sequelize, DataTypes) => {
 
   const Dialog = sequelize.define('dialog', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    introAudioUrl: { type: DataTypes.STRING },
     chineseTitle: { type: DataTypes.STRING },
     order: { type: DataTypes.INTEGER }
   }, {
