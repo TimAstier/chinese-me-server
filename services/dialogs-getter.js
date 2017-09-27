@@ -21,7 +21,7 @@ export default function DialogsGetter(episodeId, userId) {
           include: [{
             model: models.sentenceT,
             as: 'translations',
-            required: true,
+            required: false,
             attributes: [
               'translation'
             ]
