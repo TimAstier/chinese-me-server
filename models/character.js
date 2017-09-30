@@ -6,7 +6,8 @@ export default (sequelize, DataTypes) => {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     simpChar: { type: DataTypes.STRING(1), allowNull: false },
     pinyinNumber: { type: DataTypes.STRING },
-    pinyin: { type: DataTypes.STRING }
+    pinyin: { type: DataTypes.STRING },
+    hanziData: { type: DataTypes.JSON }
   }, {
     timestamps: true,
     classMethods: {
