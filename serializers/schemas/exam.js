@@ -21,7 +21,7 @@ const createExercisesArray = (record, exerciseTypes) => {
       let exerciseType;
       if (type === 'characters') {
         const randomNumber = Math.random();
-        exerciseType = randomNumber > 0.5 ? 'characterStrokeQuizs' : 'characterPinyins';
+        exerciseType = randomNumber < 0.25 ? 'characterStrokeQuizs' : 'characterPinyins';
       } else {
         exerciseType = type;
       }
