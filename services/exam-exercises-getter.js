@@ -1,4 +1,5 @@
 import models from '../models';
+import Sequelize from 'sequelize';
 
 export default function ExamExercisesGetter(episodeId) {
   return models.episode
@@ -24,11 +25,11 @@ export default function ExamExercisesGetter(episodeId) {
             'explanation'
           ]
         }]
+      }, {
+        model: models.character
       }],
       order: [
-        [ 'number', 'ASC' ],
-        [ models.multipleChoice, 'order', 'ASC' ],
-        [ models.audioToText, 'order', 'ASC' ],
+        [ Sequelize.fn('RANDOM') ],
         [ models.audioToText, models.word, models.wordAudioToText, 'order', 'ASC' ],
       ]
     })
