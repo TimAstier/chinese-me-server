@@ -16,6 +16,8 @@ import MapDataGetter from '../services/map-data-getter';
 import MapDataSerializer from '../serializers/mapData';
 import ReviewExercisesGetter from '../services/review-exercises-getter.js';
 import ReviewSerializer from '../serializers/review';
+import ExamExercisesGetter from '../services/exam-exercises-getter.js';
+import ExamSerializer from '../serializers/exam';
 
 function list(request, response, next) {
   EpisodesGetter(request.currentUser.id)
@@ -73,6 +75,13 @@ function review(request, response, next) {
     .catch(next);
 }
 
+function exam(request, response, next) {
+  ExamExercisesGetter(request.params.id)
+    .then(episode => ExamSerializer.serialize(episode))
+    .then(episode => response.send(episode))
+    .catch(next);
+}
+
 module.exports = app => {
   app.get('/api/episodes', optionalAuthenticate, list);
   app.get('/api/episodes/:id/map', optionalAuthenticate, map);
@@ -82,4 +91,5 @@ module.exports = app => {
   app.get('/api/episode/:id/multipleChoices', ensureAuthenticated, listMultipleChoices);
   app.get('/api/episode/:id/audioToTexts', ensureAuthenticated, listAudioToTexts);
   app.get('/api/episode/:id/review', ensureAuthenticated, review);
+  app.get('/api/episode/:id/exam', ensureAuthenticated, exam);
 };
