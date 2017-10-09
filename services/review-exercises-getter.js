@@ -24,9 +24,15 @@ export default function ReviewExercisesGetter(episodeId) {
             'explanation'
           ]
         }]
+      }, {
+        model: models.character,
+        include: [{
+          model: models.characterEpisode,
+          required: false
+        }]
       }],
       order: [
-        [ 'number', 'ASC' ],
+        [ models.character, models.characterEpisode, 'order', 'ASC' ],
         [ models.multipleChoice, 'order', 'ASC' ],
         [ models.audioToText, 'order', 'ASC' ],
         [ models.audioToText, models.word, models.wordAudioToText, 'order', 'ASC' ],
