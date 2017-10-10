@@ -1,34 +1,29 @@
 import audioToTextSchema from './audioToText';
 import multipleChoiceSchema from './multipleChoice';
 import characterSchema from './character';
+import shuffleArray from '../../utils/shuffleArray';
 
 const createExercisesArray = (record, exerciseTypes) => {
   const exercises = [];
-  let order = 0;
   exerciseTypes.forEach(type => {
     record[type].forEach(e => {
       if (type === 'characters') {
         exercises.push({
           type: 'characterPinyin',
-          id: e.id,
-          order
+          id: e.id
         });
-        order++;
         return exercises.push({
           type: 'characterStrokeQuiz',
-          id: e.id,
-          order
+          id: e.id
         });
       }
-      exercises.push({
+      return exercises.push({
         type: type.slice(0, -1),
-        id: e.id,
-        order
+        id: e.id
       });
-      return order++;
     });
   });
-  return exercises.sort((a, b) => a.order - b.order);
+  return shuffleArray(exercises);
 };
 
 const reviewSchema = {
