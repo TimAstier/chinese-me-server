@@ -4,15 +4,28 @@ import characterSchema from './character';
 
 const createExercisesArray = (record, exerciseTypes) => {
   const exercises = [];
+  let order = 0;
   exerciseTypes.forEach(type => {
-    let order = 0;
     record[type].forEach(e => {
+      if (type === 'characters') {
+        exercises.push({
+          type: 'characterPinyin',
+          id: e.id,
+          order
+        });
+        order++;
+        return exercises.push({
+          type: 'characterStrokeQuiz',
+          id: e.id,
+          order
+        });
+      }
       exercises.push({
         type: type.slice(0, -1),
         id: e.id,
         order
       });
-      order++;
+      return order++;
     });
   });
   return exercises.sort((a, b) => a.order - b.order);
