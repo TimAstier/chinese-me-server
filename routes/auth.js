@@ -16,7 +16,8 @@ function getToken(request, response, next) {
           }
           const token = jwt.sign({
             id: user.get('id'),
-            email: user.get('email')
+            email: user.get('email'),
+            createdAt: user.get('createdAt')
           }, process.env.JWT_SECRET);
           response.json({ token });
         } else {
