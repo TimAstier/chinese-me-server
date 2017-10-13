@@ -1,39 +1,44 @@
-import fs from 'fs';
-import path from 'path';
-import Sequelize from 'sequelize';
+/**
+ * This module loads dynamically all models modules located in the models/
+ * directory.
+ */
+'use strict';
+var fs = require('fs');
+var path = require('path');
+var Sequelize = require('sequelize');
 
-const databaseOptions = {
-  logging: false,
-  // logging: console.log,
+let databaseOptions = {
+  logging: process.env.NODE_ENV === 'development' ? console.log : false,
   pool: { maxConnections: 10, minConnections: 1 }
 };
-if (process.env.SSL_DATABASE) {
+
+if (['staging', 'production'].indexOf(process.env.NODE_ENV) > -1) {
   databaseOptions.dialectOptions = { ssl: true };
 }
 
-const sequelize = new Sequelize(process.env.DATABASE_URL, databaseOptions);
-const db = {};
+let sequelize = new Sequelize(process.env.DATABASE_URL, databaseOptions);
+let db = {};
+
 fs
   .readdirSync(__dirname)
-  .filter(file => {
+  .filter(function (file) {
     return (file.indexOf('.') !== 0) && (file !== 'index.js');
   })
-  .forEach(file => {
-    let model = null;
+  .forEach(function (file) {
     try {
-      model = sequelize.import(path.join(__dirname, file));
+      var model = sequelize['import'](path.join(__dirname, file));
       db[model.name] = model;
     } catch (error) {
-      // This produces errors in build for unknown reason:
-      // console.error('Model creation error on file ' + file  + ' :' + error);
+      console.error('Model creation error: ' + error, 'file:' + file);
     }
   });
 
-Object.keys(db).forEach(modelName => {
+Object.keys(db).forEach(function(modelName) {
   if ('associate' in db[modelName]) {
     db[modelName].associate(db);
   }
 });
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 

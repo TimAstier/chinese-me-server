@@ -1,4 +1,4 @@
-export default (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   const models = sequelize.models;
 
   const Season = sequelize.define('season', {

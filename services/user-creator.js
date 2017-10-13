@@ -21,6 +21,11 @@ export default function UserCreator(data) {
         return models.user
           .create({ email, passwordDigest, activationToken })
           .then(user => {
+            // Create a userSetting for every new user
+            models.userSetting.create({ userId: user.id });
+            return user;
+          })
+          .then(user => {
             const mail = new Mailer(
               user.email,
               'Activate your ChineseMe account',

@@ -1,4 +1,4 @@
-export default (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   const models = sequelize.models;
 
   const User = sequelize.define('user', {
@@ -19,6 +19,7 @@ export default (sequelize, DataTypes) => {
         User.belongsToMany(models.dialog, { through: 'userDialog' });
         User.hasMany(models.userDialog, { onDelete: 'cascade' });
         User.hasMany(models.userEpisode, { onDelete: 'cascade' });
+        User.hasOne(models.userSetting, { onDelete: 'cascade' });
       }
     },
     instanceMethods: {}

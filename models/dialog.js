@@ -1,5 +1,5 @@
 // NOTE: This table has an associated translation table
-export default (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   const models = sequelize.models;
 
   const Dialog = sequelize.define('dialog', {

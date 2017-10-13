@@ -17,6 +17,7 @@ function getToken(request, response, next) {
           const token = jwt.sign({
             id: user.get('id'),
             email: user.get('email'),
+            settings: user.get('userSetting'),
             createdAt: user.get('createdAt')
           }, process.env.JWT_SECRET);
           response.json({ token });

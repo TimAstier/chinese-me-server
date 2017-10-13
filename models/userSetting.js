@@ -1,19 +1,18 @@
 module.exports = (sequelize, DataTypes) => {
   const models = sequelize.models;
 
-  const Feedback = sequelize.define('feedback', {
+  const UserSetting = sequelize.define('userSetting', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    subject: { type: DataTypes.STRING },
-    message: { type: DataTypes.TEXT, allowNull: false },
-    answered: { type: DataTypes.BOOLEAN, defaultValue: false },
+    etymologyVideo: { type: DataTypes.BOOLEAN },
+    calligraphyVideo: { type: DataTypes.BOOLEAN }
   }, {
     timestamps: true,
     classMethods: {
       associate: () => {
-        Feedback.belongsTo(models.user);
+        UserSetting.belongsTo(models.user);
       }
     },
     instanceMethods: {}
   });
-  return Feedback;
+  return UserSetting;
 };
