@@ -4,7 +4,6 @@ const multipleChoiceSchema = {
     'id',
     'question',
     'choices',
-    'correctAnswer',
     'episodeId',
     'order',
     'translations'
