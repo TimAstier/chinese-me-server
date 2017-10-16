@@ -27,6 +27,11 @@ export default function ReviewExercisesGetter(episodeId) {
       }, {
         model: models.character,
         include: [{
+          model: models.characterT,
+          as: 'translations',
+          required: false,
+          attributes: [ 'meaning' ]
+        }, {
           model: models.characterEpisode,
           required: false
         }]

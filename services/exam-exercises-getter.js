@@ -25,7 +25,13 @@ export default function ExamExercisesGetter(episodeId) {
           ]
         }]
       }, {
-        model: models.character
+        model: models.character,
+        include: [{
+          model: models.characterT,
+          as: 'translations',
+          required: false,
+          attributes: [ 'meaning' ]
+        }]
       }],
       order: [
         [ models.audioToText, models.word, models.wordAudioToText, 'order', 'ASC' ],
