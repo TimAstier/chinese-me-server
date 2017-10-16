@@ -12,7 +12,8 @@ export default function CharactersGetter(episodeId, userId) {
           required: false,
           attributes: [
             'etymologyUrl',
-            'writingUrl'
+            'writingUrl',
+            'meaning'
           ]
         }, {
           model: models.characterEpisode,
