@@ -4,7 +4,6 @@ const characterSchema = {
     'id',
     'simpChar',
     'pinyinNumber',
-    'pinyin',
     'hanziData',
     'completed',
     'translations'
