@@ -11,6 +11,11 @@ module.exports = (sequelize, DataTypes) => {
       associate: () => {
         Word.belongsToMany(models.audioToText, { through: 'wordAudioToText' });
         Word.hasMany(models.wordAudioToText, { onDelete: 'cascade' });
+        Word.belongsToMany(models.dialog, { through: 'dialogWord' });
+        Word.hasMany(models.dialogWord, { onDelete: 'cascade' });
+        Word.hasMany(models.wordT,
+          { as: 'translations', onDelete: 'cascade', hooks: true }
+        );
       }
     },
     instanceMethods: {}

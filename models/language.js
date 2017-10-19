@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         Language.hasMany(models.exampleT);
         Language.hasMany(models.dialogT);
         Language.hasMany(models.characterT);
+        Language.hasMany(models.wordT);
       }
     },
     instanceMethods: {}

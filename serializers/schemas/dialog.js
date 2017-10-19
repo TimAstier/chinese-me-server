@@ -1,5 +1,6 @@
 import avatarSchema from './avatar';
 import statementSchema from './statement';
+import wordSchema from './word';
 
 const dialogSchema = {
   ref: 'id',
@@ -10,6 +11,7 @@ const dialogSchema = {
     'order',
     'avatars',
     'statements',
+    'words',
     'completed',
     'translations'
   ],
@@ -22,7 +24,8 @@ const dialogSchema = {
     return record;
   },
   avatars: avatarSchema,
-  statements: statementSchema
+  statements: statementSchema,
+  words: wordSchema
 };
 
 export default dialogSchema;
