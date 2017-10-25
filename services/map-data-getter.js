@@ -45,7 +45,7 @@ export default function MapDataGetter(episodeId, userId) {
       }, {
         model: models.userEpisode,
         where: { userId: userId },
-        attributes: ['id', 'review', 'score'],
+        attributes: ['id', 'score'],
         required: false,
       }],
       order: [

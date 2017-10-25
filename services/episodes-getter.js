@@ -21,7 +21,7 @@ export default function EpisodesGetter(userId) {
       }, {
         model: models.userEpisode,
         where: { userId: userId },
-        attributes: ['id', 'review', 'score'],
+        attributes: ['id', 'score'],
         required: false
       }],
       order: [

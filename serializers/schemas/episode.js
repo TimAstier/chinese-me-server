@@ -23,7 +23,6 @@ const episodeSchema = {
       return record;
     }
     record.score = record.userEpisodes[0].score;
-    record.review = record.userEpisodes[0].review;
     record.locked = false;
     delete record.userEpisodes;
     return record;

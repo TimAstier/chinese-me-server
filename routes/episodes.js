@@ -16,6 +16,8 @@ import MapDataGetter from '../services/map-data-getter';
 import MapDataSerializer from '../serializers/mapData';
 import ReviewExercisesGetter from '../services/review-exercises-getter.js';
 import ReviewSerializer from '../serializers/review';
+import ScoreUpdator from '../services/score-updator.js';
+import EpisodeUnlocker from '../services/episode-unlocker.js';
 import ExamExercisesGetter from '../services/exam-exercises-getter.js';
 import ExamSerializer from '../serializers/exam';
 
@@ -82,6 +84,13 @@ function exam(request, response, next) {
     .catch(next);
 }
 
+function examCompleted(request, response, next) {
+  ScoreUpdator(request)
+    .then(() => EpisodeUnlocker(request))
+    .then(result => response.send(result))
+    .catch(next);
+}
+
 module.exports = app => {
   app.get('/api/episodes', optionalAuthenticate, list);
   app.get('/api/episodes/:id/map', optionalAuthenticate, map);
@@ -92,4 +101,5 @@ module.exports = app => {
   app.get('/api/episode/:id/audioToTexts', ensureAuthenticated, listAudioToTexts);
   app.get('/api/episode/:id/review', ensureAuthenticated, review);
   app.get('/api/episode/:id/exam', ensureAuthenticated, exam);
+  app.post('/api/episode/exam/completed', ensureAuthenticated, examCompleted);
 };

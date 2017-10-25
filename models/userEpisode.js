@@ -5,7 +5,6 @@ module.exports = (sequelize, DataTypes) => {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     userId: { type: DataTypes.INTEGER },
     episodeId: { type: DataTypes.INTEGER },
-    review: { type: DataTypes.BOOLEAN, defaultValue: false },
     score: { type: DataTypes.INTEGER },
   }, {
     timestamps: true,

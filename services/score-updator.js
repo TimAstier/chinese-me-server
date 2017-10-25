@@ -1,6 +1,8 @@
 import models from '../models';
 
-export default function UserEpisodeUpdater(episodeId, userId) {
+export default function ScoreUpdator(request) {
+  const userId = request.currentUser.id;
+  const { episodeId, score } = request.body;
   return models.userEpisode
     .findOne({
       where: {
@@ -16,17 +18,15 @@ export default function UserEpisodeUpdater(episodeId, userId) {
           .create({
             userId,
             episodeId,
-            review: true
-          })
-          .then(() => {
-            return true;
+            score
           });
       }
-      userEpisode.review = true;
-      return userEpisode
-        .save()
-        .then(() => {
-          return true;
-        });
+      // Update score if improved
+      if (score > userEpisode.score) {
+        userEpisode.score = score;
+        return userEpisode
+          .save();
+      }
+      return true;
     });
 }
