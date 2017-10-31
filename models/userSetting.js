@@ -4,7 +4,12 @@ module.exports = (sequelize, DataTypes) => {
   const UserSetting = sequelize.define('userSetting', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     etymologyVideo: { type: DataTypes.BOOLEAN },
-    calligraphyVideo: { type: DataTypes.BOOLEAN }
+    calligraphyVideo: { type: DataTypes.BOOLEAN },
+    familyName: { type: DataTypes.STRING },
+    givenName: { type: DataTypes.STRING },
+    nationality: { type: DataTypes.STRING },
+    chineseFamilyName: { type: DataTypes.STRING },
+    chineseGivenName: { type: DataTypes.STRING }
   }, {
     timestamps: true,
     classMethods: {
