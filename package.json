@@ -12,7 +12,7 @@
     "prestart": "npm run -s build",
     "lint": "eslint *.js .; exit 0",
     "lint:watch": "watch 'npm run lint'",
-    "test": "watch ./node_modules/mocha/bin/mocha /tests/** --timeout 8000"
+    "test": "mocha --compilers js:babel-core/register --watch **/tests/*.test.js"
   },
   "engines": {
     "node": "7.3.0"

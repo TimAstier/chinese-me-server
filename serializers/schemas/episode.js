@@ -5,6 +5,7 @@ const episodeSchema = {
     'title',
     'number',
     'imageUrl',
+    'requiredUserData',
     'dialogs',
     'characters',
     'grammars',
