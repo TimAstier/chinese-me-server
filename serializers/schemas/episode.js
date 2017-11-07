@@ -14,7 +14,8 @@ const episodeSchema = {
     'seasonId',
     'score',
     'review',
-    'locked'
+    'locked',
+    'scripted'
   ],
   keyForAttribute: 'camelCase',
   transform: record => {
