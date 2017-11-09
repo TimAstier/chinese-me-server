@@ -11,6 +11,7 @@ const episodeSchema = {
     'grammars',
     'multipleChoices',
     'audioToTexts',
+    'videos',
     'seasonId',
     'score',
     'review',
@@ -46,6 +47,10 @@ const episodeSchema = {
     include: false
   },
   audioToTexts: {
+    ref: 'id',
+    include: false
+  },
+  videos: {
     ref: 'id',
     include: false
   }

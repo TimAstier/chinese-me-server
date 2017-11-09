@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         Episode.belongsTo(models.season);
         Episode.hasMany(models.multipleChoice);
         Episode.hasMany(models.audioToText);
+        Episode.hasMany(models.video);
         Episode.hasMany(models.userEpisode, { onDelete: 'cascade' });
         Episode.hasMany(models.example);
       }

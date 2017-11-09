@@ -12,6 +12,8 @@ import MultipleChoicesGetter from '../services/multiple-choices-getter';
 import MultipleChoiceSerializer from '../serializers/multipleChoice';
 import AudioToTextsGetter from '../services/audio-to-texts-getter';
 import AudioToTextSerializer from '../serializers/audioToText';
+import VideosGetter from '../services/videos-getter';
+import VideoSerializer from '../serializers/video';
 import MapDataGetter from '../services/map-data-getter';
 import MapDataSerializer from '../serializers/mapData';
 import ReviewExercisesGetter from '../services/review-exercises-getter.js';
@@ -70,6 +72,13 @@ function listAudioToTexts(request, response, next) {
     .catch(next);
 }
 
+function listVideos(request, response, next) {
+  VideosGetter(request.params.id)
+    .then(videos => VideoSerializer.serialize(videos))
+    .then(videos => response.send(videos))
+    .catch(next);
+}
+
 function review(request, response, next) {
   ReviewExercisesGetter(request.params.id)
     .then(episode => ReviewSerializer.serialize(episode))
@@ -99,6 +108,7 @@ module.exports = app => {
   app.get('/api/episode/:id/grammars', ensureAuthenticated, listGrammars);
   app.get('/api/episode/:id/multipleChoices', ensureAuthenticated, listMultipleChoices);
   app.get('/api/episode/:id/audioToTexts', ensureAuthenticated, listAudioToTexts);
+  app.get('/api/episode/:id/videos', ensureAuthenticated, listVideos);
   app.get('/api/episode/:id/review', ensureAuthenticated, review);
   app.get('/api/episode/:id/exam', ensureAuthenticated, exam);
   app.post('/api/episode/exam/completed', ensureAuthenticated, examCompleted);

@@ -19,6 +19,9 @@ export default function EpisodesGetter(userId) {
         model: models.audioToText,
         attributes: ['id']
       }, {
+        model: models.video,
+        attributes: ['id']
+      }, {
         model: models.userEpisode,
         where: { userId: userId },
         attributes: ['id', 'score'],
@@ -30,7 +33,8 @@ export default function EpisodesGetter(userId) {
         [ models.grammar, 'order', 'ASC' ],
         [ models.character, models.characterEpisode, 'order', 'ASC'],
         [ models.multipleChoice, 'order', 'ASC' ],
-        [ models.audioToText, 'order', 'ASC' ]
+        [ models.audioToText, 'order', 'ASC' ],
+        [ models.video, 'order', 'ASC' ]
       ]
     })
     .then(episodes => {
