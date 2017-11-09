@@ -6,8 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     title: { type: DataTypes.STRING },
     number: { type: DataTypes.INTEGER },
     imageUrl: { type: DataTypes.STRING },
-    requiredUserData: { type: DataTypes.ARRAY(DataTypes.STRING) },
-    scripted: { type: DataTypes.BOOLEAN, defaultValue: false }
+    requiredUserData: { type: DataTypes.ARRAY(DataTypes.STRING) }
   }, {
     timestamps: true,
     classMethods: {
