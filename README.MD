@@ -24,6 +24,7 @@ $ heroku addons:create heroku-postgresql:hobby-dev --remote production
 $ git push production master
 $ heroku run bash --remote production
 $ sequelize db:migrate
+// Run seeds (needs to have at least the 'en' language and the lesson 0)
 $ exit
 ```
 
@@ -53,6 +54,16 @@ Restore dump in Heroku App:
 // See: https://devcenter.heroku.com/articles/heroku-postgres-import-export
 // NOTE: pg-dump version is outated.
 $ heroku pg:backups:restore 'https://s3.amazonaws.com/me/items/3H0q/mydb.dump' DATABASE_URL --remote production
+```
+
+Running seeds:
+```
+sequelize db:seed:all
+```
+
+Undoing changes from a seed file:
+```
+sequelize db:seed:undo --seed seedfile.js
 ```
 
 ## Backups

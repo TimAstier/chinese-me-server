@@ -1,6 +1,8 @@
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 import optionalAuthenticate from '../middlewares/optionalAuthenticate';
+import EpisodeGetter from '../services/episode-getter';
 import EpisodesGetter from '../services/episodes-getter';
+import BookSerializer from '../serializers/book';
 import EpisodeSerializer from '../serializers/episode';
 import DialogsGetter from '../services/dialogs-getter';
 import DialogSerializer from '../serializers/dialog';
@@ -22,6 +24,13 @@ import ScoreUpdator from '../services/score-updator.js';
 import EpisodeUnlocker from '../services/episode-unlocker.js';
 import ExamExercisesGetter from '../services/exam-exercises-getter.js';
 import ExamSerializer from '../serializers/exam';
+
+function get(request, response, next) {
+  EpisodeGetter(request.params)
+    .then(episode => BookSerializer.serialize(episode))
+    .then(episode => response.send(episode))
+    .catch(next);
+}
 
 function list(request, response, next) {
   EpisodesGetter(request.currentUser.id)
@@ -101,6 +110,7 @@ function examCompleted(request, response, next) {
 }
 
 module.exports = app => {
+  app.get('/api/season/:seasonNumber/episode/:episodeNumber', get);
   app.get('/api/episodes', optionalAuthenticate, list);
   app.get('/api/episodes/:id/map', optionalAuthenticate, map);
   app.get('/api/episode/:id/dialogs', ensureAuthenticated, listDialogs);

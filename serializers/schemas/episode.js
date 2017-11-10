@@ -19,14 +19,16 @@ const episodeSchema = {
   ],
   keyForAttribute: 'camelCase',
   transform: record => {
-    if (record.userEpisodes.length === 0) {
-      // first episode is automatically unlocked
-      record.locked = record.number === 1 ? false : true;
-      return record;
+    if (record.userEpisodes) {
+      if (record.userEpisodes.length === 0) {
+        // first episode is automatically unlocked
+        record.locked = record.number === 1 ? false : true;
+        return record;
+      }
+      record.score = record.userEpisodes[0].score;
+      record.locked = false;
+      delete record.userEpisodes;
     }
-    record.score = record.userEpisodes[0].score;
-    record.locked = false;
-    delete record.userEpisodes;
     return record;
   },
   dialogs: {

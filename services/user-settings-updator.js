@@ -8,7 +8,8 @@ export default function UserSettingsUpdator(request) {
   return models.userSetting
     .findOne({ where: { userId } })
     .then(userSetting => {
-      return updateUserSetting(userSetting, setting, value).save()
+      return updateUserSetting(userSetting, setting, value)
+        .save()
         .then(newUserSetting => {
           // Return an object with only settings as keys
           // This allows to update the store in the client with new settings
