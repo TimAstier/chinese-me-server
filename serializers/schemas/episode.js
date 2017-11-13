@@ -1,3 +1,11 @@
+import exampleSchema from './example';
+import videoSchema from './video';
+import dialogSchema from './dialog';
+import characterSchema from './character';
+import grammarSchema from './grammar';
+import multipleChoiceSchema from './multipleChoice';
+import audioToTextSchema from './audioToText';
+
 const episodeSchema = {
   ref: 'id',
   attributes: [
@@ -8,6 +16,7 @@ const episodeSchema = {
     'requiredUserData',
     'dialogs',
     'characters',
+    'examples',
     'grammars',
     'multipleChoices',
     'audioToTexts',
@@ -31,30 +40,13 @@ const episodeSchema = {
     }
     return record;
   },
-  dialogs: {
-    ref: 'id',
-    include: false
-  },
-  characters: {
-    ref: 'id',
-    include: false
-  },
-  grammars: {
-    ref: 'id',
-    include: false
-  },
-  multipleChoices: {
-    ref: 'id',
-    include: false
-  },
-  audioToTexts: {
-    ref: 'id',
-    include: false
-  },
-  videos: {
-    ref: 'id',
-    include: false
-  }
+  dialogs: dialogSchema,
+  characters: characterSchema,
+  grammars: grammarSchema,
+  multipleChoices: multipleChoiceSchema,
+  audioToTexts: audioToTextSchema,
+  videos: videoSchema,
+  examples: exampleSchema
 };
 
 export default episodeSchema;

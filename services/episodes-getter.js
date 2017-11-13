@@ -4,37 +4,13 @@ export default function EpisodesGetter(userId) {
   return models.episode
     .findAll({
       include: [{
-        model: models.dialog,
-        attributes: ['id']
-      }, {
-        model: models.character,
-        attributes: ['id']
-      }, {
-        model: models.grammar,
-        attributes: ['id']
-      }, {
-        model: models.multipleChoice,
-        attributes: ['id']
-      }, {
-        model: models.audioToText,
-        attributes: ['id']
-      }, {
-        model: models.video,
-        attributes: ['id']
-      }, {
         model: models.userEpisode,
         where: { userId: userId },
         attributes: ['id', 'score'],
         required: false
       }],
       order: [
-        [ 'number', 'ASC' ],
-        [ models.dialog, 'order', 'ASC' ],
-        [ models.grammar, 'order', 'ASC' ],
-        [ models.character, models.characterEpisode, 'order', 'ASC'],
-        [ models.multipleChoice, 'order', 'ASC' ],
-        [ models.audioToText, 'order', 'ASC' ],
-        [ models.video, 'order', 'ASC' ]
+        [ 'number', 'ASC' ]
       ]
     })
     .then(episodes => {

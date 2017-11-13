@@ -26,7 +26,8 @@ export default function LessonGetter(params) {
             'id',
             'order',
             'chinese',
-            'pinyin'
+            'pinyin',
+            'audioUrl'
           ],
           include: [{
             model: models.exampleT,

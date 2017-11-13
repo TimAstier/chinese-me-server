@@ -2,7 +2,6 @@ import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 import optionalAuthenticate from '../middlewares/optionalAuthenticate';
 import EpisodeGetter from '../services/episode-getter';
 import EpisodesGetter from '../services/episodes-getter';
-import BookSerializer from '../serializers/book';
 import EpisodeSerializer from '../serializers/episode';
 import DialogsGetter from '../services/dialogs-getter';
 import DialogSerializer from '../serializers/dialog';
@@ -27,7 +26,7 @@ import ExamSerializer from '../serializers/exam';
 
 function get(request, response, next) {
   EpisodeGetter(request.params)
-    .then(episode => BookSerializer.serialize(episode))
+    .then(episode => EpisodeSerializer.serialize(episode))
     .then(episode => response.send(episode))
     .catch(next);
 }
