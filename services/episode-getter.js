@@ -1,6 +1,6 @@
 import models from '../models';
 
-export default function LessonGetter(params) {
+export default function EpisodeGetter(params, userId) {
   const { seasonNumber, episodeNumber } = params;
   return models.season
     .findOne({ where: { number: seasonNumber } })
@@ -12,6 +12,11 @@ export default function LessonGetter(params) {
           seasonId: season.id
         },
         include: [{
+          model: models.userEpisode,
+          where: { userId },
+          attributes: ['id', 'score'],
+          required: false
+        }, {
           model: models.character,
           required: false,
           attributes: [

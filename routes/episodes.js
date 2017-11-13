@@ -25,7 +25,7 @@ import ExamExercisesGetter from '../services/exam-exercises-getter.js';
 import ExamSerializer from '../serializers/exam';
 
 function get(request, response, next) {
-  EpisodeGetter(request.params)
+  EpisodeGetter(request.params, request.currentUser.id)
     .then(episode => EpisodeSerializer.serialize(episode))
     .then(episode => response.send(episode))
     .catch(next);
@@ -109,7 +109,7 @@ function examCompleted(request, response, next) {
 }
 
 module.exports = app => {
-  app.get('/api/season/:seasonNumber/episode/:episodeNumber', get);
+  app.get('/api/season/:seasonNumber/episode/:episodeNumber', optionalAuthenticate, get);
   app.get('/api/episodes', optionalAuthenticate, list);
   app.get('/api/episodes/:id/map', optionalAuthenticate, map);
   app.get('/api/episode/:id/dialogs', ensureAuthenticated, listDialogs);
