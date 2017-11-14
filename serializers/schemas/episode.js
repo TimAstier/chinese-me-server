@@ -5,6 +5,7 @@ import characterSchema from './character';
 import grammarSchema from './grammar';
 import multipleChoiceSchema from './multipleChoice';
 import audioToTextSchema from './audioToText';
+import avatarSchema from './avatar';
 
 const episodeSchema = {
   ref: 'id',
@@ -21,6 +22,7 @@ const episodeSchema = {
     'multipleChoices',
     'audioToTexts',
     'videos',
+    'avatars',
     'seasonId',
     'score',
     'review',
@@ -46,7 +48,8 @@ const episodeSchema = {
   multipleChoices: multipleChoiceSchema,
   audioToTexts: audioToTextSchema,
   videos: videoSchema,
-  examples: exampleSchema
+  examples: exampleSchema,
+  avatars: avatarSchema
 };
 
 export default episodeSchema;

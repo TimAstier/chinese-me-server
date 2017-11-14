@@ -52,6 +52,14 @@ export default function EpisodeGetter(params, userId) {
             'chineseTitle',
           ],
           include: [{
+            model: models.avatar,
+            required: false,
+            attributes: [
+              'id',
+              'name',
+              'chineseName'
+            ]
+          }, {
             model: models.dialogT,
             as: 'translations',
             required: false,
@@ -64,7 +72,8 @@ export default function EpisodeGetter(params, userId) {
             required: false,
             attributes: [
               'id',
-              'order'
+              'order',
+              'avatarId'
             ],
             include: [{
               model: models.sentence,
@@ -82,14 +91,6 @@ export default function EpisodeGetter(params, userId) {
                   'translation'
                 ]
               }]
-            }, {
-              model: models.avatar,
-              required: false,
-              attributes: [
-                'id',
-                'name',
-                'chineseName'
-              ]
             }]
           }],
         }],
