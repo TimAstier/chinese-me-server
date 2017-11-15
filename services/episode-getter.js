@@ -23,7 +23,17 @@ export default function EpisodeGetter(params, userId) {
             'id',
             'simpChar',
             'pinyinNumber'
-          ]
+          ],
+          include: [{
+            model: models.characterT,
+            as: 'translations',
+            required: false,
+            attributes: [
+              'meaning',
+              'etymologyUrl',
+              'writingUrl'
+            ]
+          }]
         }, {
           model: models.example,
           required: false,
