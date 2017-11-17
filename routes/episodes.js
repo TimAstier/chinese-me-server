@@ -20,7 +20,6 @@ import MapDataSerializer from '../serializers/mapData';
 import ReviewExercisesGetter from '../services/review-exercises-getter.js';
 import ReviewSerializer from '../serializers/review';
 import ScoreUpdator from '../services/score-updator.js';
-import EpisodeUnlocker from '../services/episode-unlocker.js';
 import ExamExercisesGetter from '../services/exam-exercises-getter.js';
 import ExamSerializer from '../serializers/exam';
 
@@ -103,8 +102,7 @@ function exam(request, response, next) {
 
 function examCompleted(request, response, next) {
   ScoreUpdator(request)
-    .then(() => EpisodeUnlocker(request))
-    .then(result => response.send(result))
+    .then(() => response.sendStatus(204))
     .catch(next);
 }
 

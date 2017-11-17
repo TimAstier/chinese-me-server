@@ -6,6 +6,7 @@ import grammarSchema from './grammar';
 import multipleChoiceSchema from './multipleChoice';
 import audioToTextSchema from './audioToText';
 import avatarSchema from './avatar';
+import isEmpty from 'lodash/isEmpty';
 
 const episodeSchema = {
   ref: 'id',
@@ -25,19 +26,12 @@ const episodeSchema = {
     'avatars',
     'seasonId',
     'score',
-    'review',
-    'locked'
+    'review'
   ],
   keyForAttribute: 'camelCase',
   transform: record => {
-    if (record.userEpisodes) {
-      if (record.userEpisodes.length === 0) {
-        // first episode is automatically unlocked
-        record.locked = record.number === 1 ? false : true;
-        return record;
-      }
+    if (!isEmpty(record.userEpisodes)) {
       record.score = record.userEpisodes[0].score;
-      record.locked = false;
       delete record.userEpisodes;
     }
     return record;
