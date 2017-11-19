@@ -9,16 +9,15 @@ module.exports = (sequelize, DataTypes) => {
     chinese: { type: DataTypes.STRING },
     audioUrl: { type: DataTypes.STRING }
   }, {
-    timestamps: true,
-    classMethods: {
-      associate: () => {
-        Sentence.belongsTo(models.statement);
-        Sentence.hasMany(models.sentenceT,
-          { as: 'translations', onDelete: 'cascade', hooks: true }
-        );
-      }
-    },
-    instanceMethods: {}
+    timestamps: true
   });
+
+  Sentence.associate = () => {
+    Sentence.belongsTo(models.statement);
+    Sentence.hasMany(models.sentenceT,
+      { as: 'translations', onDelete: 'cascade', hooks: true }
+    );
+  };
+
   return Sentence;
 };

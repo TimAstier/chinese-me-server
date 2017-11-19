@@ -7,17 +7,6 @@ module.exports = (sequelize, DataTypes) => {
     order: { type: DataTypes.INTEGER }
   }, {
     timestamps: true,
-    classMethods: {
-      associate: () => {
-        Grammar.belongsTo(models.episode);
-        Grammar.belongsToMany(models.user, { through: 'userGrammar' });
-        Grammar.hasMany(models.userGrammar, { onDelete: 'cascade' });
-        Grammar.hasMany(models.grammarT,
-          { as: 'translations', onDelete: 'cascade', hooks: true }
-        );
-      }
-    },
-    instanceMethods: {},
     // BUG: Sequelize names the table 'grammar' by default
     // This is a bug from 'inflection'. Using this workaround:
     freezeTableName: true,
@@ -27,5 +16,15 @@ module.exports = (sequelize, DataTypes) => {
       singular: 'grammar'
     }
   });
+
+  Grammar.associate = () => {
+    Grammar.belongsTo(models.episode);
+    Grammar.belongsToMany(models.user, { through: 'userGrammar' });
+    Grammar.hasMany(models.userGrammar, { onDelete: 'cascade' });
+    Grammar.hasMany(models.grammarT,
+      { as: 'translations', onDelete: 'cascade', hooks: true }
+    );
+  };
+
   return Grammar;
 };

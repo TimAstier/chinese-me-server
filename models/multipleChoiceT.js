@@ -5,14 +5,13 @@ module.exports = (sequelize, DataTypes) => {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     explanation: { type: DataTypes.STRING }
   }, {
-    timestamps: true,
-    classMethods: {
-      associate: () => {
-        MultipleChoiceT.belongsTo(models.multipleChoice);
-        MultipleChoiceT.belongsTo(models.language);
-      }
-    },
-    instanceMethods: {}
+    timestamps: true
   });
+
+  MultipleChoiceT.associate = () => {
+    MultipleChoiceT.belongsTo(models.multipleChoice);
+    MultipleChoiceT.belongsTo(models.language);
+  };
+
   return MultipleChoiceT;
 };

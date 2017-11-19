@@ -6,15 +6,14 @@ module.exports = (sequelize, DataTypes) => {
     audioUrl: { type: DataTypes.STRING },
     order: { type: DataTypes.INTEGER }
   }, {
-    timestamps: true,
-    classMethods: {
-      associate: () => {
-        AudioToText.belongsTo(models.episode);
-        AudioToText.belongsToMany(models.word, { through: 'wordAudioToText' });
-        AudioToText.hasMany(models.wordAudioToText, { onDelete: 'cascade' });
-      }
-    },
-    instanceMethods: {}
+    timestamps: true
   });
+
+  AudioToText.associate = () => {
+    AudioToText.belongsTo(models.episode);
+    AudioToText.belongsToMany(models.word, { through: 'wordAudioToText' });
+    AudioToText.hasMany(models.wordAudioToText, { onDelete: 'cascade' });
+  };
+
   return AudioToText;
 };

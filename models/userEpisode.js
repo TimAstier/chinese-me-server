@@ -7,14 +7,13 @@ module.exports = (sequelize, DataTypes) => {
     episodeId: { type: DataTypes.INTEGER },
     score: { type: DataTypes.INTEGER },
   }, {
-    timestamps: true,
-    classMethods: {
-      associate: () => {
-        UserEpisode.belongsTo(models.user);
-        UserEpisode.belongsTo(models.episode);
-      }
-    },
-    instanceMethods: {}
+    timestamps: true
   });
+
+  UserEpisode.associate = () => {
+    UserEpisode.belongsTo(models.user);
+    UserEpisode.belongsTo(models.episode);
+  };
+
   return UserEpisode;
 };

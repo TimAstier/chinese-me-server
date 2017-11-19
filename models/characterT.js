@@ -7,14 +7,13 @@ module.exports = (sequelize, DataTypes) => {
     writingUrl: { type: DataTypes.STRING },
     meaning: { type: DataTypes.STRING }
   }, {
-    timestamps: true,
-    classMethods: {
-      associate: () => {
-        CharacterT.belongsTo(models.character);
-        CharacterT.belongsTo(models.language);
-      }
-    },
-    instanceMethods: {}
+    timestamps: true
   });
+
+  CharacterT.associate = () => {
+    CharacterT.belongsTo(models.character);
+    CharacterT.belongsTo(models.language);
+  };
+
   return CharacterT;
 };

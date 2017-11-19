@@ -6,14 +6,13 @@ module.exports = (sequelize, DataTypes) => {
     title: { type: DataTypes.STRING },
     videoUrl: { type: DataTypes.STRING }
   }, {
-    timestamps: true,
-    classMethods: {
-      associate: () => {
-        GrammarT.belongsTo(models.grammar);
-        GrammarT.belongsTo(models.language);
-      }
-    },
-    instanceMethods: {}
+    timestamps: true
   });
+
+  GrammarT.associate = () => {
+    GrammarT.belongsTo(models.grammar);
+    GrammarT.belongsTo(models.language);
+  };
+
   return GrammarT;
 };

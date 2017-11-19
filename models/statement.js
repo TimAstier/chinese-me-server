@@ -5,15 +5,14 @@ module.exports = (sequelize, DataTypes) => {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     order: { type: DataTypes.INTEGER }
   }, {
-    timestamps: true,
-    classMethods: {
-      associate: () => {
-        Statement.belongsTo(models.dialog);
-        Statement.hasMany(models.sentence);
-        Statement.belongsTo(models.avatar);
-      }
-    },
-    instanceMethods: {}
+    timestamps: true
   });
+
+  Statement.associate = () => {
+    Statement.belongsTo(models.dialog);
+    Statement.hasMany(models.sentence);
+    Statement.belongsTo(models.avatar);
+  };
+
   return Statement;
 };

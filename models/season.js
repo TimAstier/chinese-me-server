@@ -5,13 +5,12 @@ module.exports = (sequelize, DataTypes) => {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     number: { type: DataTypes.INTEGER }
   }, {
-    timestamps: true,
-    classMethods: {
-      associate: () => {
-        Season.hasMany(models.episode);
-      }
-    },
-    instanceMethods: {}
+    timestamps: true
   });
+
+  Season.associate = () => {
+    Season.hasMany(models.episode);
+  };
+
   return Season;
 };

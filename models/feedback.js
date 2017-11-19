@@ -7,13 +7,12 @@ module.exports = (sequelize, DataTypes) => {
     message: { type: DataTypes.TEXT, allowNull: false },
     answered: { type: DataTypes.BOOLEAN, defaultValue: false },
   }, {
-    timestamps: true,
-    classMethods: {
-      associate: () => {
-        Feedback.belongsTo(models.user);
-      }
-    },
-    instanceMethods: {}
+    timestamps: true
   });
+
+  Feedback.associate = () => {
+    Feedback.belongsTo(models.user);
+  };
+
   return Feedback;
 };

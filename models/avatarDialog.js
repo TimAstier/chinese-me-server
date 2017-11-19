@@ -7,14 +7,13 @@ module.exports = (sequelize, DataTypes) => {
     dialogId: { type: DataTypes.INTEGER },
     order: { type: DataTypes.INTEGER }
   }, {
-    timestamps: true,
-    classMethods: {
-      associate: () => {
-        AvatarDialog.belongsTo(models.avatar);
-        AvatarDialog.belongsTo(models.dialog);
-      }
-    },
-    instanceMethods: {}
+    timestamps: true
   });
+
+  AvatarDialog.associate = () => {
+    AvatarDialog.belongsTo(models.avatar);
+    AvatarDialog.belongsTo(models.dialog);
+  };
+
   return AvatarDialog;
 };

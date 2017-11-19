@@ -9,14 +9,13 @@ module.exports = (sequelize, DataTypes) => {
     pinyin: { type: DataTypes.INTEGER },
     writing: { type: DataTypes.INTEGER }
   }, {
-    timestamps: true,
-    classMethods: {
-      associate: () => {
-        UserCharacter.belongsTo(models.user);
-        UserCharacter.belongsTo(models.character);
-      }
-    },
-    instanceMethods: {}
+    timestamps: true
   });
+
+  UserCharacter.associate = () => {
+    UserCharacter.belongsTo(models.user);
+    UserCharacter.belongsTo(models.character);
+  };
+
   return UserCharacter;
 };

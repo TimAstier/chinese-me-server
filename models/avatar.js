@@ -12,15 +12,14 @@ module.exports = (sequelize, DataTypes) => {
     embarrassedImage: { type: DataTypes.STRING },
     sadImage: { type: DataTypes.STRING }
   }, {
-    timestamps: true,
-    classMethods: {
-      associate: () => {
-        Avatar.hasMany(models.statement);
-        Avatar.belongsToMany(models.dialog, { through: 'avatarDialog' });
-        Avatar.hasMany(models.avatarDialog, { onDelete: 'cascade' });
-      }
-    },
-    instanceMethods: {}
+    timestamps: true
   });
+
+  Avatar.associate = () => {
+    Avatar.hasMany(models.statement);
+    Avatar.belongsToMany(models.dialog, { through: 'avatarDialog' });
+    Avatar.hasMany(models.avatarDialog, { onDelete: 'cascade' });
+  };
+
   return Avatar;
 };

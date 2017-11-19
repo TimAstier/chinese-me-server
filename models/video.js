@@ -6,16 +6,15 @@ module.exports = (sequelize, DataTypes) => {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     order: { type: DataTypes.INTEGER }
   }, {
-    timestamps: true,
-    classMethods: {
-      associate: () => {
-        Video.belongsTo(models.episode);
-        Video.hasMany(models.videoT,
-          { as: 'translations', onDelete: 'cascade', hooks: true }
-        );
-      }
-    },
-    instanceMethods: {}
+    timestamps: true
   });
+
+  Video.associate = () => {
+    Video.belongsTo(models.episode);
+    Video.hasMany(models.videoT,
+      { as: 'translations', onDelete: 'cascade', hooks: true }
+    );
+  };
+
   return Video;
 };

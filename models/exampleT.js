@@ -6,14 +6,13 @@ module.exports = (sequelize, DataTypes) => {
     translation: { type: DataTypes.STRING },
     literalTranslation: { type: DataTypes.STRING }
   }, {
-    timestamps: true,
-    classMethods: {
-      associate: () => {
-        ExampleT.belongsTo(models.example);
-        ExampleT.belongsTo(models.language);
-      }
-    },
-    instanceMethods: {}
+    timestamps: true
   });
+
+  ExampleT.associate = () => {
+    ExampleT.belongsTo(models.example);
+    ExampleT.belongsTo(models.language);
+  };
+
   return ExampleT;
 };

@@ -7,14 +7,13 @@ module.exports = (sequelize, DataTypes) => {
     introAudioUrl: { type: DataTypes.STRING },
     intro: { type: DataTypes.TEXT }
   }, {
-    timestamps: true,
-    classMethods: {
-      associate: () => {
-        DialogT.belongsTo(models.dialog);
-        DialogT.belongsTo(models.language);
-      }
-    },
-    instanceMethods: {}
+    timestamps: true
   });
+
+  DialogT.associate = () => {
+    DialogT.belongsTo(models.dialog);
+    DialogT.belongsTo(models.language);
+  };
+
   return DialogT;
 };

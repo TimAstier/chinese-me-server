@@ -8,22 +8,21 @@ module.exports = (sequelize, DataTypes) => {
     imageUrl: { type: DataTypes.STRING },
     requiredUserData: { type: DataTypes.ARRAY(DataTypes.STRING) }
   }, {
-    timestamps: true,
-    classMethods: {
-      associate: () => {
-        Episode.hasMany(models.dialog);
-        Episode.hasMany(models.grammar);
-        Episode.belongsToMany(models.character, { through: 'characterEpisode' });
-        Episode.hasMany(models.characterEpisode, { onDelete: 'cascade' });
-        Episode.belongsTo(models.season);
-        Episode.hasMany(models.multipleChoice);
-        Episode.hasMany(models.audioToText);
-        Episode.hasMany(models.video);
-        Episode.hasMany(models.userEpisode, { onDelete: 'cascade' });
-        Episode.hasMany(models.example);
-      }
-    },
-    instanceMethods: {}
+    timestamps: true
   });
+
+  Episode.associate = () => {
+    Episode.hasMany(models.dialog);
+    Episode.hasMany(models.grammar);
+    Episode.belongsToMany(models.character, { through: 'characterEpisode' });
+    Episode.hasMany(models.characterEpisode, { onDelete: 'cascade' });
+    Episode.belongsTo(models.season);
+    Episode.hasMany(models.multipleChoice);
+    Episode.hasMany(models.audioToText);
+    Episode.hasMany(models.video);
+    Episode.hasMany(models.userEpisode, { onDelete: 'cascade' });
+    Episode.hasMany(models.example);
+  };
+
   return Episode;
 };

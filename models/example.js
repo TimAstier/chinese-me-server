@@ -9,16 +9,15 @@ module.exports = (sequelize, DataTypes) => {
     order: { type: DataTypes.INTEGER },
     audioUrl: { type: DataTypes.STRING }
   }, {
-    timestamps: true,
-    classMethods: {
-      associate: () => {
-        Example.belongsTo(models.episode);
-        Example.hasMany(models.exampleT,
-          { as: 'translations', onDelete: 'cascade', hooks: true }
-        );
-      }
-    },
-    instanceMethods: {}
+    timestamps: true
   });
+
+  Example.associate = () => {
+    Example.belongsTo(models.episode);
+    Example.hasMany(models.exampleT,
+      { as: 'translations', onDelete: 'cascade', hooks: true }
+    );
+  };
+
   return Example;
 };

@@ -7,14 +7,13 @@ module.exports = (sequelize, DataTypes) => {
     audioToTextId: { type: DataTypes.INTEGER },
     order: { type: DataTypes.INTEGER }
   }, {
-    timestamps: true,
-    classMethods: {
-      associate: () => {
-        WordAudioToText.belongsTo(models.word);
-        WordAudioToText.belongsTo(models.audioToText);
-      }
-    },
-    instanceMethods: {}
+    timestamps: true
   });
+
+  WordAudioToText.associate = () => {
+    WordAudioToText.belongsTo(models.word);
+    WordAudioToText.belongsTo(models.audioToText);
+  };
+
   return WordAudioToText;
 };

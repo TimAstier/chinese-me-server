@@ -8,6 +8,8 @@ export default function EpisodeGetter(params, userId) {
       return models.episode
       .findOne({
         where: {
+          // BUG: This is extremely slow.
+          // Need to use the ID or an index 
           number: episodeNumber,
           seasonId: season.id
         },
@@ -32,6 +34,20 @@ export default function EpisodeGetter(params, userId) {
               'meaning',
               'etymologyUrl',
               'writingUrl'
+            ]
+          }]
+        }, {
+          model: models.grammar,
+          required: false,
+          attributes: [
+            'id'
+          ],
+          include: [{
+            model: models.grammarT,
+            as: 'translations',
+            required: false,
+            attributes: [
+              'title'
             ]
           }]
         }, {
@@ -107,6 +123,7 @@ export default function EpisodeGetter(params, userId) {
         order: [
           [ models.character, models.characterEpisode, 'order', 'ASC' ],
           [ models.example, 'order', 'ASC' ],
+          [ models.grammar, 'order', 'ASC' ],
           [ models.dialog, 'order', 'ASC' ],
           [ models.dialog, models.statement, 'order', 'ASC' ],
           [ models.dialog, models.statement, models.sentence, 'order', 'ASC' ],

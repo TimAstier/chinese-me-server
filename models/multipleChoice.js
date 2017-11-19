@@ -9,16 +9,15 @@ module.exports = (sequelize, DataTypes) => {
     choices: { type: DataTypes.ARRAY(DataTypes.STRING), allowNull: false },
     order: { type: DataTypes.INTEGER }
   }, {
-    timestamps: true,
-    classMethods: {
-      associate: () => {
-        MultipleChoice.belongsTo(models.episode);
-        MultipleChoice.hasMany(models.multipleChoiceT,
-          { as: 'translations', onDelete: 'cascade', hooks: true }
-        );
-      }
-    },
-    instanceMethods: {}
+    timestamps: true
   });
+
+  MultipleChoice.associate = () => {
+    MultipleChoice.belongsTo(models.episode);
+    MultipleChoice.hasMany(models.multipleChoiceT,
+      { as: 'translations', onDelete: 'cascade', hooks: true }
+    );
+  };
+
   return MultipleChoice;
 };

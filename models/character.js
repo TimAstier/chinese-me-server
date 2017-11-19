@@ -8,19 +8,18 @@ module.exports = (sequelize, DataTypes) => {
     pinyinNumber: { type: DataTypes.STRING },
     hanziData: { type: DataTypes.JSON }
   }, {
-    timestamps: true,
-    classMethods: {
-      associate: () => {
-        Character.belongsToMany(models.episode, { through: 'characterEpisode' });
-        Character.hasMany(models.characterEpisode, { onDelete: 'cascade' });
-        Character.belongsToMany(models.user, { through: 'userCharacter' });
-        Character.hasMany(models.userCharacter, { onDelete: 'cascade' });
-        Character.hasMany(models.characterT,
-          { as: 'translations', onDelete: 'cascade', hooks: true }
-        );
-      }
-    },
-    instanceMethods: {}
+    timestamps: true
   });
+
+  Character.associate = () => {
+    Character.belongsToMany(models.episode, { through: 'characterEpisode' });
+    Character.hasMany(models.characterEpisode, { onDelete: 'cascade' });
+    Character.belongsToMany(models.user, { through: 'userCharacter' });
+    Character.hasMany(models.userCharacter, { onDelete: 'cascade' });
+    Character.hasMany(models.characterT,
+      { as: 'translations', onDelete: 'cascade', hooks: true }
+    );
+  };
+
   return Character;
 };

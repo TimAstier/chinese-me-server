@@ -11,13 +11,12 @@ module.exports = (sequelize, DataTypes) => {
     chineseFamilyName: { type: DataTypes.STRING },
     chineseGivenName: { type: DataTypes.STRING }
   }, {
-    timestamps: true,
-    classMethods: {
-      associate: () => {
-        UserSetting.belongsTo(models.user);
-      }
-    },
-    instanceMethods: {}
+    timestamps: true
   });
+
+  UserSetting.associate = () => {
+    UserSetting.belongsTo(models.user);
+  };
+
   return UserSetting;
 };

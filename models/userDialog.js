@@ -9,14 +9,13 @@ module.exports = (sequelize, DataTypes) => {
     explore: { type: DataTypes.INTEGER },
     roleplay: { type: DataTypes.INTEGER }
   }, {
-    timestamps: true,
-    classMethods: {
-      associate: () => {
-        UserDialog.belongsTo(models.user);
-        UserDialog.belongsTo(models.dialog);
-      }
-    },
-    instanceMethods: {}
+    timestamps: true
   });
+
+  UserDialog.associate = () => {
+    UserDialog.belongsTo(models.user);
+    UserDialog.belongsTo(models.dialog);
+  };
+
   return UserDialog;
 };

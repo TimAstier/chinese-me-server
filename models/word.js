@@ -6,19 +6,18 @@ module.exports = (sequelize, DataTypes) => {
     chinese: { type: DataTypes.STRING },
     pinyin: { type: DataTypes.STRING }
   }, {
-    timestamps: true,
-    classMethods: {
-      associate: () => {
-        Word.belongsToMany(models.audioToText, { through: 'wordAudioToText' });
-        Word.hasMany(models.wordAudioToText, { onDelete: 'cascade' });
-        Word.belongsToMany(models.dialog, { through: 'dialogWord' });
-        Word.hasMany(models.dialogWord, { onDelete: 'cascade' });
-        Word.hasMany(models.wordT,
-          { as: 'translations', onDelete: 'cascade', hooks: true }
-        );
-      }
-    },
-    instanceMethods: {}
+    timestamps: true
   });
+
+  Word.associate = () => {
+    Word.belongsToMany(models.audioToText, { through: 'wordAudioToText' });
+    Word.hasMany(models.wordAudioToText, { onDelete: 'cascade' });
+    Word.belongsToMany(models.dialog, { through: 'dialogWord' });
+    Word.hasMany(models.dialogWord, { onDelete: 'cascade' });
+    Word.hasMany(models.wordT,
+      { as: 'translations', onDelete: 'cascade', hooks: true }
+    );
+  };
+
   return Word;
 };

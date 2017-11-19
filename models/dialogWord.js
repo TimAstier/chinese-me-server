@@ -6,14 +6,13 @@ module.exports = (sequelize, DataTypes) => {
     dialogId: { type: DataTypes.INTEGER },
     wordId: { type: DataTypes.INTEGER },
   }, {
-    timestamps: true,
-    classMethods: {
-      associate: () => {
-        DialogWord.belongsTo(models.dialog);
-        DialogWord.belongsTo(models.word);
-      }
-    },
-    instanceMethods: {}
+    timestamps: true
   });
+
+  DialogWord.associate = () => {
+    DialogWord.belongsTo(models.dialog);
+    DialogWord.belongsTo(models.word);
+  };
+
   return DialogWord;
 };

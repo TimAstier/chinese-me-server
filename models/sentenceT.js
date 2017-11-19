@@ -5,14 +5,13 @@ module.exports = (sequelize, DataTypes) => {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     translation: { type: DataTypes.STRING }
   }, {
-    timestamps: true,
-    classMethods: {
-      associate: () => {
-        SentenceT.belongsTo(models.sentence);
-        SentenceT.belongsTo(models.language);
-      }
-    },
-    instanceMethods: {}
+    timestamps: true
   });
+
+  SentenceT.associate = () => {
+    SentenceT.belongsTo(models.sentence);
+    SentenceT.belongsTo(models.language);
+  };
+
   return SentenceT;
 };

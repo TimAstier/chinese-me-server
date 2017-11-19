@@ -7,14 +7,13 @@ module.exports = (sequelize, DataTypes) => {
     grammarId: { type: DataTypes.INTEGER },
     explanation: { type: DataTypes.INTEGER }
   }, {
-    timestamps: true,
-    classMethods: {
-      associate: () => {
-        UserGrammar.belongsTo(models.user);
-        UserGrammar.belongsTo(models.grammar);
-      }
-    },
-    instanceMethods: {}
+    timestamps: true
   });
+
+  UserGrammar.associate = () => {
+    UserGrammar.belongsTo(models.user);
+    UserGrammar.belongsTo(models.grammar);
+  };
+
   return UserGrammar;
 };
