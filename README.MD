@@ -91,6 +91,12 @@ $ git push heroku master
 - staging - https://frozen-temple-75832.herokuapp.com
 - production - https://chinese-me-server.herokuapp.com
 
+## Technical debt
+
+- Foreign key constraints are not correctly implemented in the DB schema because
+the 'reference' option used in most migration files has a typo. The constraints
+still exists in models thanks to Sequelize.
+
 ## Misc
 - [Heroku: Upgrading Postgres DB](https://devcenter.heroku.com/articles/upgrading-heroku-postgres-databases)
 - [Heroku: Scheduling Backups](https://devcenter.heroku.com/articles/heroku-postgres-backups#scheduling-backups)
