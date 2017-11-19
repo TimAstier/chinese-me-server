@@ -1,5 +1,7 @@
 import models from '../models';
 
+// This service uses separate: true to avoid previous issue (very slow query)
+
 export default function EpisodeGetter(params, userId) {
   const { seasonNumber, episodeNumber } = params;
   return models.season
@@ -8,14 +10,13 @@ export default function EpisodeGetter(params, userId) {
       return models.episode
       .findOne({
         where: {
-          // BUG: This is extremely slow.
-          // Need to use the ID or an index 
           number: episodeNumber,
           seasonId: season.id
         },
         include: [{
           model: models.userEpisode,
           where: { userId },
+          separate: true,
           attributes: ['id', 'score'],
           required: false
         }, {
@@ -39,9 +40,16 @@ export default function EpisodeGetter(params, userId) {
         }, {
           model: models.grammar,
           required: false,
+          // Workaraound - Using separate:true on hasMany associations
+          // See: https://github.com/sequelize/sequelize/issues/4868
+          separate: true,
           attributes: [
-            'id'
+            'id',
+            // Workaround - Need to specify the foreignKey in the include attributes
+            // See: https://github.com/sequelize/sequelize/issues/7514
+            'episodeId'
           ],
+          order: [ ['order', 'ASC'] ],
           include: [{
             model: models.grammarT,
             as: 'translations',
@@ -49,17 +57,20 @@ export default function EpisodeGetter(params, userId) {
             attributes: [
               'title'
             ]
-          }]
+          }],
         }, {
           model: models.example,
           required: false,
+          separate: true,
           attributes: [
             'id',
             'order',
             'chinese',
             'pinyin',
-            'audioUrl'
+            'audioUrl',
+            'episodeId'
           ],
+          order: [ [ 'order', 'ASC' ] ],
           include: [{
             model: models.exampleT,
             as: 'translations',
@@ -72,10 +83,17 @@ export default function EpisodeGetter(params, userId) {
         }, {
           model: models.dialog,
           required: false,
+          separate: true,
           attributes: [
             'id',
             'order',
             'chineseTitle',
+            'episodeId'
+          ],
+          order: [
+            [ 'order', 'ASC' ],
+            [ models.statement, 'order', 'ASC' ],
+            [ models.statement, models.sentence, 'order', 'ASC' ]
           ],
           include: [{
             model: models.avatar,
@@ -121,12 +139,7 @@ export default function EpisodeGetter(params, userId) {
           }],
         }],
         order: [
-          [ models.character, models.characterEpisode, 'order', 'ASC' ],
-          [ models.example, 'order', 'ASC' ],
-          [ models.grammar, 'order', 'ASC' ],
-          [ models.dialog, 'order', 'ASC' ],
-          [ models.dialog, models.statement, 'order', 'ASC' ],
-          [ models.dialog, models.statement, models.sentence, 'order', 'ASC' ],
+          [ models.character, models.characterEpisode, 'order', 'ASC' ]
         ]
       })
       .then(episode => {
