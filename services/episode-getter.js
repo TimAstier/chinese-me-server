@@ -17,7 +17,12 @@ export default function EpisodeGetter(params, userId) {
           model: models.userEpisode,
           where: { userId },
           separate: true,
-          attributes: ['id', 'score'],
+          attributes: [
+            'id',
+            'score',
+            'userId',
+            'episodeId'
+          ],
           required: false
         }, {
           model: models.character,
