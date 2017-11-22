@@ -10,40 +10,63 @@ describe('updateUserSetting', () => {
       .to.deep.equal({ age: 42 });
   });
 
-  it('finds Chinese family and given name for familyName setting', () => {
-    expect(updateUserSetting({ nationality: 'FRA' }, 'familyName', 'Astier'))
+  it('finds Chinese family and given name for gender setting', () => {
+    expect(updateUserSetting({ nationality: 'FRA', familyName: 'Astier' }, 'gender', 'Male'))
       .to.deep.equal({
         familyName: 'Astier',
         nationality: 'FRA',
+        gender: 'Male',
         chineseFamilyName: '安',
         chineseGivenName: '杰'
       });
-    expect(updateUserSetting({ nationality: 'SWE' }, 'familyName', 'Björkstén'))
+    expect(updateUserSetting({ nationality: 'SWE', familyName: 'Sun' }, 'gender', 'Female'))
       .to.deep.equal({
-        familyName: 'Björkstén',
+        familyName: 'Sun',
         nationality: 'SWE',
-        chineseFamilyName: '白',
+        gender: 'Female',
+        chineseFamilyName: '宋',
         chineseGivenName: '瑞'
       });
   });
 
   it('returns 谢 as default chineseFamilyName if familyName not supported', () => {
-    expect(updateUserSetting({ nationality: 'SWE' }, 'familyName', 'Jackson'))
+    expect(updateUserSetting({ nationality: 'SWE', familyName: 'Jackson' }, 'gender', 'Male'))
       .to.deep.equal({
         familyName: 'Jackson',
         nationality: 'SWE',
+        gender: 'Male',
         chineseFamilyName: '谢',
         chineseGivenName: '瑞'
       });
   });
 
   it('returns 杰 as default chineseGivenName if nationality not supported', () => {
-    expect(updateUserSetting({ nationality: 'SWE' }, 'familyName', 'Jackson'))
+    expect(updateUserSetting({ nationality: 'SWE', familyName: 'Jackson' }, 'gender', 'Male'))
       .to.deep.equal({
         familyName: 'Jackson',
         nationality: 'SWE',
+        gender: 'Male',
         chineseFamilyName: '谢',
         chineseGivenName: '瑞'
+      });
+  });
+
+  it('returns a different chineseGivenName base on gender', () => {
+    expect(updateUserSetting({ nationality: 'FRA', familyName: 'Astier' }, 'gender', 'Male'))
+      .to.deep.equal({
+        familyName: 'Astier',
+        nationality: 'FRA',
+        gender: 'Male',
+        chineseFamilyName: '安',
+        chineseGivenName: '杰'
+      });
+    expect(updateUserSetting({ nationality: 'FRA', familyName: 'Astier' }, 'gender', 'Female'))
+      .to.deep.equal({
+        familyName: 'Astier',
+        nationality: 'FRA',
+        gender: 'Female',
+        chineseFamilyName: '安',
+        chineseGivenName: '丽'
       });
   });
 });

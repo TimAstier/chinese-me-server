@@ -1,3 +1,8 @@
+// HOW-TO: add a new setting
+// 1. Create new column in userSettings table (migration)
+// 2. Create the constants on the client
+// 3. Update userSetting model
+
 const namesMap = {
   A: '安',
   B: '白',
@@ -32,12 +37,12 @@ const findChineseFamilyName = familyName => {
   return namesMap[firstLetter] || '谢';
 };
 
-const findChineseGivenName = nationality => {
+const findChineseGivenName = (nationality, gender) => {
   // TODO: should also depend on gender
   switch (nationality) {
-    case 'USA': return '杰';
-    case 'GBR': return '杰';
-    case 'FRA': return '杰';
+    case 'USA': return gender === 'Male' ? '杰' : '美';
+    case 'GBR': return gender === 'Male' ? '杰' : '英';
+    case 'FRA': return gender === 'Male' ? '杰' : '丽';
     case 'SWE': return '瑞';
     case 'DEU': return '德';
     default: return '杰';
@@ -46,10 +51,10 @@ const findChineseGivenName = nationality => {
 
 const updateUserSetting = (userSetting, setting, value) => {
   userSetting[setting] = value;
-  if (setting === 'familyName') {
-    userSetting.chineseFamilyName = findChineseFamilyName(value);
+  if (setting === 'gender') {
+    userSetting.chineseFamilyName = findChineseFamilyName(userSetting.familyName);
     userSetting.chineseGivenName =
-      findChineseGivenName(userSetting.nationality);
+      findChineseGivenName(userSetting.nationality, value);
   }
   return userSetting;
 };
