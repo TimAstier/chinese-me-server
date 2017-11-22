@@ -3,6 +3,7 @@ module.exports = (sequelize, DataTypes) => {
 
   const Feedback = sequelize.define('feedback', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
+    email: { type: DataTypes.STRING },
     subject: { type: DataTypes.STRING },
     message: { type: DataTypes.TEXT, allowNull: false },
     answered: { type: DataTypes.BOOLEAN, defaultValue: false },
