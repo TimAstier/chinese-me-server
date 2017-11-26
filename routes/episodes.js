@@ -17,11 +17,7 @@ import VideosGetter from '../services/videos-getter';
 import VideoSerializer from '../serializers/video';
 import MapDataGetter from '../services/map-data-getter';
 import MapDataSerializer from '../serializers/mapData';
-import ReviewExercisesGetter from '../services/review-exercises-getter.js';
-import ReviewSerializer from '../serializers/review';
 import ScoreUpdator from '../services/score-updator.js';
-import ExamExercisesGetter from '../services/exam-exercises-getter.js';
-import ExamSerializer from '../serializers/exam';
 
 function get(request, response, next) {
   EpisodeGetter(request.params, request.currentUser.id)
@@ -86,20 +82,6 @@ function listVideos(request, response, next) {
     .catch(next);
 }
 
-function review(request, response, next) {
-  ReviewExercisesGetter(request.params.id)
-    .then(episode => ReviewSerializer.serialize(episode))
-    .then(episode => response.send(episode))
-    .catch(next);
-}
-
-function exam(request, response, next) {
-  ExamExercisesGetter(request.params.id)
-    .then(episode => ExamSerializer.serialize(episode))
-    .then(episode => response.send(episode))
-    .catch(next);
-}
-
 function examCompleted(request, response, next) {
   ScoreUpdator(request)
     .then(() => response.sendStatus(204))
@@ -116,7 +98,5 @@ module.exports = app => {
   app.get('/api/episode/:id/multipleChoices', ensureAuthenticated, listMultipleChoices);
   app.get('/api/episode/:id/audioToTexts', ensureAuthenticated, listAudioToTexts);
   app.get('/api/episode/:id/videos', ensureAuthenticated, listVideos);
-  app.get('/api/episode/:id/review', ensureAuthenticated, review);
-  app.get('/api/episode/:id/exam', ensureAuthenticated, exam);
   app.post('/api/episode/exam/completed', ensureAuthenticated, examCompleted);
 };

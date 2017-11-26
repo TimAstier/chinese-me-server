@@ -25,6 +25,16 @@ export default function EpisodeGetter(params, userId) {
           ],
           required: false
         }, {
+          model: models.practice,
+          required: false,
+          separate: true,
+          attributes: [
+            'id',
+            'number',
+            'episodeId'
+          ],
+          order: [ ['number', 'ASC'] ]
+        }, {
           model: models.character,
           required: false,
           attributes: [

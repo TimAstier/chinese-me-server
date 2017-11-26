@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   MultipleChoice.associate = () => {
-    MultipleChoice.belongsTo(models.episode);
+    MultipleChoice.belongsTo(models.practice);
     MultipleChoice.hasMany(models.multipleChoiceT,
       { as: 'translations', onDelete: 'cascade', hooks: true }
     );

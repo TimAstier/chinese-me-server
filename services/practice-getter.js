@@ -1,11 +1,18 @@
 import models from '../models';
 
-export default function ReviewExercisesGetter(episodeId) {
-  return models.episode
+export default function PracticeGetter(params, isExam = false) {
+  const whereClause = isExam === false
+    ? { id: params.practiceId, episodeId: params.episodeId, type: null }
+    : { type: 'exam', episodeId: params.episodeId };
+    // NOTE: type: null
+    // Ensure we can't access an exam practice from a random practice route on client
+  return models.practice
     .findOne({
-      where: { id: episodeId },
+      // Ensure we can't access a practice from a random episode
+      where: whereClause,
       include: [{
         model: models.audioToText,
+        required: false,
         include: [{
           model: models.word,
           required: false,
@@ -16,6 +23,7 @@ export default function ReviewExercisesGetter(episodeId) {
         }]
       }, {
         model: models.multipleChoice,
+        required: false,
         include: [{
           model: models.multipleChoiceT,
           as: 'translations',
@@ -26,24 +34,25 @@ export default function ReviewExercisesGetter(episodeId) {
         }]
       }, {
         model: models.character,
+        required: false,
         include: [{
           model: models.characterT,
           as: 'translations',
           required: false,
           attributes: [ 'meaning' ]
-        }, {
-          model: models.characterEpisode,
-          required: false
         }]
+      }, {
+        model: models.characterExercise,
+        required: false
       }],
       order: [
-        [ models.character, models.characterEpisode, 'order', 'ASC' ],
         [ models.multipleChoice, 'order', 'ASC' ],
         [ models.audioToText, 'order', 'ASC' ],
+        [ models.characterExercise, 'number', 'ASC' ],
         [ models.audioToText, models.word, models.wordAudioToText, 'order', 'ASC' ],
       ]
     })
-    .then(episode => {
-      return episode;
+    .then(practice => {
+      return practice;
     });
 }

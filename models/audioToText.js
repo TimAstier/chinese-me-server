@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   AudioToText.associate = () => {
-    AudioToText.belongsTo(models.episode);
+    AudioToText.belongsTo(models.practice);
     AudioToText.belongsToMany(models.word, { through: 'wordAudioToText' });
     AudioToText.hasMany(models.wordAudioToText, { onDelete: 'cascade' });
   };

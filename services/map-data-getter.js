@@ -43,6 +43,10 @@ export default function MapDataGetter(episodeId, userId) {
           ]
         }]
       }, {
+        model: models.practice,
+        attributes: ['id'],
+        required: false
+      }, {
         model: models.userEpisode,
         where: { userId: userId },
         attributes: ['id', 'score'],
@@ -51,6 +55,7 @@ export default function MapDataGetter(episodeId, userId) {
       order: [
         [ 'number', 'ASC' ],
         [ models.dialog, 'order', 'ASC' ],
+        [ models.practice, 'number', 'ASC' ],
         [ models.grammar, 'order', 'ASC' ],
         [ models.character, models.characterEpisode, 'order', 'ASC']
       ]

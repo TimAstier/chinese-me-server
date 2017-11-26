@@ -20,13 +20,13 @@ const episodeSchema = {
     'characters',
     'examples',
     'grammars',
+    'practices',
     'multipleChoices',
     'audioToTexts',
     'videos',
     'avatars',
     'seasonId',
-    'score',
-    'review'
+    'score'
   ],
   keyForAttribute: 'camelCase',
   transform: record => {

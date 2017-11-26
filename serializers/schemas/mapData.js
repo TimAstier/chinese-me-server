@@ -5,7 +5,8 @@ const mapDataSchema = {
     'dialogs',
     'characters',
     'grammars',
-    'userEpisodes'
+    'userEpisodes',
+    'practices'
   ],
   keyForAttribute: 'camelCase'
 };
