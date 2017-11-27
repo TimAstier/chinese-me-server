@@ -8,6 +8,13 @@ export default function DialogsGetter(episodeId, userId) {
       include: [{
         model: models.dialog,
         required: false,
+        separate: true,
+        attributes: [
+          'id',
+          'order',
+          'episodeId',
+          'chineseTitle'
+        ],
         include: [{
           model: models.avatar,
           required: false,
@@ -46,7 +53,13 @@ export default function DialogsGetter(episodeId, userId) {
           where: { userId },
           attributes: ['id'],
           required: false
-        }]
+        }],
+        order: [
+          [ 'order', 'ASC' ],
+          [ models.statement, 'order', 'ASC' ],
+          [ models.statement, models.sentence, 'order', 'ASC' ],
+          [ models.avatar, models.avatarDialog, 'order', 'ASC']
+        ]
       }, {
         model: models.word,
         required: false,
@@ -58,13 +71,7 @@ export default function DialogsGetter(episodeId, userId) {
             'meanings'
           ]
         }]
-      }],
-      order: [
-        [ models.dialog, 'order', 'ASC' ],
-        [ models.dialog, models.statement, 'order', 'ASC' ],
-        [ models.dialog, models.statement, models.sentence, 'order', 'ASC' ],
-        [ models.dialog, models.avatar, models.avatarDialog, 'order', 'ASC']
-      ]
+      }]
     })
     .then(dialogs => {
       if (!dialogs) {
