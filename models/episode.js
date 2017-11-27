@@ -21,6 +21,8 @@ module.exports = (sequelize, DataTypes) => {
     Episode.hasMany(models.video);
     Episode.hasMany(models.userEpisode, { onDelete: 'cascade' });
     Episode.hasMany(models.example);
+    Episode.belongsToMany(models.word, { through: 'wordEpisode' });
+    Episode.hasMany(models.wordEpisode, { onDelete: 'cascade' });
   };
 
   return Episode;

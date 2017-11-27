@@ -75,6 +75,17 @@ export default function EpisodeGetter(params, userId) {
             ]
           }],
         }, {
+          model: models.word,
+          required: false,
+          include: [{
+            model: models.wordT,
+            as: 'translations',
+            required: false,
+            attributes: [
+              'meanings'
+            ]
+          }]
+        }, {
           model: models.example,
           required: false,
           separate: true,
@@ -155,6 +166,7 @@ export default function EpisodeGetter(params, userId) {
           }],
         }],
         order: [
+          [ models.word, models.wordEpisode, 'order', 'ASC' ],
           [ models.character, models.characterEpisode, 'order', 'ASC' ]
         ]
       })

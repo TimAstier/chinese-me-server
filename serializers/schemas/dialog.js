@@ -17,6 +17,7 @@ const dialogSchema = {
   ],
   keyForAttribute: 'camelCase',
   transform: record => {
+    console.log('hey')
     if (!record.userDialog) {
       return record;
     }

@@ -2,30 +2,50 @@
 import models from '../models';
 
 export default function DialogsGetter(episodeId, userId) {
-  return models.dialog
-    .findAll({
-      where: { episodeId },
+  return models.episode
+    .findOne({
+      where: { id: episodeId },
       include: [{
-        model: models.avatar,
+        model: models.dialog,
         required: false,
         include: [{
-          model: models.avatarDialog,
-          required: false
-        }]
-      }, {
-        model: models.statement,
-        required: false,
-        include: [{
-          model: models.sentence,
+          model: models.avatar,
           required: false,
           include: [{
-            model: models.sentenceT,
+            model: models.avatarDialog,
+            required: false
+          }]
+        }, {
+          model: models.statement,
+          required: false,
+          include: [{
+            model: models.sentence,
+            required: false,
+            include: [{
+              model: models.sentenceT,
+              as: 'translations',
+              required: false,
+              attributes: [
+                'translation'
+              ]
+            }]
+          }]
+        }, {
+          model: models.word,
+          required: false,
+          include: [{
+            model: models.wordT,
             as: 'translations',
             required: false,
             attributes: [
-              'translation'
+              'meanings'
             ]
           }]
+        }, {
+          model: models.userDialog,
+          where: { userId },
+          attributes: ['id'],
+          required: false
         }]
       }, {
         model: models.word,
@@ -38,17 +58,12 @@ export default function DialogsGetter(episodeId, userId) {
             'meanings'
           ]
         }]
-      }, {
-        model: models.userDialog,
-        where: { userId },
-        attributes: ['id'],
-        required: false
       }],
       order: [
-        [ 'order', 'ASC' ],
-        [ models.statement, 'order', 'ASC' ],
-        [ models.statement, models.sentence, 'order', 'ASC' ],
-        [ models.avatar, models.avatarDialog, 'order', 'ASC']
+        [ models.dialog, 'order', 'ASC' ],
+        [ models.dialog, models.statement, 'order', 'ASC' ],
+        [ models.dialog, models.statement, models.sentence, 'order', 'ASC' ],
+        [ models.dialog, models.avatar, models.avatarDialog, 'order', 'ASC']
       ]
     })
     .then(dialogs => {

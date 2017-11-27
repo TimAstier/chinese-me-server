@@ -2,6 +2,7 @@ import exampleSchema from './example';
 import videoSchema from './video';
 import dialogSchema from './dialog';
 import characterSchema from './character';
+import wordSchema from './word';
 import grammarSchema from './grammar';
 import multipleChoiceSchema from './multipleChoice';
 import audioToTextSchema from './audioToText';
@@ -20,6 +21,7 @@ const episodeSchema = {
     'characters',
     'examples',
     'grammars',
+    'words',
     'practices',
     'multipleChoices',
     'audioToTexts',
@@ -43,7 +45,8 @@ const episodeSchema = {
   audioToTexts: audioToTextSchema,
   videos: videoSchema,
   examples: exampleSchema,
-  avatars: avatarSchema
+  avatars: avatarSchema,
+  words: wordSchema
 };
 
 export default episodeSchema;

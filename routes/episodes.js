@@ -4,7 +4,6 @@ import EpisodeGetter from '../services/episode-getter';
 import EpisodesGetter from '../services/episodes-getter';
 import EpisodeSerializer from '../serializers/episode';
 import DialogsGetter from '../services/dialogs-getter';
-import DialogSerializer from '../serializers/dialog';
 import CharactersGetter from '../services/characters-getter';
 import CharacterSerializer from '../serializers/character';
 import GrammarsGetter from '../services/grammars-getter';
@@ -42,8 +41,8 @@ function map(request, response, next) {
 
 function listDialogs(request, response, next) {
   DialogsGetter(request.params.id, request.currentUser.id)
-    .then(dialogs => DialogSerializer.serialize(dialogs))
-    .then(dialogs => response.send(dialogs))
+    .then(episode => EpisodeSerializer.serialize(episode))
+    .then(episode => response.send(episode))
     .catch(next);
 }
 
