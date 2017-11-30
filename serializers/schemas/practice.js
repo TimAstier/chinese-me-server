@@ -1,39 +1,32 @@
-import audioToTextSchema from './audioToText';
-import multipleChoiceSchema from './multipleChoice';
-import characterSchema from './character';
+import exerciseSchema from './exercise';
 import createExercisesArray from '../../utils/createExercisesArray';
-
-// Currently 4 exercise types:
-// 1. audioToText (has its own model AudioToText)
-// 2. multipleChoice (has its own model MultipleChoice)
-// 3. characterStroke (defined from CharacterExercise model)
-// 3. multipleChoice (defined from CharacterExercise model)
 
 const practiceSchema = {
   ref: 'id',
   attributes: [
-    'multipleChoices',
-    'audioToTexts',
-    'characters',
-    'exercises'
+    'exercises',
+    'exercisesArray'
   ],
   keyForAttribute: 'camelCase',
   transform: record => {
-    record.exercises = createExercisesArray(
-      record,
-      [
-        'multipleChoices',
-        'audioToTexts',
-        'characterExercises',
-      ],
-      record.type
-    );
+    record.exercises.forEach((e, i) => {
+      record.exercises[i].order = record.exercises[i].practiceExercise.order;
+      // Workaround so that exerciseSchema can serialize belongsTo associations
+      // (needs an array)
+      if (record.exercises[i].character) {
+        record.exercises[i].character = [ record.exercises[i].character ];
+      }
+      if (record.exercises[i].audioToText) {
+        record.exercises[i].audioToText = [ record.exercises[i].audioToText ];
+      }
+      if (record.exercises[i].multipleChoice) {
+        record.exercises[i].multipleChoice = [ record.exercises[i].multipleChoice ];
+      }
+    });
+    record.exercisesArray = createExercisesArray(record.practiceExercises, record.type);
     return record;
   },
-  characters: characterSchema,
-  practices: practiceSchema,
-  multipleChoices: multipleChoiceSchema,
-  audioToTexts: audioToTextSchema
+  exercises: exerciseSchema
 };
 
 export default practiceSchema;
