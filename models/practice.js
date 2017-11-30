@@ -13,10 +13,8 @@ module.exports = (sequelize, DataTypes) => {
 
   Practice.associate = () => {
     Practice.belongsTo(models.episode);
-    Practice.hasMany(models.multipleChoice);
-    Practice.hasMany(models.audioToText);
-    Practice.belongsToMany(models.character, { through: 'characterExercise' });
-    Practice.hasMany(models.characterExercise, { onDelete: 'cascade' });
+    Practice.hasMany(models.practiceExercise);
+    Practice.belongsToMany(models.exercise, { through: 'practiceExercise' });
   };
 
   return Practice;

@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     MultipleChoice.hasMany(models.multipleChoiceT,
       { as: 'translations', onDelete: 'cascade', hooks: true }
     );
+    MultipleChoice.hasMany(models.exercise);
   };
 
   return MultipleChoice;

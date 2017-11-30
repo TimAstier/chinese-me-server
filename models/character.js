@@ -19,8 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     Character.hasMany(models.characterT,
       { as: 'translations', onDelete: 'cascade', hooks: true }
     );
-    Character.belongsToMany(models.practice, { through: 'characterExercise' });
-    Character.hasMany(models.characterExercise, { onDelete: 'cascade' });
+    Character.hasMany(models.exercise);
   };
 
   return Character;
