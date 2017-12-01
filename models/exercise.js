@@ -66,6 +66,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Exercise.associate = () => {
+    Exercise.hasMany(models.answer);
     Exercise.belongsTo(models.audioToText);
     Exercise.belongsTo(models.character);
     Exercise.belongsTo(models.multipleChoice);

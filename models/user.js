@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.userDialog, { onDelete: 'cascade' });
     User.hasMany(models.userEpisode, { onDelete: 'cascade' });
     User.hasOne(models.userSetting, { onDelete: 'cascade' });
+    User.hasMany(models.userAnswer);
   };
 
   return User;

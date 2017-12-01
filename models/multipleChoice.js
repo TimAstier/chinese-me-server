@@ -6,8 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     question: { type: DataTypes.STRING, allowNull: false },
     // NOTE: The first choice needs to be the correct one.
-    choices: { type: DataTypes.ARRAY(DataTypes.STRING), allowNull: false },
-    order: { type: DataTypes.INTEGER }
+    choices: { type: DataTypes.ARRAY(DataTypes.STRING), allowNull: false }
   }, {
     timestamps: true
   });
@@ -17,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     MultipleChoice.hasMany(models.multipleChoiceT,
       { as: 'translations', onDelete: 'cascade', hooks: true }
     );
-    MultipleChoice.hasMany(models.exercise);
+    MultipleChoice.hasOne(models.exercise);
   };
 
   return MultipleChoice;

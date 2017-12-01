@@ -3,8 +3,7 @@ module.exports = (sequelize, DataTypes) => {
 
   const AudioToText = sequelize.define('audioToText', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    audioUrl: { type: DataTypes.STRING },
-    order: { type: DataTypes.INTEGER }
+    audioUrl: { type: DataTypes.STRING }
   }, {
     timestamps: true
   });
@@ -13,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     AudioToText.belongsTo(models.practice);
     AudioToText.belongsToMany(models.word, { through: 'wordAudioToText' });
     AudioToText.hasMany(models.wordAudioToText, { onDelete: 'cascade' });
-    AudioToText.hasMany(models.exercise);
+    AudioToText.hasOne(models.exercise);
   };
 
   return AudioToText;
