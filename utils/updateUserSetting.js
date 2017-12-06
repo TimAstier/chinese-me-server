@@ -3,6 +3,8 @@
 // 2. Create the constants on the client
 // 3. Update userSetting model
 
+import capitalizeFirstLetter from '../utils/capitalizeFirstLetter';
+
 const namesMap = {
   A: '安',
   B: '白',
@@ -38,7 +40,6 @@ const findChineseFamilyName = familyName => {
 };
 
 const findChineseGivenName = (nationality, gender) => {
-  // TODO: should also depend on gender
   switch (nationality) {
     case 'USA': return gender === 'Male' ? '杰' : '美';
     case 'GBR': return gender === 'Male' ? '杰' : '英';
@@ -49,12 +50,21 @@ const findChineseGivenName = (nationality, gender) => {
   }
 };
 
+const standardizeValue = (setting, value) => {
+  switch (setting) {
+    case 'givenName':
+    case 'familyName': return capitalizeFirstLetter(value);
+    default: return value;
+  }
+};
+
 const updateUserSetting = (userSetting, setting, value) => {
-  userSetting[setting] = value;
+  const standardizedValue = standardizeValue(setting, value);
+  userSetting[setting] = standardizedValue;
   if (setting === 'gender') {
     userSetting.chineseFamilyName = findChineseFamilyName(userSetting.familyName);
     userSetting.chineseGivenName =
-      findChineseGivenName(userSetting.nationality, value);
+      findChineseGivenName(userSetting.nationality, standardizedValue);
   }
   return userSetting;
 };

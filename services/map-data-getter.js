@@ -44,7 +44,7 @@ export default function MapDataGetter(episodeId, userId) {
         }]
       }, {
         model: models.practice,
-        where: { type: null }, // Avoid fetching the 'exam' practice
+        where: { number: 0 }, // Only fetch the review
         attributes: ['id'],
         required: false
       }, {
