@@ -1,19 +1,19 @@
 module.exports = (sequelize, DataTypes) => {
   const models = sequelize.models;
 
-  const WordAudioToText = sequelize.define('wordAudioToText', {
+  const ExerciseWord = sequelize.define('exerciseWord', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
+    exerciseId: { type: DataTypes.INTEGER },
     wordId: { type: DataTypes.INTEGER },
-    audioToTextId: { type: DataTypes.INTEGER },
     order: { type: DataTypes.INTEGER }
   }, {
     timestamps: true
   });
 
-  WordAudioToText.associate = () => {
-    WordAudioToText.belongsTo(models.word);
-    WordAudioToText.belongsTo(models.audioToText);
+  ExerciseWord.associate = () => {
+    ExerciseWord.belongsTo(models.exercise);
+    ExerciseWord.belongsTo(models.word);
   };
 
-  return WordAudioToText;
+  return ExerciseWord;
 };

@@ -1,61 +1,66 @@
 module.exports = (sequelize, DataTypes) => {
   const models = sequelize.models;
 
-  // DB constraint enforces composite unique type/foreignKey combinations
-
   const Exercise = sequelize.define('exercise', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     type: {
       type: DataTypes.ENUM(
-        'characterPinyin',
-        'characterStrokeQuiz',
+        'textToText',
+        'choicesToOrder',
         'audioToText',
-        'multipleChoice'
+        'audioToChoice',
+        'textToChoice',
+        'audioToWords',
+        'characterPinyin',
+        'characterStroke'
       ),
       allowNull: false
     },
+    text: { type: DataTypes.STRING },
+    audioUrl: { type: DataTypes.STRING },
+    choices: { type: DataTypes.ARRAY(DataTypes.STRING) },
     characterId: {
       type: DataTypes.INTEGER
     },
-    multipleChoiceId: {
-      type: DataTypes.INTEGER
-    },
-    audioToTextId: {
-      type: DataTypes.INTEGER
-    }
   }, {
     timestamps: true,
     validate: {
-      exclusiveArcs() {
-        // See: https://stackoverflow.com/questions/922184/why-can-you-not-have-a-foreign-key-in-a-polymorphic-association
-        // Requires that exactly one of these foreign keys can be non-NULL
-        const foreignKeys = ['characterId', 'multipleChoiceId', 'audioToTextId'];
-        let nonNullKeys = foreignKeys.length;
-        foreignKeys.forEach(key => {
-          if (this[key] === null) {
-            nonNullKeys --;
-          }
-        });
-        if (nonNullKeys !== 1) {
-          throw new Error('Exactly one exercise element needs to be associated');
-        }
-      },
-      matchTypeAndForeignKey() {
+      hasRequiredData() {
         switch (this.type) {
-          case 'characterPinyin':
-          case 'characterStrokeQuiz':
-            if (this.characterId === null) {
-              throw new Error(this.type + ' exercises need to have an associate character');
+          case 'textToText':
+            if (!this.text) {
+              throw new Error(this.type + ' exercises need to have a text attribute');
+            }
+            break;
+          case 'choicesToOrder':
+            if (!this.choices) {
+              throw new Error(this.type + ' exercises need to have a choices attribute');
             }
             break;
           case 'audioToText':
-            if (this.audioToTextId === null) {
-              throw new Error(this.type + ' exercises need to have an associate audioToText');
+            if (!this.audioUrl) {
+              throw new Error(this.type + ' exercises need to have a audioUrl attribute');
             }
             break;
-          case 'multipleChoice':
-            if (this.multipleChoiceId === null) {
-              throw new Error(this.type + ' exercises need to have an associate multipleChoice');
+          case 'audioToChoice':
+            if (!this.audioUrl || !this.choices) {
+              throw new Error(this.type + ' exercises need to have a audioUrl and choices attributes');
+            }
+            break;
+          case 'textToChoice':
+            if (!this.text || !this.choices) {
+              throw new Error(this.type + ' exercises need to have a text and choices attributes');
+            }
+            break;
+          case 'audioToWords':
+            if (!this.audioUrl) {
+              throw new Error(this.type + ' exercises need to have a audioUrl attribute');
+            }
+            break;
+          case 'characterPinyin':
+          case 'characterStroke':
+            if (!this.characterId) {
+              throw new Error(this.type + ' exercises need to have an associated character');
             }
             break;
           default:
@@ -67,11 +72,14 @@ module.exports = (sequelize, DataTypes) => {
 
   Exercise.associate = () => {
     Exercise.hasMany(models.answer);
-    Exercise.belongsTo(models.audioToText);
     Exercise.belongsTo(models.character);
-    Exercise.belongsTo(models.multipleChoice);
-    Exercise.hasMany(models.practiceExercise);
     Exercise.belongsToMany(models.practice, { through: 'practiceExercise' });
+    Exercise.hasMany(models.practiceExercise);
+    Exercise.belongsToMany(models.word, { through: 'exerciseWord' });
+    Exercise.hasMany(models.exerciseWord);
+    Exercise.hasMany(models.exerciseT,
+      { as: 'translations', onDelete: 'cascade', hooks: true }
+    );
   };
 
   return Exercise;

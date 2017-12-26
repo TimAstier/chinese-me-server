@@ -10,12 +10,12 @@ module.exports = (sequelize, DataTypes) => {
 
   Language.associate = () => {
     Language.hasMany(models.sentenceT);
-    Language.hasMany(models.multipleChoiceT);
     Language.hasMany(models.grammarT);
     Language.hasMany(models.exampleT);
     Language.hasMany(models.dialogT);
     Language.hasMany(models.characterT);
     Language.hasMany(models.wordT);
+    Language.hasMany(models.exerciseT);
   };
 
   return Language;

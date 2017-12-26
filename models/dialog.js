@@ -20,8 +20,6 @@ module.exports = (sequelize, DataTypes) => {
     Dialog.hasMany(models.dialogT,
       { as: 'translations', onDelete: 'cascade', hooks: true }
     );
-    Dialog.belongsToMany(models.word, { through: 'dialogWord' });
-    Dialog.hasMany(models.dialogWord, { onDelete: 'cascade' });
   };
 
   return Dialog;

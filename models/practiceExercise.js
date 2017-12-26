@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
   const models = sequelize.models;
 
-  const PracticeExercises = sequelize.define('practiceExercise', {
+  const PracticeExercise = sequelize.define('practiceExercise', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     exerciseId: { type: DataTypes.INTEGER },
     practiceId: { type: DataTypes.INTEGER },
@@ -10,10 +10,10 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: true
   });
 
-  PracticeExercises.associate = () => {
-    PracticeExercises.belongsTo(models.exercise);
-    PracticeExercises.belongsTo(models.practice);
+  PracticeExercise.associate = () => {
+    PracticeExercise.belongsTo(models.exercise);
+    PracticeExercise.belongsTo(models.practice);
   };
 
-  return PracticeExercises;
+  return PracticeExercise;
 };
