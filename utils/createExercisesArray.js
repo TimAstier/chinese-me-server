@@ -1,33 +1,25 @@
 import isEmpty from 'lodash/isEmpty';
 import shuffleArray from './shuffleArray';
 
-const exerciseTypeToIdAttributeMap = {
-  characterStrokeQuiz: 'characterId',
-  characterPinyin: 'characterId',
-  multipleChoice: 'multipleChoiceId',
-  audioToText: 'audioToTextId'
-};
-
-const createExercisesArray = (practiceExercises, practiceType) => {
-  if (isEmpty(practiceExercises)) {
+const createExercisesArray = (exercises, practiceType) => {
+  if (isEmpty(exercises)) {
     return [];
   }
   if (practiceType === 'exam') {
-    return createExamExercisesArray(practiceExercises);
+    return createExamExercisesArray(exercises);
   }
   const exercisesArray = [];
-  practiceExercises.forEach(p => {
+  exercises.forEach(e => {
     return exercisesArray.push({
-      id: p.exerciseId,
-      type: p.exercise.type,
-      order: p.order,
-      elementId: p.exercise[exerciseTypeToIdAttributeMap[p.exercise.type]]
+      id: e.id,
+      order: e.order,
+      type: e.type
     });
   });
   return exercisesArray.sort((a, b) => a.order - b.order);
 };
 
-const createExamExercisesArray = (practiceExercises) => {
+const createExamExercisesArray = (exercises) => {
   const orderedNumbers = [];
   for (let i = 1; i < 11; i++) {
     orderedNumbers.push(i);
@@ -35,15 +27,14 @@ const createExamExercisesArray = (practiceExercises) => {
   const randomNumbers = shuffleArray(orderedNumbers);
   const exercisesArray = [];
   let orderIndex = 0;
-  practiceExercises.forEach(p => {
+  exercises.forEach(e => {
     if (orderIndex > 9) {
       return null;
     }
     exercisesArray.push({
-      id: p.exerciseId,
-      type: p.exercise.type,
+      id: e.id,
       order: randomNumbers[orderIndex],
-      elementId: p.exercise[exerciseTypeToIdAttributeMap[p.exercise.type]]
+      type: e.type
     });
     return orderIndex++;
   });

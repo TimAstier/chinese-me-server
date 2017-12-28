@@ -17,6 +17,6 @@ function getExamPractice(request, response, next) {
 }
 
 module.exports = app => {
-  app.get('/api/episode/:episodeId/practice/:practiceId', ensureAuthenticated, get);
+  app.get('/api/episode/:episodeId/practice/:practiceId', get); // TODO: ensureAuthenticated
   app.get('/api/episode/:episodeId/exam', ensureAuthenticated, getExamPractice);
 };

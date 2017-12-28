@@ -14,26 +14,11 @@ export default function PracticeGetter(params, isExam = false) {
         model: models.exercise,
         required: false,
         include: [{
-          model: models.audioToText,
+          model: models.word,
           required: false,
           include: [{
-            model: models.word,
-            required: false,
-            include: [{
-              model: models.wordAudioToText,
-              required: false
-            }]
-          }]
-        }, {
-          model: models.multipleChoice,
-          required: false,
-          include: [{
-            model: models.multipleChoiceT,
-            as: 'translations',
-            required: false,
-            attributes: [
-              'explanation'
-            ]
+            model: models.exerciseWord,
+            required: false
           }]
         }, {
           model: models.character,
@@ -44,17 +29,18 @@ export default function PracticeGetter(params, isExam = false) {
             required: false,
             attributes: [ 'meaning' ]
           }]
+        }, {
+          model: models.exerciseT,
+          as: 'translations',
+          required: false
         }]
       }, {
         model: models.practiceExercise,
         required: false,
-        include: [{
-          model: models.exercise,
-          required: true
-        }]
+        attributes: [ 'order' ]
       }],
       order: [
-        [ models.exercise, models.audioToText, models.word, models.wordAudioToText, 'order', 'ASC' ],
+        [ models.exercise, models.practiceExercise, 'order', 'ASC' ],
       ]
     })
     .then(practice => {

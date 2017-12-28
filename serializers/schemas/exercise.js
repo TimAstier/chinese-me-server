@@ -1,21 +1,24 @@
-import audioToTextSchema from './audioToText';
-import multipleChoiceSchema from './multipleChoice';
 import characterSchema from './character';
+import wordSchema from './word';
 // import createExercisesArray from '../../utils/createExercisesArray';
 
 const exerciseSchema = {
   ref: 'id',
   attributes: [
+    'id',
     'type',
-    'order',
+    'text',
+    'audioUrl',
+    'choices',
     'character',
-    'multipleChoice',
-    'audioToText',
+    'words',
+    'translations',
+    'order',
+    'characterId'
   ],
   keyForAttribute: 'camelCase',
   character: characterSchema,
-  multipleChoice: multipleChoiceSchema,
-  audioToText: audioToTextSchema
+  words: wordSchema
 };
 
 export default exerciseSchema;

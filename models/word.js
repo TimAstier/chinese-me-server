@@ -15,6 +15,8 @@ module.exports = (sequelize, DataTypes) => {
     );
     Word.belongsToMany(models.episode, { through: 'wordEpisode' });
     Word.hasMany(models.wordEpisode, { onDelete: 'cascade' });
+    Word.belongsToMany(models.exercise, { through: 'exerciseWord' });
+    Word.hasMany(models.exerciseWord);
   };
 
   return Word;
