@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
   Answer.associate = () => {
     Answer.belongsTo(models.exercise);
     Answer.hasMany(models.userAnswer);
+    Answer.hasMany(models.explanation);
   };
 
   return Answer;
