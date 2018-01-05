@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
 
   const Answer = sequelize.define('answer', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    value: { type: DataTypes.STRING },
+    value: { type: DataTypes.STRING, allowNull: false },
     isCorrect: { type: DataTypes.BOOLEAN }
   }, {
     timestamps: true
