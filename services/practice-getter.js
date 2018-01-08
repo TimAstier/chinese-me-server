@@ -19,10 +19,7 @@ export default function PracticeGetter(params, isExam = false) {
           include: [{
             model: models.exerciseWord,
             required: false
-          }],
-          order: [
-            [ models.word, models.exerciseWord, 'order', 'ASC' ]
-          ]
+          }]
         }, {
           model: models.character,
           required: false,
@@ -43,7 +40,8 @@ export default function PracticeGetter(params, isExam = false) {
         attributes: [ 'order' ]
       }],
       order: [
-        [ models.exercise, models.practiceExercise, 'order', 'ASC' ]
+        [ models.exercise, models.practiceExercise, 'order', 'ASC' ],
+        [ models.exercise, models.word, models.exerciseWord, 'order', 'ASC' ]
       ]
     })
     .then(practice => {
