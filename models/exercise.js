@@ -26,45 +26,47 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: true,
     validate: {
       hasRequiredData() {
-        switch (this.type) {
-          case 'textToText':
-            if (!this.text) {
-              throw new Error(this.type + ' exercises need to have a text attribute');
-            }
-            break;
-          case 'choicesToOrder':
-            if (!this.choices) {
-              throw new Error(this.type + ' exercises need to have a choices attribute');
-            }
-            break;
-          case 'audioToText':
-            if (!this.audioUrl) {
-              throw new Error(this.type + ' exercises need to have a audioUrl attribute');
-            }
-            break;
-          case 'audioToChoice':
-            if (!this.audioUrl || !this.choices) {
-              throw new Error(this.type + ' exercises need to have a audioUrl and choices attributes');
-            }
-            break;
-          case 'textToChoice':
-            if (!this.text || !this.choices) {
-              throw new Error(this.type + ' exercises need to have a text and choices attributes');
-            }
-            break;
-          case 'audioToWords':
-            if (!this.audioUrl) {
-              throw new Error(this.type + ' exercises need to have a audioUrl attribute');
-            }
-            break;
-          case 'characterPinyin':
-          case 'characterStroke':
-            if (!this.characterId) {
-              throw new Error(this.type + ' exercises need to have an associated character');
-            }
-            break;
-          default:
-            throw new Error('Unknown exercise type: ', this.type);
+        if (this.type) {
+          switch (this.type) {
+            case 'textToText':
+              if (!this.text) {
+                throw new Error(this.type + ' exercises need to have a text attribute');
+              }
+              break;
+            case 'choicesToOrder':
+              if (!this.choices) {
+                throw new Error(this.type + ' exercises need to have a choices attribute');
+              }
+              break;
+            case 'audioToText':
+              if (!this.audioUrl) {
+                throw new Error(this.type + ' exercises need to have a audioUrl attribute');
+              }
+              break;
+            case 'audioToChoice':
+              if (!this.audioUrl || !this.choices) {
+                throw new Error(this.type + ' exercises need to have a audioUrl and choices attributes');
+              }
+              break;
+            case 'textToChoice':
+              if (!this.text || !this.choices) {
+                throw new Error(this.type + ' exercises need to have a text and choices attributes');
+              }
+              break;
+            case 'audioToWords':
+              if (!this.audioUrl) {
+                throw new Error(this.type + ' exercises need to have a audioUrl attribute');
+              }
+              break;
+            case 'characterPinyin':
+            case 'characterStroke':
+              if (!this.characterId) {
+                throw new Error(this.type + ' exercises need to have an associated character');
+              }
+              break;
+            default:
+              throw new Error('Unknown exercise type: ', this.type);
+          }
         }
       }
     }
