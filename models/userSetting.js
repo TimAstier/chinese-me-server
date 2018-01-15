@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
     nationality: { type: DataTypes.STRING },
     chineseFamilyName: { type: DataTypes.STRING },
     chineseGivenName: { type: DataTypes.STRING },
-    gender: { type: DataTypes.ENUM('Female', 'Male') }
+    gender: { type: DataTypes.ENUM('Female', 'Male') },
+    birthdate: { type: DataTypes.DATE }
   }, {
     timestamps: true
   });
