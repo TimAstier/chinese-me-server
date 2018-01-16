@@ -5,6 +5,7 @@ const mapDataSchema = {
     'dialogs',
     'characters',
     'grammars',
+    'pronunciations',
     'userEpisodes',
     'practices'
   ],

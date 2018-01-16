@@ -43,6 +43,18 @@ export default function MapDataGetter(episodeId, userId) {
           ]
         }]
       }, {
+        model: models.pronunciation,
+        attributes: ['id'],
+        required: false,
+        include: [{
+          model: models.pronunciationT,
+          as: 'translations',
+          required: false,
+          attributes: [
+            'title'
+          ]
+        }]
+      }, {
         model: models.practice,
         where: { number: 0 }, // Only fetch the review
         attributes: ['id'],

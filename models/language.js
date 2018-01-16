@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   Language.associate = () => {
     Language.hasMany(models.sentenceT);
     Language.hasMany(models.grammarT);
+    Language.hasMany(models.pronunciationT);
     Language.hasMany(models.exampleT);
     Language.hasMany(models.dialogT);
     Language.hasMany(models.characterT);

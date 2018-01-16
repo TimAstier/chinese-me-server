@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   Episode.associate = () => {
     Episode.hasMany(models.dialog);
     Episode.hasMany(models.grammar);
+    Episode.hasMany(models.pronunciation);
     Episode.belongsToMany(models.character, { through: 'characterEpisode' });
     Episode.hasMany(models.characterEpisode, { onDelete: 'cascade' });
     Episode.belongsTo(models.season);

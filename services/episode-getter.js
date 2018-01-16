@@ -75,6 +75,23 @@ export default function EpisodeGetter(params, userId) {
             ]
           }],
         }, {
+          model: models.pronunciation,
+          required: false,
+          separate: true,
+          attributes: [
+            'id',
+            'episodeId'
+          ],
+          order: [ ['order', 'ASC'] ],
+          include: [{
+            model: models.pronunciationT,
+            as: 'translations',
+            required: false,
+            attributes: [
+              'title'
+            ]
+          }],
+        }, {
           model: models.word,
           required: false,
           include: [{
