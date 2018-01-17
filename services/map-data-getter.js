@@ -70,6 +70,7 @@ export default function MapDataGetter(episodeId, userId) {
         [ models.dialog, 'order', 'ASC' ],
         [ models.practice, 'number', 'ASC' ],
         [ models.grammar, 'order', 'ASC' ],
+        [ models.pronunciation, 'order', 'ASC' ],
         [ models.character, models.characterEpisode, 'order', 'ASC']
       ]
     })
