@@ -1,4 +1,3 @@
-// TODO: translations
 import models from '../models';
 
 export default function CharactersGetter(episodeId, userId) {
@@ -11,8 +10,6 @@ export default function CharactersGetter(episodeId, userId) {
           as: 'translations',
           required: false,
           attributes: [
-            'etymologyUrl',
-            'writingUrl',
             'meaning'
           ]
         }, {

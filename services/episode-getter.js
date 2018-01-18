@@ -41,16 +41,17 @@ export default function EpisodeGetter(params, userId) {
           attributes: [
             'id',
             'simpChar',
-            'pinyinNumber'
+            'pinyinNumber',
+            'calligraphyVideo',
+            'calligraphyHash',
+            'etymologyHash'
           ],
           include: [{
             model: models.characterT,
             as: 'translations',
             required: false,
             attributes: [
-              'meaning',
-              'etymologyUrl',
-              'writingUrl'
+              'meaning'
             ]
           }]
         }, {

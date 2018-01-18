@@ -5,6 +5,9 @@ const characterSchema = {
     'simpChar',
     'pinyinNumber',
     'completed',
+    'calligraphyVideo',
+    'calligraphyHash',
+    'etymologyHash',
     'translations'
   ],
   keyForAttribute: 'camelCase',
