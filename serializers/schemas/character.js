@@ -9,6 +9,7 @@ const characterSchema = {
     'calligraphyHash',
     'etymologyHash',
     'radical',
+    'phonetic',
     'translations'
   ],
   keyForAttribute: 'camelCase',

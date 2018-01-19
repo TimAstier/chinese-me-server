@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
     calligraphyVideo: { type: DataTypes.STRING },
     calligraphyHash: { type: DataTypes.STRING },
     etymologyHash: { type: DataTypes.STRING },
-    radical: { type: DataTypes.STRING }
+    radical: { type: DataTypes.STRING },
+    phonetic: { type: DataTypes.STRING }
   }, {
     timestamps: true
   });

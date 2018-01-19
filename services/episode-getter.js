@@ -45,7 +45,8 @@ export default function EpisodeGetter(params, userId) {
             'calligraphyVideo',
             'calligraphyHash',
             'etymologyHash',
-            'radical'
+            'radical',
+            'phonetic'
           ],
           include: [{
             model: models.characterT,
