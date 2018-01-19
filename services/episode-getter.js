@@ -44,7 +44,8 @@ export default function EpisodeGetter(params, userId) {
             'pinyinNumber',
             'calligraphyVideo',
             'calligraphyHash',
-            'etymologyHash'
+            'etymologyHash',
+            'radical'
           ],
           include: [{
             model: models.characterT,

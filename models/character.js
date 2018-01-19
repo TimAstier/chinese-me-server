@@ -9,7 +9,8 @@ module.exports = (sequelize, DataTypes) => {
     hanziData: { type: DataTypes.JSON },
     calligraphyVideo: { type: DataTypes.STRING },
     calligraphyHash: { type: DataTypes.STRING },
-    etymologyHash: { type: DataTypes.STRING }
+    etymologyHash: { type: DataTypes.STRING },
+    radical: { type: DataTypes.STRING }
   }, {
     timestamps: true
   });
