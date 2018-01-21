@@ -14,6 +14,13 @@ export default function MapDataGetter(episodeId, userId) {
           where: { userId: userId },
           attributes: ['id', 'listen', 'explore', 'roleplay'],
           required: false
+        }, {
+          model: models.dialogT,
+          as: 'translations',
+          required: false,
+          attributes: [
+            'titleTranslation'
+          ]
         }]
       }, {
         model: models.character,
