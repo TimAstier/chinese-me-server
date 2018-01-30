@@ -1,8 +1,7 @@
 import config from './config'; // eslint-disable-line no-unused-vars
-
 import express from 'express';
 import bodyParser from 'body-parser';
-
+import cors from 'cors';
 import { sequelize } from './models';
 
 const app = express();
@@ -19,14 +18,19 @@ app.use(require('forest-express-sequelize').init({
   sequelize
 }));
 
-// Enable CORS to allow requests from the client
-app.use((request, response, next) => {
-  response.header('Access-Control-Allow-Origin', process.env.CLIENT_URL);
-  response.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE');
-  response.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  next();
-});
+// Enable CORS to allow requests from the client and ForestAdmin
+// Also allow S3, but this should be improved to make it more specific
+const corsOptions = {
+  origin: [process.env.CLIENT_URL, 'http://app.forestadmin.com', 'https://app.forestadmin.com'],
+  methods: ['GET', 'PUT', 'POST', 'DELETE'],
+  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
+};
 
+app.use(cors(corsOptions));
+// enable pre-flight across-the-board:
+app.options('*', cors(corsOptions));
+
+// Register custom routes
 require('./routes')(app);
 
 // Errors handling
