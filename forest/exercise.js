@@ -8,10 +8,6 @@ Liana.collection('exercise', {
     fields: [{
       field: 'File',
       type: 'File'
-      // description: 'Personal description',
-      // isRequired: true,
-      // defaultValue: 'I approve this comment',
-      // widget: 'text input'
     }]
   }]
 });
