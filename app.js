@@ -10,14 +10,6 @@ const app = express();
 app.use(bodyParser.json({limit: '5mb'}));
 app.use(bodyParser.urlencoded({limit: '5mb', extended: true}));
 
-// Forest Admin setup
-app.use(require('forest-express-sequelize').init({
-  modelsDir: __dirname + '/models',
-  envSecret: process.env.FOREST_ENV_SECRET,
-  authSecret: process.env.FOREST_AUTH_SECRET,
-  sequelize
-}));
-
 // Enable CORS to allow requests from the client and ForestAdmin
 // Also allow S3, but this should be improved to make it more specific
 const corsOptions = {
@@ -29,6 +21,14 @@ const corsOptions = {
 app.use(cors(corsOptions));
 // enable pre-flight across-the-board:
 app.options('*', cors(corsOptions));
+
+// Forest Admin setup
+app.use(require('forest-express-sequelize').init({
+  modelsDir: __dirname + '/models',
+  envSecret: process.env.FOREST_ENV_SECRET,
+  authSecret: process.env.FOREST_AUTH_SECRET,
+  sequelize
+}));
 
 // Register custom routes
 require('./routes')(app);
