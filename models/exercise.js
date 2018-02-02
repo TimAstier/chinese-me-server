@@ -12,7 +12,9 @@ module.exports = (sequelize, DataTypes) => {
         'textToChoice',
         'audioToWords',
         'characterPinyin',
-        'characterStroke'
+        'characterStroke',
+        'textToSpeech',
+        'audioToSpeech'
       ),
       allowNull: false
     },
@@ -62,6 +64,16 @@ module.exports = (sequelize, DataTypes) => {
             case 'characterStroke':
               if (!this.characterId) {
                 throw new Error(this.type + ' exercises need to have an associated character');
+              }
+              break;
+            case 'textToSpeech':
+              if (!this.text || !this.audioUrl) {
+                throw new Error(this.type + ' exercises need to have text and audioUrl attribute');
+              }
+              break;
+            case 'audioToSpeech':
+              if (!this.audioUrl) {
+                throw new Error(this.type + ' exercises need to have audioUrl attribute');
               }
               break;
             default:
