@@ -38,17 +38,6 @@ export default function DialogsGetter(episodeId, userId) {
             }]
           }]
         }, {
-          model: models.word,
-          required: false,
-          include: [{
-            model: models.wordT,
-            as: 'translations',
-            required: false,
-            attributes: [
-              'meanings'
-            ]
-          }]
-        }, {
           model: models.userDialog,
           where: { userId },
           attributes: ['id'],
