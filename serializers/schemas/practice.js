@@ -5,6 +5,7 @@ import shuffleArray from '../../utils/shuffleArray';
 const practiceSchema = {
   ref: 'id',
   attributes: [
+    'type',
     'exercises',
     'exercisesArray'
   ],

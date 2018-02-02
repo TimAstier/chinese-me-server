@@ -26,13 +26,14 @@ export default function EpisodeGetter(params, userId) {
           required: false
         }, {
           model: models.practice,
-          where: { type: null }, // Avoid fetching the 'exam' practice
           required: false,
           separate: true,
           attributes: [
             'id',
             'number',
-            'episodeId'
+            'episodeId',
+            'type',
+            'recommended'
           ],
           order: [ ['number', 'ASC'] ]
         }, {

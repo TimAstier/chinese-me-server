@@ -1,15 +1,10 @@
 import models from '../models';
 
-export default function PracticeGetter(params, isExam = false) {
-  const whereClause = isExam === false
-    ? { id: params.practiceId, episodeId: params.episodeId, type: null }
-    : { type: 'exam', episodeId: params.episodeId };
-    // NOTE: type: null
-    // Ensure we can't access an exam practice from a random practice route on client
+export default function PracticeGetter(params) {
   return models.practice
     .findOne({
       // Ensure we can't access a practice from a random episode
-      where: whereClause,
+      where: { id: params.practiceId, episodeId: params.episodeId },
       include: [{
         model: models.exercise,
         required: false,
