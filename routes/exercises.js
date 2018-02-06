@@ -19,10 +19,14 @@ function importExercises(req, res, next) {
         * when received in backend. Convert it back into Array type in backend
         * and you should be good to go.
         **/
-        if (attribute === 'choices') {
-          exercise[attribute] = row[i].split(',');
+        if (row[i] === '') {
+          exercise[attribute] === null;
         } else {
-          exercise[attribute] = row[i];
+          if (attribute === 'choices') {
+            exercise[attribute] = row[i].split(',');
+          } else {
+            exercise[attribute] = row[i];
+          }
         }
       });
       return exercise;

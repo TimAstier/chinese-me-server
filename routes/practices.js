@@ -39,7 +39,6 @@ function importPractices(req, res, next) {
           practice[attribute] = row[i];
         }
       });
-      console.log(practice)
       return practice;
     });
     return models.practice

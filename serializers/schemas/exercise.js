@@ -7,7 +7,8 @@ const exerciseSchema = {
   attributes: [
     'id',
     'type',
-    'text',
+    'guidelineText',
+    'questionText',
     'audioUrl',
     'choices',
     'character',

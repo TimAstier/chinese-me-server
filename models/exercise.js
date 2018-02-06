@@ -18,7 +18,8 @@ module.exports = (sequelize, DataTypes) => {
       ),
       allowNull: false
     },
-    text: { type: DataTypes.STRING },
+    guidelineText: { type: DataTypes.STRING },
+    questionText: { type: DataTypes.STRING },
     audioUrl: { type: DataTypes.STRING },
     choices: { type: DataTypes.ARRAY(DataTypes.STRING) },
     characterId: { type: DataTypes.INTEGER },
