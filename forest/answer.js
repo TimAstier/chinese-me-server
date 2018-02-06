@@ -12,5 +12,13 @@ Liana.collection('answer', {
         where: { answerId: answer.id }
       });
     }
+  }],
+  actions: [{
+    name: 'Import answers',
+    global: true,
+    fields: [{
+      field: 'File',
+      type: 'File'
+    }]
   }]
 });
