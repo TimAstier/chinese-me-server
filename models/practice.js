@@ -27,8 +27,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Practice.associate = () => {
     Practice.belongsTo(models.episode);
-    Practice.hasMany(models.practiceExercise);
-    Practice.belongsToMany(models.exercise, { through: 'practiceExercise' });
+    Practice.hasMany(models.exercise);
   };
 
   return Practice;

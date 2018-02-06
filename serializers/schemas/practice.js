@@ -12,9 +12,6 @@ const practiceSchema = {
   keyForAttribute: 'camelCase',
   transform: record => {
     record.exercises.forEach((e, i) => {
-      // Un-nest 'order' from practiceExercise joined record
-      record.exercises[i].order = record.exercises[i].practiceExercise.order;
-      delete record.exercises[i].practiceExercises;
       // Workaround so that exerciseSchema can serialize belongsTo associations
       // (needs an array)
       if (record.exercises[i].character) {

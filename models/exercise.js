@@ -21,9 +21,9 @@ module.exports = (sequelize, DataTypes) => {
     text: { type: DataTypes.STRING },
     audioUrl: { type: DataTypes.STRING },
     choices: { type: DataTypes.ARRAY(DataTypes.STRING) },
-    characterId: {
-      type: DataTypes.INTEGER
-    },
+    characterId: { type: DataTypes.INTEGER },
+    practiceId: { type: DataTypes.INTEGER },
+    number: { type: DataTypes.INTEGER }
   }, {
     timestamps: true,
     validate: {
@@ -87,8 +87,7 @@ module.exports = (sequelize, DataTypes) => {
   Exercise.associate = () => {
     Exercise.hasMany(models.answer);
     Exercise.belongsTo(models.character);
-    Exercise.belongsToMany(models.practice, { through: 'practiceExercise' });
-    Exercise.hasMany(models.practiceExercise);
+    Exercise.belongsTo(models.practice);
     Exercise.belongsToMany(models.word, { through: 'exerciseWord' });
     Exercise.hasMany(models.exerciseWord);
     Exercise.hasMany(models.exerciseT,

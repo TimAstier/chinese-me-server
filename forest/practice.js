@@ -1,9 +1,9 @@
 'use strict';
 const Liana = require('forest-express-sequelize');
 
-Liana.collection('exercise', {
+Liana.collection('practice', {
   actions: [{
-    name: 'Import exercises',
+    name: 'Import practices',
     global: true,
     fields: [{
       field: 'File',

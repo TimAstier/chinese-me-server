@@ -3,9 +3,9 @@ const parseDataUri = require('parse-data-uri');
 const csv = require('csv');
 import models from '../models';
 
-function bulkImport(req, res, next) {
+function importExercises(req, res, next) {
   const parsed = parseDataUri(req.body.data.attributes.values.File);
-  return csv.parse(parsed.data, (err, data) => {
+  return csv.parse(parsed.data, { auto_parse: true }, (err, data) => {
     // Business logic to create exercises
     // Firt row contains headers with attribute names
     const attributes = data[0];
@@ -37,5 +37,5 @@ function bulkImport(req, res, next) {
 }
 
 module.exports = app => {
-  app.post('/forest/actions/bulk-import', liana.ensureAuthenticated, bulkImport);
+  app.post('/forest/actions/import-exercises', liana.ensureAuthenticated, importExercises);
 };

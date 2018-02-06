@@ -29,13 +29,9 @@ export default function PracticeGetter(params) {
           as: 'translations',
           required: false
         }]
-      }, {
-        model: models.practiceExercise,
-        required: false,
-        attributes: [ 'order' ]
       }],
       order: [
-        [ models.exercise, models.practiceExercise, 'order', 'ASC' ],
+        [ models.exercise, 'number', 'ASC' ],
         [ models.exercise, models.word, models.exerciseWord, 'order', 'ASC' ]
       ]
     })

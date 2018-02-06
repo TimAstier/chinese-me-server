@@ -14,7 +14,9 @@ const exerciseSchema = {
     'words',
     'translations',
     'order',
-    'characterId'
+    'characterId',
+    'number',
+    'practiceId'
   ],
   keyForAttribute: 'camelCase',
   character: characterSchema,
