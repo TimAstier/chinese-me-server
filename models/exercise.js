@@ -32,8 +32,8 @@ module.exports = (sequelize, DataTypes) => {
         if (this.type) {
           switch (this.type) {
             case 'textToText':
-              if (!this.text) {
-                throw new Error(this.type + ' exercises need to have a text attribute');
+              if (!this.guidelineText && !this.questionText) {
+                throw new Error(this.type + ' exercises need to have a guildelineText or a questionText');
               }
               break;
             case 'choicesToOrder':
@@ -52,7 +52,7 @@ module.exports = (sequelize, DataTypes) => {
               }
               break;
             case 'textToChoice':
-              if (!this.text || !this.choices) {
+              if ((!this.guidelineText && !this.questionText) || !this.choices) {
                 throw new Error(this.type + ' exercises need to have a text and choices attributes');
               }
               break;
@@ -68,8 +68,8 @@ module.exports = (sequelize, DataTypes) => {
               }
               break;
             case 'textToSpeech':
-              if (!this.text || !this.audioUrl) {
-                throw new Error(this.type + ' exercises need to have text and audioUrl attribute');
+              if (!this.questionText || !this.audioUrl) {
+                throw new Error(this.type + ' exercises need to have a questionText and audioUrl attribute');
               }
               break;
             case 'audioToSpeech':
