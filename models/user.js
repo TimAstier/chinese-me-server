@@ -17,6 +17,8 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.userCharacter, { onDelete: 'cascade' });
     User.belongsToMany(models.grammar, { through: 'userGrammar' });
     User.hasMany(models.userGrammar, { onDelete: 'cascade' });
+    User.belongsToMany(models.practice, { through: 'userPractice' });
+    User.hasMany(models.userPractice, { onDelete: 'cascade' });
     User.belongsToMany(models.dialog, { through: 'userDialog' });
     User.hasMany(models.userDialog, { onDelete: 'cascade' });
     User.hasMany(models.userEpisode, { onDelete: 'cascade' });

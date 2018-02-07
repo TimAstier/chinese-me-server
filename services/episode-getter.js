@@ -35,7 +35,12 @@ export default function EpisodeGetter(params, userId) {
             'type',
             'recommended'
           ],
-          order: [ ['number', 'ASC'] ]
+          order: [ ['number', 'ASC'] ],
+          include: [{
+            model: models.userPractice,
+            where: { userId },
+            required: false
+          }]
         }, {
           model: models.character,
           required: false,

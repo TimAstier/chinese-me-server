@@ -1,6 +1,7 @@
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 import PracticeGetter from '../services/practice-getter.js';
 import PracticeSerializer from '../serializers/practice';
+import UserPracticesUpdater from '../services/user-practices-updater';
 const liana = require('forest-express-sequelize');
 const parseDataUri = require('parse-data-uri');
 const csv = require('csv');
@@ -50,8 +51,15 @@ function importPractices(req, res, next) {
   });
 }
 
+function complete(request, response, next) {
+  UserPracticesUpdater(request)
+    .then(userPractice => response.send(userPractice))
+    .catch(next);
+}
+
 module.exports = app => {
   app.get('/api/episode/:episodeId/practice/:practiceId', ensureAuthenticated, get);
   app.get('/api/episode/:episodeId/exam', ensureAuthenticated, getExamPractice);
+  app.post('/api/practice/:id/completed', ensureAuthenticated, complete);
   app.post('/forest/actions/import-practices', liana.ensureAuthenticated, importPractices);
 };

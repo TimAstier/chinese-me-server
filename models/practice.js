@@ -28,6 +28,8 @@ module.exports = (sequelize, DataTypes) => {
   Practice.associate = () => {
     Practice.belongsTo(models.episode);
     Practice.hasMany(models.exercise);
+    Practice.belongsToMany(models.user, { through: 'userPractice' });
+    Practice.hasMany(models.userPractice, { onDelete: 'cascade' });
   };
 
   return Practice;

@@ -7,7 +7,8 @@ const practiceSchema = {
   attributes: [
     'type',
     'exercises',
-    'exercisesArray'
+    'exercisesArray',
+    'userPractice'
   ],
   keyForAttribute: 'camelCase',
   transform: record => {
