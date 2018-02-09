@@ -14,13 +14,6 @@ function get(request, response, next) {
     .catch(next);
 }
 
-function getExamPractice(request, response, next) {
-  PracticeGetter(request.params, true)
-    .then(practice => PracticeSerializer.serialize(practice))
-    .then(practice => response.send(practice))
-    .catch(next);
-}
-
 function importPractices(req, res, next) {
   const parsed = parseDataUri(req.body.data.attributes.values.File);
   return csv.parse(parsed.data, { auto_parse: true }, (err, data) => {
@@ -59,7 +52,6 @@ function complete(request, response, next) {
 
 module.exports = app => {
   app.get('/api/episode/:episodeId/practice/:practiceId', ensureAuthenticated, get);
-  app.get('/api/episode/:episodeId/exam', ensureAuthenticated, getExamPractice);
   app.post('/api/practice/:id/completed', ensureAuthenticated, complete);
   app.post('/forest/actions/import-practices', liana.ensureAuthenticated, importPractices);
 };

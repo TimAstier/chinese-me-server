@@ -16,7 +16,6 @@ import VideosGetter from '../services/videos-getter';
 import VideoSerializer from '../serializers/video';
 import MapDataGetter from '../services/map-data-getter';
 import MapDataSerializer from '../serializers/mapData';
-import ScoreUpdator from '../services/score-updator.js';
 
 function get(request, response, next) {
   EpisodeGetter(request.params, request.currentUser.id)
@@ -81,12 +80,6 @@ function listVideos(request, response, next) {
     .catch(next);
 }
 
-function examCompleted(request, response, next) {
-  ScoreUpdator(request)
-    .then(() => response.sendStatus(204))
-    .catch(next);
-}
-
 module.exports = app => {
   app.get('/api/season/:seasonNumber/episode/:episodeNumber', optionalAuthenticate, get);
   app.get('/api/episodes', optionalAuthenticate, list);
@@ -97,5 +90,4 @@ module.exports = app => {
   app.get('/api/episode/:id/multipleChoices', ensureAuthenticated, listMultipleChoices);
   app.get('/api/episode/:id/audioToTexts', ensureAuthenticated, listAudioToTexts);
   app.get('/api/episode/:id/videos', ensureAuthenticated, listVideos);
-  app.post('/api/episode/exam/completed', ensureAuthenticated, examCompleted);
 };

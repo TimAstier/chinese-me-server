@@ -1,6 +1,5 @@
 import characterSchema from './character';
 import wordSchema from './word';
-// import createExercisesArray from '../../utils/createExercisesArray';
 
 const exerciseSchema = {
   ref: 'id',

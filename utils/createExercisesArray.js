@@ -1,5 +1,4 @@
 import isEmpty from 'lodash/isEmpty';
-import shuffleArray from './shuffleArray';
 
 const createExercisesArray = (exercises, practiceType) => {
   if (isEmpty(exercises)) {
@@ -20,25 +19,15 @@ const createExercisesArray = (exercises, practiceType) => {
 };
 
 const createExamExercisesArray = (exercises) => {
-  const orderedNumbers = [];
-  for (let i = 1; i < 11; i++) {
-    orderedNumbers.push(i);
-  }
-  const randomNumbers = shuffleArray(orderedNumbers);
   const exercisesArray = [];
-  let orderIndex = 0;
-  exercises.forEach(e => {
-    if (orderIndex > 9) {
-      return null;
-    }
+  exercises.forEach((e, i) => {
     exercisesArray.push({
       id: e.id,
-      order: randomNumbers[orderIndex],
+      order: i,
       type: e.type
     });
-    return orderIndex++;
   });
-  return exercisesArray.sort((a, b) => a.order - b.order);
+  return exercisesArray;
 };
 
 export default createExercisesArray;
