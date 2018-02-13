@@ -6,8 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     chinese: { type: DataTypes.STRING },
     pinyin: { type: DataTypes.STRING },
-    order: { type: DataTypes.INTEGER },
-    audioUrl: { type: DataTypes.STRING }
+    order: { type: DataTypes.INTEGER }
   }, {
     timestamps: true
   });

@@ -120,7 +120,6 @@ export default function EpisodeGetter(params, userId) {
             'order',
             'chinese',
             'pinyin',
-            'audioUrl',
             'episodeId'
           ],
           order: [ [ 'order', 'ASC' ] ],

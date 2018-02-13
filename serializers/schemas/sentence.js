@@ -5,7 +5,6 @@ const sentenceSchema = {
     'order',
     'chinese',
     'mood',
-    'audioUrl',
     'translations'
   ],
 };

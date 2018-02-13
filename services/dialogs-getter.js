@@ -13,7 +13,8 @@ export default function DialogsGetter(episodeId, userId) {
           'id',
           'order',
           'episodeId',
-          'chineseTitle'
+          'chineseTitle',
+          'hasAudio'
         ],
         include: [{
           model: models.avatar,

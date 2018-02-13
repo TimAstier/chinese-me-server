@@ -5,7 +5,8 @@ module.exports = (sequelize, DataTypes) => {
   const Dialog = sequelize.define('dialog', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     chineseTitle: { type: DataTypes.STRING },
-    order: { type: DataTypes.INTEGER }
+    order: { type: DataTypes.INTEGER },
+    hasAudio: { type: DataTypes.BOOLEAN }
   }, {
     timestamps: true
   });
