@@ -12,8 +12,10 @@ app.use(bodyParser.urlencoded({limit: '5mb', extended: true}));
 
 // Enable CORS to allow requests from the client and ForestAdmin
 // Also allow S3, but this should be improved to make it more specific
+const clientOrigins = process.env.CLIENT_URLS.split(',');
+const adminOrigins = ['http://app.forestadmin.com', 'https://app.forestadmin.com'];
 const corsOptions = {
-  origin: [process.env.CLIENT_URL, 'http://app.forestadmin.com', 'https://app.forestadmin.com'],
+  origin: clientOrigins.concat(adminOrigins),
   methods: ['GET', 'PUT', 'POST', 'DELETE'],
   allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
 };
