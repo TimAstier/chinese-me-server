@@ -58,8 +58,8 @@ const standardizeValue = (setting, value) => {
   }
 };
 
-const updateUserSetting = (userSetting, setting, value) => {
-  const standardizedValue = standardizeValue(setting, value);
+const updateUserSetting = (userSetting, setting, userInput) => {
+  const standardizedValue = standardizeValue(setting, userInput);
   userSetting[setting] = standardizedValue;
   if (setting === 'gender') {
     userSetting.chineseFamilyName = findChineseFamilyName(userSetting.familyName);

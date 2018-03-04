@@ -4,11 +4,11 @@ import updateUserSetting from '../utils/updateUserSetting';
 
 export default function UserSettingsUpdator(request) {
   const userId = request.currentUser.id;
-  const { setting, value } = request.body;
+  const { setting, userInput } = request.body;
   return models.userSetting
     .findOne({ where: { userId } })
     .then(userSetting => {
-      return updateUserSetting(userSetting, setting, value)
+      return updateUserSetting(userSetting, setting, userInput)
         .save()
         .then(newUserSetting => {
           // Return an object with only settings as keys

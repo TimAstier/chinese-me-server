@@ -14,8 +14,7 @@ function post(request, response, next) {
 
 function activate(request, response, next) {
   UserActivator(request)
-    .then(user => UserSerializer.serialize(user))
-    .then(user => response.json({ user }))
+    .then(result => response.send(result))
     .catch(next);
 }
 
