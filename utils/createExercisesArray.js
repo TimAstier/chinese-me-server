@@ -11,7 +11,7 @@ const createExercisesArray = (exercises, practiceType) => {
   exercises.forEach(e => {
     return exercisesArray.push({
       id: e.id,
-      order: e.order,
+      order: e.number,
       type: e.type
     });
   });
