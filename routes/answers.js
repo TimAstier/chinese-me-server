@@ -1,4 +1,5 @@
-import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+// import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+import optionalAuthenticate from '../middlewares/optionalAuthenticate';
 import AnswerCreator from '../services/answer-creator';
 const liana = require('forest-express-sequelize');
 const parseDataUri = require('parse-data-uri');
@@ -36,6 +37,6 @@ function importAnswers(req, res, next) {
 }
 
 module.exports = app => {
-  app.post('/api/answers', ensureAuthenticated, post);
+  app.post('/api/answers', optionalAuthenticate, post);
   app.post('/forest/actions/import-answers', liana.ensureAuthenticated, importAnswers);
 };

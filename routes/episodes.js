@@ -1,19 +1,8 @@
-import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 import optionalAuthenticate from '../middlewares/optionalAuthenticate';
 import EpisodeGetter from '../services/episode-getter';
 import EpisodesGetter from '../services/episodes-getter';
 import EpisodeSerializer from '../serializers/episode';
 import DialogsGetter from '../services/dialogs-getter';
-import CharactersGetter from '../services/characters-getter';
-import CharacterSerializer from '../serializers/character';
-import GrammarsGetter from '../services/grammars-getter';
-import GrammarSerializer from '../serializers/grammar';
-import MultipleChoicesGetter from '../services/multiple-choices-getter';
-import MultipleChoiceSerializer from '../serializers/multipleChoice';
-import AudioToTextsGetter from '../services/audio-to-texts-getter';
-import AudioToTextSerializer from '../serializers/audioToText';
-import VideosGetter from '../services/videos-getter';
-import VideoSerializer from '../serializers/video';
 import MapDataGetter from '../services/map-data-getter';
 import MapDataSerializer from '../serializers/mapData';
 
@@ -39,44 +28,9 @@ function map(request, response, next) {
 }
 
 function listDialogs(request, response, next) {
-  DialogsGetter(request.params.id, request.currentUser.id)
+  DialogsGetter(request.params.id)
     .then(episode => EpisodeSerializer.serialize(episode))
     .then(episode => response.send(episode))
-    .catch(next);
-}
-
-function listCharacters(request, response, next) {
-  CharactersGetter(request.params.id, request.currentUser.id)
-    .then(characters => CharacterSerializer.serialize(characters))
-    .then(characters => response.send(characters))
-    .catch(next);
-}
-
-function listGrammars(request, response, next) {
-  GrammarsGetter(request.params.id, request.currentUser.id)
-    .then(grammars => GrammarSerializer.serialize(grammars))
-    .then(grammars => response.send(grammars))
-    .catch(next);
-}
-
-function listMultipleChoices(request, response, next) {
-  MultipleChoicesGetter(request.params.id)
-    .then(multipleChoices => MultipleChoiceSerializer.serialize(multipleChoices))
-    .then(multipleChoices => response.send(multipleChoices))
-    .catch(next);
-}
-
-function listAudioToTexts(request, response, next) {
-  AudioToTextsGetter(request.params.id)
-    .then(audioToTexts => AudioToTextSerializer.serialize(audioToTexts))
-    .then(audioToTexts => response.send(audioToTexts))
-    .catch(next);
-}
-
-function listVideos(request, response, next) {
-  VideosGetter(request.params.id)
-    .then(videos => VideoSerializer.serialize(videos))
-    .then(videos => response.send(videos))
     .catch(next);
 }
 
@@ -84,10 +38,5 @@ module.exports = app => {
   app.get('/api/season/:seasonNumber/episode/:episodeNumber', optionalAuthenticate, get);
   app.get('/api/episodes', optionalAuthenticate, list);
   app.get('/api/episodes/:id/map', optionalAuthenticate, map);
-  app.get('/api/episode/:id/dialogs', ensureAuthenticated, listDialogs);
-  app.get('/api/episode/:id/characters', ensureAuthenticated, listCharacters);
-  app.get('/api/episode/:id/grammars', ensureAuthenticated, listGrammars);
-  app.get('/api/episode/:id/multipleChoices', ensureAuthenticated, listMultipleChoices);
-  app.get('/api/episode/:id/audioToTexts', ensureAuthenticated, listAudioToTexts);
-  app.get('/api/episode/:id/videos', ensureAuthenticated, listVideos);
+  app.get('/api/episode/:id/dialogs', optionalAuthenticate, listDialogs);
 };
