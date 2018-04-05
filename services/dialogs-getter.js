@@ -1,7 +1,7 @@
 // TODO: translations
 import models from '../models';
 
-export default function DialogsGetter(episodeId, userId) {
+export default function DialogsGetter(episodeId) {
   return models.episode
     .findOne({
       where: { id: episodeId },
@@ -38,11 +38,6 @@ export default function DialogsGetter(episodeId, userId) {
               ]
             }]
           }]
-        }, {
-          model: models.userDialog,
-          where: { userId },
-          attributes: ['id'],
-          required: false
         }],
         order: [
           [ 'order', 'ASC' ],

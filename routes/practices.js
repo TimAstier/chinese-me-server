@@ -51,7 +51,7 @@ function complete(request, response, next) {
 }
 
 module.exports = app => {
-  app.get('/api/episode/:episodeId/practice/:practiceId', ensureAuthenticated, get);
+  app.get('/api/episode/:episodeId/practice/:practiceId', get);
   app.post('/api/practice/:id/completed', ensureAuthenticated, complete);
   app.post('/forest/actions/import-practices', liana.ensureAuthenticated, importPractices);
 };

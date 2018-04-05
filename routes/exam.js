@@ -24,6 +24,6 @@ function completed(request, response, next) {
 
 module.exports = app => {
   // TODO: update API endpoints on client
-  app.get('/api/episode/:episodeId/exam', ensureAuthenticated, get);
+  app.get('/api/episode/:episodeId/exam', get);
   app.post('/api/exam/completed', ensureAuthenticated, completed);
 };
