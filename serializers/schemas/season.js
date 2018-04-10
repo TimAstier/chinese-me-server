@@ -1,11 +1,27 @@
+import isEmpty from 'lodash/isEmpty';
+
 const seasonSchema = {
   ref: 'id',
   attributes: [
     'id',
     'number',
-    'episodes'
+    'price',
+    'name',
+    'image',
+    'available',
+    'episodes',
+    'purchased',
+    'purchaseDate'
   ],
   keyForAttribute: 'camelCase',
+  transform: record => {
+    record.purchased = !isEmpty(record.userSeasons);
+    if (record.purchased) {
+      record.purchaseDate = record.userSeasons[0].createdAt;
+    }
+    delete record.userSeasonS;
+    return record;
+  },
   episodes: {
     ref: 'id',
     include: false

@@ -1,4 +1,6 @@
 import optionalAuthenticate from '../middlewares/optionalAuthenticate';
+import CharactersGetter from '../services/characters-getter';
+import CharacterSerializer from '../serializers/character';
 import EpisodeGetter from '../services/episode-getter';
 import EpisodesGetter from '../services/episodes-getter';
 import EpisodeSerializer from '../serializers/episode';
@@ -20,6 +22,14 @@ function list(request, response, next) {
     .catch(next);
 }
 
+function listCharacters(request, response, next) {
+  CharactersGetter(request.params.id, request.currentUser.id)
+    .then(characters => CharacterSerializer.serialize(characters))
+    .then(characters => response.send(characters))
+    .catch(next);
+}
+
+
 function map(request, response, next) {
   MapDataGetter(request.params.id, request.currentUser.id)
     .then(mapData => MapDataSerializer.serialize(mapData))
@@ -37,6 +47,7 @@ function listDialogs(request, response, next) {
 module.exports = app => {
   app.get('/api/season/:seasonNumber/episode/:episodeNumber', optionalAuthenticate, get);
   app.get('/api/episodes', optionalAuthenticate, list);
+  app.get('/api/episode/:id/characters', optionalAuthenticate, listCharacters);
   app.get('/api/episodes/:id/map', optionalAuthenticate, map);
   app.get('/api/episode/:id/dialogs', optionalAuthenticate, listDialogs);
 };

@@ -8,6 +8,16 @@ export default function EpisodesGetter(userId) {
         where: { userId: userId },
         attributes: ['id', 'score'],
         required: false
+      }, {
+        model: models.season,
+        required: false,
+        include: [{
+          model: models.userSeason,
+          where: {
+            userId
+          },
+          required: false
+        }]
       }],
       order: [
         [ 'number', 'ASC' ]

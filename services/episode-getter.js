@@ -14,6 +14,16 @@ export default function EpisodeGetter(params, userId) {
           seasonId: season.id
         },
         include: [{
+          model: models.season,
+          required: false,
+          include: [{
+            model: models.userSeason,
+            where: {
+              userId
+            },
+            required: false
+          }]
+        }, {
           model: models.userEpisode,
           where: { userId },
           separate: true,

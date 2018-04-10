@@ -30,7 +30,8 @@ const episodeSchema = {
     'videos',
     'avatars',
     'seasonId',
-    'score'
+    'score',
+    'locked'
   ],
   keyForAttribute: 'camelCase',
   transform: record => {
@@ -38,6 +39,15 @@ const episodeSchema = {
       record.score = record.userEpisodes[0].score;
       delete record.userEpisodes;
     }
+    // Episodes with number superior to 3 are locked if the user hasn't
+    // purchased the season
+    if (record.season && isEmpty(record.season.userSeasons) && record.number > 3) {
+      record.locked = true;
+    } else {
+      record.locked = false;
+    }
+    delete record.season;
+    delete record.userSeasons;
     return record;
   },
   dialogs: dialogSchema,

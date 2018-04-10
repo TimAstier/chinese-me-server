@@ -15,8 +15,12 @@ export default function StripeChargeCreator(data, userId) {
     }
   })
   .then(charge => {
-    // TODO: Then, Update user permission
-    // Need to create a userSeason record
+    if (charge) {
+      return models.userSeason.create({
+        userId,
+        seasonId: data.seasonId
+      });
+    }
     return charge;
   });
 }
