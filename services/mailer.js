@@ -18,7 +18,7 @@ function Mailer(recipient, subject, template, params) {
         const toEmail = new helper.Email(recipient);
         const content = new helper.Content(
           'text/html',
-          'Good luck with your studies! You can contact us any time if you have any question or comment regarding the Chinese language or ChineseMe.' // Replaces the body that is required by Sendgrid
+          'Good luck with your studies! You can contact me any time if you have any question or comment regarding the Chinese language or ChineseMe.' // Replaces the body that is required by Sendgrid
         );
         const mail = new helper.Mail(fromEmail, subject, toEmail, content);
         params.forEach(param => {
