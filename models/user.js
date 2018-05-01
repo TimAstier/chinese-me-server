@@ -26,6 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.userAnswer, { onDelete: 'cascade' });
     User.belongsToMany(models.season, { through: 'userSeason' });
     User.hasMany(models.userSeason, { onDelete: 'cascade' });
+    User.hasMany(models.code);
   };
 
   return User;

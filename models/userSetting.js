@@ -3,6 +3,7 @@ module.exports = (sequelize, DataTypes) => {
 
   const UserSetting = sequelize.define('userSetting', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
+    giftCode: { type: DataTypes.BOOLEAN, defaultValue: false },
     etymologyVideo: { type: DataTypes.BOOLEAN },
     calligraphyVideo: { type: DataTypes.BOOLEAN },
     familyName: { type: DataTypes.STRING },
