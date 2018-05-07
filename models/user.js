@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     passwordDigest: { type: DataTypes.STRING },
     activationToken: { type: DataTypes.STRING },
     active: { type: DataTypes.BOOLEAN, defaultValue: false },
+    rel: { type: DataTypes.STRING }
   }, {
     timestamps: true
   });
