@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     passwordDigest: { type: DataTypes.STRING },
     activationToken: { type: DataTypes.STRING },
     active: { type: DataTypes.BOOLEAN, defaultValue: false },
-    rel: { type: DataTypes.STRING }
+    refDate: { type: DataTypes.DATE }
   }, {
     timestamps: true
   });
@@ -28,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     User.belongsToMany(models.season, { through: 'userSeason' });
     User.hasMany(models.userSeason, { onDelete: 'cascade' });
     User.hasMany(models.code);
+    User.belongsTo(models.refCode);
   };
 
   return User;

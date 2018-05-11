@@ -12,7 +12,7 @@ export default function UserSettingsGetter(request) {
     })
     .then(userSetting => {
       const settings = userSetting.dataValues;
-      settings.rel = userSetting.user.rel;
+      settings.refCodeId = userSetting.user.refCodeId;
       // Return an object with only settings as keys
       // This allows to update the store in the client with new settings
       // by directly passing this object to the reducer

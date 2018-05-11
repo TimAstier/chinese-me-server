@@ -4,7 +4,9 @@ module.exports = (sequelize, DataTypes) => {
   const UserSeason = sequelize.define('userSeason', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     userId: { type: DataTypes.INTEGER },
-    seasonId: { type: DataTypes.INTEGER }
+    seasonId: { type: DataTypes.INTEGER },
+    purchased: { type: DataTypes.BOOLEAN, defaultValue: false },
+    paidPrice: { type: DataTypes.FLOAT }
   }, {
     timestamps: true
   });

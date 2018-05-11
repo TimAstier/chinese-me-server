@@ -18,7 +18,9 @@ export default function StripeChargeCreator(data, userId) {
     if (charge) {
       return models.userSeason.create({
         userId,
-        seasonId: data.seasonId
+        seasonId: data.seasonId,
+        purchased: true,
+        paidPrice: data.amount / 100
       });
     }
     return charge;
