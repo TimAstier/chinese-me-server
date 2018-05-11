@@ -16,6 +16,7 @@ export default function DialogsGetter(request) {
           model: models.user,
           include: [{
             model: models.userSeason,
+            required: false,
             where: {
               purchased: true
             }
@@ -33,7 +34,7 @@ export default function DialogsGetter(request) {
       affiliate.refCodes.forEach(code => {
         const codeData = {
           value: code.value,
-          referredUsers: 0,
+          referred_users: 0,
           balance: 0
         };
         usersCount = usersCount + code.users.length;
