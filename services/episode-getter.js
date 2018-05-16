@@ -62,7 +62,8 @@ export default function EpisodeGetter(params, userId) {
             'calligraphyHash',
             'etymologyHash',
             'radical',
-            'phonetic'
+            'phonetic',
+            'hanziData'
           ],
           include: [{
             model: models.characterT,
