@@ -8,6 +8,7 @@ const characterSchema = {
     'calligraphyVideo',
     'calligraphyHash',
     'etymologyHash',
+    'hanziData',
     'radical',
     'phonetic',
     'translations'
