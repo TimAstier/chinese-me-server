@@ -11,7 +11,9 @@ const seasonSchema = {
     'available',
     'episodes',
     'purchased',
-    'purchaseDate'
+    'purchaseDate',
+    'levels',
+    'description'
   ],
   keyForAttribute: 'camelCase',
   transform: record => {
