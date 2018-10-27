@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "description": "A server for ChineseMe app.",
   "author": "Timothée Astier",
+  "license": "GPL-3.0",
   "main": "app.js",
-  "private": true,
+  "private": false,
   "scripts": {
     "start": "node build",
     "dev": "nodemon scripts/start.js -L --watch '**/*' --ext 'js'",
