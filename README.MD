@@ -1,6 +1,6 @@
 # ChineseMe server
 
-A client app for the ChineseMe project.
+A server for the ChineseMe project.
 
 ## No longer maintained
 
